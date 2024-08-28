@@ -43,7 +43,10 @@ class _ChannelCardState extends State<ChannelCard> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Text(resourceName![q], style: KFont.cardGreyStyle)],
+            children: [
+              Text(resourceName![q], style: KFont.cardGreyStyle),
+              const Text(" : "),
+              Text(resourceValue![q], style: KFont.cardGreyStyle,)]
           ));
     });
   }
@@ -51,40 +54,47 @@ class _ChannelCardState extends State<ChannelCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 167,
-      decoration: KDecoration.cardDecoration,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      margin:const EdgeInsets.only(bottom: 24),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: (){},
+        child: Container(
+          width: 213,
+          decoration: KDecoration.cardDecoration,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 0),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  date!,
-                  style: KFont.cardGreyStyle,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      date!,
+                      style: KFont.cardGreyStyle,
+                    ),
+                    const Expanded(child: SizedBox()),
+                    Text(
+                      time!,
+                      style: KFont.cardGreyStyle,
+                    ),
+                  ],
                 ),
-                const Expanded(child: SizedBox()),
-                Text(
-                  time!,
-                  style: KFont.cardGreyStyle,
+                const SizedBox(
+                  height: 24,
                 ),
+                Text(serviceName!, style: KFont.cardNameStyle),
+                const SizedBox(
+                  height: 24,
+                ),
+                Column(
+                  children: resource,
+                )
               ],
             ),
-            const SizedBox(
-              height: 24,
-            ),
-            Text(serviceName!, style: KFont.cardNameStyle),
-            const SizedBox(
-              height: 24,
-            ),
-            Column(
-              children: resource,
-            )
-          ],
+          ),
         ),
       ),
     );

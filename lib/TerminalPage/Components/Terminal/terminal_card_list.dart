@@ -36,7 +36,7 @@ class _TerminalCardListState extends State<TerminalCardList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height - 24 -24 -24 - 48,
+      height: MediaQuery.of(context).size.height - 24 -24 -24 - 46,
 
       child: ScrollConfiguration(
                     behavior: ScrollConfiguration.of(context)

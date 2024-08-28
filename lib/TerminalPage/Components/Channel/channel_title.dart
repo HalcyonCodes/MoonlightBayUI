@@ -37,6 +37,7 @@ class _ChannelTitleState extends State<ChannelTitle> {
                 width: 18,
                 child: SvgPicture.asset('Svg/channel.svg')
               ),
+            SizedBox(width: 4,),
             Text(channelName!, style: KFont.channelTitleStyle,),
             
           ],

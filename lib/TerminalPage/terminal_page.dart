@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import './Components/Nav/page_nav.dart';
 import '../Config/color.dart';
 import 'Components/Terminal/terminal.dart';
+import './Components/Channel/channel.dart';
+import '../Config/string.dart';
 
 class TerminalPage extends StatefulWidget {
   const TerminalPage({super.key});
@@ -35,6 +37,32 @@ class _TerminalPageState extends State<TerminalPage> {
                     width: 450,
                     child: Terminal(),
                   ),
+                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 213,
+                    child: Channel(channelName: KString.channel0,),
+                  ),
+                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 213,
+                    child: Channel(channelName: KString.channel1,),
+                  ),
+                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 213,
+                    child: Channel(channelName: KString.channel2,),
+                  ),
+                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 213,
+                    child: Channel(channelName: KString.channel3,),
+                  ),
+                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 213,
+                    child: Channel(channelName: KString.channel4,),
+                  ),
+                  
                 ],
               ),
             )),
