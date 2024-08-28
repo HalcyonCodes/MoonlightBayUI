@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import './color.dart';
 
-class KFont{
-
+class KFont {
   //nav 标题头的字体
   static TextStyle navTitleStyle = const TextStyle(
     fontFamily: 'MiSans',
@@ -12,6 +12,59 @@ class KFont{
     //height:
   );
 
+  //searchBar 标题字体
+  static TextStyle searchBarTitleStyle = const TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    decoration: TextDecoration.none,
+    //height:
+  );
 
-  
+  //searchBar 提示字体
+  static TextStyle searchBarTipStyle = TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    color: KColor.greyTextColor,
+    decoration: TextDecoration.none,
+    //height:
+  );
+
+  //searchBar 输入字体
+  static TextStyle searchBarInputStyle = TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    color: KColor.blackColor,
+    decoration: TextDecoration.none,
+  );
+
+  //card 灰色字体
+  static TextStyle cardGreyStyle = TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: KColor.greyTextColor,
+    decoration: TextDecoration.none,
+  );
+
+  //card 主题字体
+  static TextStyle cardNameStyle = TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: KColor.blackColor,
+    decoration: TextDecoration.none,
+  );
+
+    //channelTitle 标题字体
+  static TextStyle channelTitleStyle = TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: KColor.blackColor,
+    decoration: TextDecoration.none,
+  );
 }

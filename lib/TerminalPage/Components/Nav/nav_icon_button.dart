@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../Config/color.dart';
 
-class IconButton extends StatefulWidget {
+class NavIconButton extends StatefulWidget {
   final String iconPath;
   final Function()? onClick;
-  const IconButton({super.key, required this.iconPath, required this.onClick});
+  const NavIconButton(
+      {super.key, required this.iconPath, required this.onClick});
 
   @override
-  State<IconButton> createState() => _IconButtonState();
+  State<NavIconButton> createState() => _NavIconButtonState();
 }
 
-class _IconButtonState extends State<IconButton> {
+class _NavIconButtonState extends State<NavIconButton> {
   bool? isHover;
   String? iconPath;
 
@@ -34,13 +35,13 @@ class _IconButtonState extends State<IconButton> {
         height: 55,
         width: 55,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(8),
             color: isHover == true ? KColor.primaryColor : KColor.navIconColor),
         alignment: Alignment.center,
         child: SizedBox(
           height: 47,
           width: 47,
-          child: SvgPicture.asset(iconPath!),
+          child: SvgPicture.asset(iconPath!, color: Colors.white),
         ),
       ),
     );

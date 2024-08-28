@@ -16,6 +16,8 @@ dependencies:
     path: ../fluro
   dio: ^5.6.0
   flutter_svg: ^2.0.7
+  double_bladed_axe:
+    path: ../double_bladed_axe
 
 
 
@@ -48,6 +50,7 @@ flutter:
     - Svg/setting.svg
     - Svg/stopCircle.svg
     - Svg/terminal.svg
+    - Svg/serviceResource.svg
 
 
 
