@@ -2,11 +2,10 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import './handle_route.dart';
 
-
 class Routes {
   static String root = '/';
   static String terminalPage = '/TerminalPage';
-
+  static String orderResourcePage = '/OrderResourcePage';
 
   //---------
   static void configureRotes(FluroRouter router) {
@@ -19,8 +18,6 @@ class Routes {
     //路由配置
     router.define(root, handler: terminalPageHandle);
     router.define(terminalPage, handler: terminalPageHandle);
-
+    router.define(orderResourcePage, handler: orderResourcePageHandle);
   }
 }
-
-

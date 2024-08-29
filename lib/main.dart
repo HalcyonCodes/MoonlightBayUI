@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router!.generator,
       onGenerateInitialRoutes: (d) {
-        return Application.router!.generatorInitail('/TerminalPage');
+        //return Application.router!.generatorInitail('/TerminalPage');
+        return Application.router!.generatorInitail('/OrderResourcePage');
       },
     );
   }

@@ -59,12 +59,21 @@ class KFont {
     decoration: TextDecoration.none,
   );
 
-    //channelTitle 标题字体
+  //channelTitle 标题字体
   static TextStyle channelTitleStyle = TextStyle(
     fontFamily: 'MiSans',
     fontSize: 13,
     fontWeight: FontWeight.w600,
     color: KColor.blackColor,
+    decoration: TextDecoration.none,
+  );
+
+  //edit 标题字体
+  static TextStyle editTitleStyle = TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
     decoration: TextDecoration.none,
   );
 }

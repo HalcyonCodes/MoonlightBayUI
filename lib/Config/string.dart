@@ -9,4 +9,13 @@ class KString {
   static String channel2 = '频道2';
   static String channel3 = '频道3';
   static String channel4 = '频道4';
+  static String bindingCount = '绑定服务数量';
+  static String bindingOrderService = '所属订单服务';
+  static String addOrderResource = '添加订单资源';
+  static String commit = '确定';
+  static String cancel = '取消';
+  static String orderServiceResourceName = '订单服务资源名称';
+  static String orderServiceResourceDesc = '订单服务资源简介';
+  static String inputOrderServiceResourceName = '输入订单服务资源名称';
+  static String inputOrderServiceResourceDesc = '输入订单服务资源简介';
 }
