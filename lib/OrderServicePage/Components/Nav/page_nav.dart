@@ -1,18 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
 import 'package:moonlight_bay_ui/Config/shadow.dart';
 import './title_page_nav.dart';
 import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
-import '../../Util/edit_util.dart';
-import '../Edit/edit.dart';
-import '../Remove/remove.dart';
+
 
 class PageNav extends StatefulWidget {
-  final EditUtil? editUtil;
+ 
   const PageNav({
     super.key,
-    required this.editUtil,
+    //required this.editUtil,
   });
 
   @override
@@ -28,13 +28,13 @@ class _PageNavState extends State<PageNav> {
   void initState() {
     super.initState();
     width = 213;
-    overlayEntry = dOverlayEntry();
-    fOverlayEntry = qOverlayEntry();
+    //overlayEntry = dOverlayEntry();
+    //fOverlayEntry = qOverlayEntry();
     //注册
-    widget.editUtil!.setFuncRemoveEdit(removeEdit);
-    widget.editUtil!.setFuncShowEdit(showEdit);
-    widget.editUtil!.setFuncShowRemove(showDelete);
-    widget.editUtil!.setFuncRemoveRemove(removeDelete);
+    //widget.editUtil!.setFuncRemoveEdit(removeEdit);
+    //widget.editUtil!.setFuncShowEdit(showEdit);
+    //widget.editUtil!.setFuncShowRemove(showDelete);
+    //widget.editUtil!.setFuncRemoveRemove(removeDelete);
   }
 
   @override
@@ -85,7 +85,7 @@ class _PageNavState extends State<PageNav> {
                 NavIconButton(
                     iconPath: 'svg/add.svg',
                     onClick: () {
-                      widget.editUtil!.showEdit!();
+                      //widget.editUtil!.showEdit!();
                     }),
                 const SizedBox(
                   width: 12,
@@ -93,8 +93,63 @@ class _PageNavState extends State<PageNav> {
                 NavIconButton(
                     iconPath: 'svg/remove.svg',
                     onClick: () {
-                      widget.editUtil!.showRemove!();
+                      //widget.editUtil!.showRemove!();
                     }),
+              ],
+            ),
+            const SizedBox(height: 24,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Transform(
+                  alignment: FractionalOffset.center,
+                  transform: Matrix4.rotationZ(pi),
+                  child: NavIconButton(
+                      iconPath: 'svg/move.svg',
+                      onClick: () {
+                        //widget.editUtil!.showRemove!();
+                      }),
+                ),
+                
+                const SizedBox(
+                  width: 12,
+                ),
+                
+                NavIconButton(
+                    iconPath: 'svg/move.svg',
+                    onClick: () {
+                      //widget.editUtil!.showEdit!();
+                    }),
+              ],
+            ),
+            const SizedBox(height: 24,),
+             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NavIconButton(
+                    iconPath: 'svg/order.svg',
+                    onClick: () {
+                      //widget.editUtil!.showEdit!();
+                    }),
+                const SizedBox(
+                  width: 12,
+                ),
+               
+                NavIconButton(
+                      iconPath: 'svg/serviceResource.svg',
+                      onClick: () {
+                        //widget.editUtil!.showRemove!();
+                }),
+                const SizedBox(
+                  width: 12,
+                ),
+                NavIconButton(
+                      iconPath: 'svg/script.svg',
+                      onClick: () {
+                        //widget.editUtil!.showRemove!();
+                }),
               ],
             ),
           ],
@@ -103,6 +158,7 @@ class _PageNavState extends State<PageNav> {
     );
   }
 
+  /*
   OverlayEntry dOverlayEntry() {
     return OverlayEntry(builder: (context) {
       return Positioned(
@@ -135,5 +191,5 @@ class _PageNavState extends State<PageNav> {
 
   Future<void> removeDelete() async {
     fOverlayEntry?.remove();
-  }
+  }*/
 }

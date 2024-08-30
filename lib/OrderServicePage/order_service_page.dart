@@ -2,27 +2,16 @@ import 'package:flutter/material.dart';
 import '../Config/color.dart';
 import '../Config/string.dart';
 import './Components/Nav/page_nav.dart';
-import './Components/OrderResource/order_resource.dart';
 import './Components/OrderService/order_service.dart';
-import './Components/Edit/edit.dart';
-import './Util/edit_util.dart';
 
-class OrderResourcePage extends StatefulWidget {
-  const OrderResourcePage({super.key});
+class OrderServicePage extends StatefulWidget {
+  const OrderServicePage({super.key});
 
   @override
-  State<OrderResourcePage> createState() => _OrderResourcePageState();
+  State<OrderServicePage> createState() => _OrderServicePageState();
 }
 
-class _OrderResourcePageState extends State<OrderResourcePage> {
-  EditUtil? editUtil;
-
-  @override
-  void initState() {
-    super.initState();
-    editUtil = EditUtil();
-  }
-
+class _OrderServicePageState extends State<OrderServicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,16 +28,11 @@ class _OrderResourcePageState extends State<OrderResourcePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  PageNav(editUtil: editUtil,),
+                  const PageNav(),
                   const SizedBox(
                     width: 24,
                   ),
-                  OrderResource(),
-                  SizedBox(
-                    width: 24,
-                  ),
                   OrderService()
-                  //Edit()
                 ],
               ),
             )),

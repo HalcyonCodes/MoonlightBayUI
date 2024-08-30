@@ -5,24 +5,21 @@ import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 
-class EditCommitBar extends StatefulWidget {
-  const EditCommitBar({super.key});
+class RemoveCommitBar extends StatefulWidget {
+  const RemoveCommitBar({super.key});
 
   @override
-  State<EditCommitBar> createState() => _EditCommitBarState();
+  State<RemoveCommitBar> createState() => _RemoveCommitBarState();
 }
 
-class _EditCommitBarState extends State<EditCommitBar> {
+class _RemoveCommitBarState extends State<RemoveCommitBar> {
 
    
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +45,7 @@ class _EditCommitBarState extends State<EditCommitBar> {
           ),
           SizedBox(width: 4,),
           Text(
-            KString.addOrderResource,
+            KString.removeOrderServiceResourceTitle,
             style: KFont.navTitleStyle,
           ),
           const Expanded(child: SizedBox()),

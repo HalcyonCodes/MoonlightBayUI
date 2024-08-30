@@ -69,11 +69,30 @@ class KFont {
   );
 
   //edit 标题字体
-  static TextStyle editTitleStyle = TextStyle(
+  static TextStyle editTitleStyle = const TextStyle(
     fontFamily: 'MiSans',
     fontSize: 13,
     fontWeight: FontWeight.w600,
     color: Colors.white,
+    decoration: TextDecoration.none,
+  );
+
+  //order Service 徽章字体
+    static TextStyle serviceResourceStyle = const TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+    decoration: TextDecoration.none,
+    height: 16/11
+  );  
+
+  //orderService 脚本字体
+    static TextStyle serviceScriptStyle = const TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: Colors.black,
     decoration: TextDecoration.none,
   );
 }

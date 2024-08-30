@@ -18,4 +18,10 @@ class KString {
   static String orderServiceResourceDesc = '订单服务资源简介';
   static String inputOrderServiceResourceName = '输入订单服务资源名称';
   static String inputOrderServiceResourceDesc = '输入订单服务资源简介';
+  static String removeOrderServiceResourceTitle = '删除订单服务资源';
+  static String removeOrderServiceResource = '确定删除订单服务资源吗?';
+  static String orderBindingCount = '使用的订单数量 : ';
+  static String workScript = '工作脚本';
+  static String orderServiceResource = '订单服务所拥有的资源';
+  static String allOrderServiceResource = '所有订单服务所拥有的资源';
 }

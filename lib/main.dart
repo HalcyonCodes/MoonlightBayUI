@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Application.router!.generator,
       onGenerateInitialRoutes: (d) {
         //return Application.router!.generatorInitail('/TerminalPage');
-        return Application.router!.generatorInitail('/OrderResourcePage');
+        return Application.router!.generatorInitail('/OrderServicePage');
       },
     );
   }

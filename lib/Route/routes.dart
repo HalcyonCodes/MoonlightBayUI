@@ -6,6 +6,7 @@ class Routes {
   static String root = '/';
   static String terminalPage = '/TerminalPage';
   static String orderResourcePage = '/OrderResourcePage';
+  static String orderServicePage = '/OrderServicePage';
 
   //---------
   static void configureRotes(FluroRouter router) {
@@ -19,5 +20,6 @@ class Routes {
     router.define(root, handler: terminalPageHandle);
     router.define(terminalPage, handler: terminalPageHandle);
     router.define(orderResourcePage, handler: orderResourcePageHandle);
+    router.define(orderServicePage, handler: orderServicePageHandle);
   }
 }

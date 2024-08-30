@@ -28,6 +28,7 @@ class _EditState extends State<Edit> {
   Widget build(BuildContext context) {
     return Container(
       decoration: KDecoration.cardDecoration,
+      
       width: 658,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -121,6 +122,7 @@ class _EditState extends State<Edit> {
               ),
             ),
           ),
+          const SizedBox(height: 12,)
         ],
       ),
     );

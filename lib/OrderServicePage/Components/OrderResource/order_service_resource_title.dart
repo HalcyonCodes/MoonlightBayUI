@@ -1,19 +1,21 @@
 
 
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:moonlight_bay_ui/Config/string.dart';
 import '../../../Config/decoration.dart';
+import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 
-class OrderServiceTitle extends StatelessWidget {
-  const OrderServiceTitle({super.key});
+class OrderServiceResourceTitle extends StatelessWidget {
+  const OrderServiceResourceTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+     return Container(
       height: 46,
-      width: 1161,
+      width: 529,
       decoration: KDecoration.cardDecoration,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical:13 ),
@@ -24,10 +26,10 @@ class OrderServiceTitle extends StatelessWidget {
             SizedBox(
                 height: 18,
                 width: 18,
-                child: SvgPicture.asset('Svg/channel.svg')
+                child: SvgPicture.asset('Svg/serviceResource.svg')
               ),
             const SizedBox(width: 4,),
-            Text(KString.bindingOrderService, style: KFont.channelTitleStyle,),
+            Text(KString.orderServiceResource, style: KFont.channelTitleStyle,),
             
           ],
         ),
@@ -35,6 +37,5 @@ class OrderServiceTitle extends StatelessWidget {
     );
   }
 }
-
 
 
