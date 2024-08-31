@@ -24,4 +24,7 @@ class KString {
   static String workScript = '工作脚本';
   static String orderServiceResource = '订单服务所拥有的资源';
   static String allOrderServiceResource = '所有订单服务所拥有的资源';
+  static String scriptBindingCount = '绑定服务数量 : ';
+  static String orderScript = '订单所拥有的脚本';
+  static String allScript = '所有脚本';
 }

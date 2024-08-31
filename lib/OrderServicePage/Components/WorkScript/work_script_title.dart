@@ -1,12 +1,18 @@
+
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../Config/decoration.dart';
-import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 
-class OrderServiceResourceTitle extends StatelessWidget {
+
+class WorkScriptTitle extends StatelessWidget {
+
   final String? title;
-  const OrderServiceResourceTitle({super.key, required this.title});
+  const WorkScriptTitle({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,7 @@ class OrderServiceResourceTitle extends StatelessWidget {
             SizedBox(
                 height: 18,
                 width: 18,
-                child: SvgPicture.asset('Svg/serviceResource.svg')),
+                child: SvgPicture.asset('Svg/script.svg')),
             const SizedBox(
               width: 4,
             ),
@@ -36,4 +42,5 @@ class OrderServiceResourceTitle extends StatelessWidget {
       ),
     );
   }
+  
 }
