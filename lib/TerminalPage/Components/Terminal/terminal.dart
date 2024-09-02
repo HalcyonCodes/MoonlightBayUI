@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:moonlight_bay_ui/TerminalPage/Components/Terminal/terminal_card_list.dart';
-import 'package:moonlight_bay_ui/TerminalPage/Components/Terminal/terminal_search_bar.dart';
+
+
+import '../../Components/Terminal/future_terminal_card_list.dart';
+import '../../Components/Terminal/terminal_search_bar.dart';
+import '../../Model/ViewModel/terminal_view_model.dart';
+
 
 class Terminal extends StatefulWidget {
-  const Terminal({super.key});
+  final TerminalViewModel viewModel;
+
+  Terminal({super.key, required this.viewModel});
 
   @override
   State<Terminal> createState() => _TerminalState();
@@ -18,7 +24,7 @@ class _TerminalState extends State<Terminal> {
       children: [
         TerminalSearchBar(), 
         SizedBox(height: 24), 
-        TerminalCardList()
+        TerminalCardListFuture(viewModel: widget.viewModel,)
         ],
     );
   }

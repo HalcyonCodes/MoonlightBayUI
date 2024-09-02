@@ -1,3 +1,5 @@
+import 'package:double_bladed_axe/components/status_card/status_card.dart';
+
 class KString {
   static String tset = 'test';
   static String manage = '管理';
@@ -27,4 +29,11 @@ class KString {
   static String scriptBindingCount = '绑定服务数量 : ';
   static String orderScript = '订单所拥有的脚本';
   static String allScript = '所有脚本';
+  static String removeTargetTitle = '删除所选中的项目';
+  static String removeTip = '确定删除 所选中 的项目吗?';
+  static String inputTerminalName = '输入终端名称';
+  static String terminalName = '终端名称';
+  static String terminalDesc = '终端简介';
+  static String editTerminalName = '修改终端名称';
+  static String editTerminalDesc = '修改终端简介';
 }

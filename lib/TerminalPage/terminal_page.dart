@@ -4,6 +4,8 @@ import '../Config/color.dart';
 import 'Components/Terminal/terminal.dart';
 import './Components/Channel/channel.dart';
 import '../Config/string.dart';
+import './Util/edit_util.dart';
+import './Model/ViewModel/terminal_view_model.dart';
 
 class TerminalPage extends StatefulWidget {
   const TerminalPage({super.key});
@@ -13,6 +15,16 @@ class TerminalPage extends StatefulWidget {
 }
 
 class _TerminalPageState extends State<TerminalPage> {
+  EditUtil? pageEditUtil;
+  TerminalViewModel? terminalViewMode;
+
+  @override
+  void initState() {
+    super.initState();
+    pageEditUtil = EditUtil();
+    terminalViewMode = TerminalViewModel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,40 +41,61 @@ class _TerminalPageState extends State<TerminalPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const PageNav(),
+                  PageNav(
+                    editUtil: pageEditUtil,
+                  ),
                   const SizedBox(
                     width: 24,
                   ),
                   SizedBox(
                     width: 450,
-                    child: Terminal(),
+                    child: Terminal(viewModel: terminalViewMode!,),
                   ),
-                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 24,
+                  ),
                   SizedBox(
                     width: 213,
-                    child: Channel(channelName: KString.channel0,),
+                    child: Channel(
+                      channelName: KString.channel0,
+                    ),
                   ),
-                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 24,
+                  ),
                   SizedBox(
                     width: 213,
-                    child: Channel(channelName: KString.channel1,),
+                    child: Channel(
+                      channelName: KString.channel1,
+                    ),
                   ),
-                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 24,
+                  ),
                   SizedBox(
                     width: 213,
-                    child: Channel(channelName: KString.channel2,),
+                    child: Channel(
+                      channelName: KString.channel2,
+                    ),
                   ),
-                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 24,
+                  ),
                   SizedBox(
                     width: 213,
-                    child: Channel(channelName: KString.channel3,),
+                    child: Channel(
+                      channelName: KString.channel3,
+                    ),
                   ),
-                  SizedBox(width: 24,),
+                  SizedBox(
+                    width: 24,
+                  ),
                   SizedBox(
                     width: 213,
-                    child: Channel(channelName: KString.channel4,),
+                    child: Channel(
+                      channelName: KString.channel4,
+                    ),
                   ),
-                  
                 ],
               ),
             )),

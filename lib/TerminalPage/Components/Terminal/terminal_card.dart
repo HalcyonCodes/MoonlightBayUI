@@ -4,27 +4,21 @@ import 'package:moonlight_bay_ui/Config/color.dart';
 import 'package:moonlight_bay_ui/Config/font.dart';
 import '../../../Config/decoration.dart';
 
-
 class TerminalCard extends StatefulWidget {
   final String? terminalID;
   final String? terminalIP;
   final String? terminalName;
   final String? terminalDesc;
   final int? terminalStatus;
-  final Function()? playCircleOnTap;
-  final Function()? stopCircleOnTap;
-  final Function()? pauseCircleOnTap;
 
-  const TerminalCard(
-      {super.key,
-      required this.terminalID,
-      required this.terminalIP,
-      required this.terminalName,
-      required this.terminalDesc,
-      required this.terminalStatus,
-      required this.playCircleOnTap,
-      required this.stopCircleOnTap,
-      required this.pauseCircleOnTap});
+  const TerminalCard({
+    super.key,
+    required this.terminalID,
+    required this.terminalIP,
+    required this.terminalName,
+    required this.terminalDesc,
+    required this.terminalStatus,
+  });
 
   @override
   State<TerminalCard> createState() => _TerminalCardState();
@@ -53,13 +47,14 @@ class _TerminalCardState extends State<TerminalCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom:  24),
+      margin: const EdgeInsets.only(bottom: 24),
       child: InkWell(
         onTap: cardOnSelect,
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          decoration: KDecoration.cardDecoration,
-          
+          decoration: isSelect == false
+              ? KDecoration.cardDecoration
+              : KDecoration.cardSelectedDecoration,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
             child: Column(
@@ -72,58 +67,93 @@ class _TerminalCardState extends State<TerminalCard> {
                   children: [
                     Text(
                       terminalID!,
-                      style: KFont.cardGreyStyle,
+                      style: isSelect == false
+                          ? KFont.cardGreyStyle
+                          : KFont.cardSelectGreyStyle,
                     ),
                     const Expanded(child: SizedBox()),
                     Text(
                       terminalIP!,
-                      style: KFont.cardGreyStyle,
+                      style: isSelect == false
+                          ? KFont.cardGreyStyle
+                          : KFont.cardSelectGreyStyle,
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                Text(terminalName!, style: KFont.cardNameStyle),
+                Text(terminalName!,
+                    style: isSelect == false
+                        ? KFont.cardNameStyle
+                        : KFont.cardSelectNameStyle),
                 const SizedBox(
                   height: 12,
                 ),
-                Text(terminalDesc!, style: KFont.cardGreyStyle),
+                Text(terminalDesc!,
+                    style: isSelect == false
+                        ? KFont.cardGreyStyle
+                        : KFont.cardSelectGreyStyle),
                 const SizedBox(
                   height: 24,
                 ),
-                 Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          InkWell(
-            onLongPress: widget.playCircleOnTap,
-            child: SizedBox(
-              height: 26,
-              width: 26,
-              child: SvgPicture.asset('Svg/playCircle.svg', color: status == 1?KColor.primaryColor:KColor.blackColor,),
-            ),
-          ),
-          const SizedBox(width: 24,),
-          InkWell(
-            onLongPress: widget.stopCircleOnTap,
-            child: SizedBox(
-              height: 26,
-              width: 26,
-              child: SvgPicture.asset('Svg/stopCircle.svg', color: status == 2?KColor.primaryColor:KColor.blackColor,),
-            ),
-          ),
-          const SizedBox(width: 24,),
-          InkWell(
-            onLongPress: widget.pauseCircleOnTap,
-            child: SizedBox(
-              height: 26,
-              width: 26,
-              child: SvgPicture.asset('Svg/pauseCircle.svg', color: status == 3?KColor.primaryColor:KColor.blackColor,),
-            ),
-          ),
-        ],
-      )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onLongPress: playCircleOnTap,
+                      child: SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: SvgPicture.asset(
+                          'Svg/playCircle.svg',
+                          color: isSelect == true
+                              ? Colors.white
+                              : status == 1
+                                  ? KColor.primaryColor
+                                  : KColor.blackColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 24,
+                    ),
+                    InkWell(
+                      onLongPress: stopCircleOnTap,
+                      child: SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: SvgPicture.asset(
+                          'Svg/stopCircle.svg',
+                          color: isSelect == true
+                              ? Colors.white
+                              : status == 2
+                                  ? KColor.primaryColor
+                                  : KColor.blackColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 24,
+                    ),
+                    InkWell(
+                      onLongPress: pauseCircleOnTap,
+                      child: SizedBox(
+                        height: 26,
+                        width: 26,
+                        child: SvgPicture.asset(
+                          'Svg/pauseCircle.svg',
+                          color: isSelect == true
+                              ? Colors.white
+                              : status == 3
+                                  ? KColor.primaryColor
+                                  : KColor.blackColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -136,9 +166,27 @@ class _TerminalCardState extends State<TerminalCard> {
     setState(() {});
   }
 
-  void cardOnSelect() {}
-  void initSelectStatus() {
-    isSelect = false;
+  void cardOnSelect() {
+    isSelect = !isSelect!;
 
+    refreshUi();
+  }
+
+  void playCircleOnTap() {
+    status = 1;
+    //添加服务器请求
+    refreshUi();
+  }
+
+  void stopCircleOnTap() {
+    status = 2;
+    //添加服务器请求
+    refreshUi();
+  }
+
+  void pauseCircleOnTap() {
+    status = 3;
+    //添加服务器请求
+    refreshUi();
   }
 }

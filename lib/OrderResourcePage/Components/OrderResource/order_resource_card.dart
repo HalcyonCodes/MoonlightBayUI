@@ -3,7 +3,7 @@ import 'package:moonlight_bay_ui/Config/font.dart';
 import 'package:moonlight_bay_ui/Config/string.dart';
 import '../../../Config/decoration.dart';
 
-class OrderResourceCard extends StatelessWidget {
+class OrderResourceCard extends StatefulWidget {
   final String? orderResourceID;
   final String? bindingCount;
   final String? orderResourceName;
@@ -17,15 +17,47 @@ class OrderResourceCard extends StatelessWidget {
       required this.desc});
 
   @override
-  Widget build(BuildContext context) {
+  State<OrderResourceCard> createState() => _OrderResourceCardState();
+}
 
+class _OrderResourceCardState extends State<OrderResourceCard> {
+  String? orderResourceID;
+  String? bindingCount;
+  String? orderResourceName;
+  String? desc;
+
+  bool? isSelect;
+
+  @override
+  void initState() {
+    super.initState();
+    orderResourceID = widget.orderResourceID;
+    bindingCount = widget.bindingCount;
+    orderResourceName = widget.orderResourceName;
+    desc = widget.desc;
+    isSelect = false;
+  }
+
+  void cardOnTap() {
+    isSelect = !isSelect!;
+    refreshUi();
+  }
+
+  void refreshUi() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: (){},
+        onTap: cardOnTap,
         child: Container(
-          decoration: KDecoration.cardDecoration,
+          decoration: isSelect == false
+              ? KDecoration.cardDecoration
+              : KDecoration.cardSelectedDecoration,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: Column(
@@ -38,22 +70,34 @@ class OrderResourceCard extends StatelessWidget {
                     children: [
                       Text(
                         orderResourceID!,
-                        style: KFont.cardGreyStyle,
+                        style: isSelect == false
+                            ? KFont.cardGreyStyle
+                            : KFont.cardSelectGreyStyle,
                       ),
                       const Expanded(child: SizedBox()),
                       Text(
                         '${KString.bindingCount} : ${bindingCount!}',
-                        style: KFont.cardGreyStyle,
+                        style: isSelect == false
+                            ? KFont.cardGreyStyle
+                            : KFont.cardSelectGreyStyle,
                       )
                     ]),
                 const SizedBox(
                   height: 24,
                 ),
-                Text(orderResourceName!, style: KFont.cardNameStyle),
+                Text(orderResourceName!,
+                    style: isSelect == false
+                        ? KFont.cardNameStyle
+                        : KFont.cardSelectNameStyle),
                 const SizedBox(
                   height: 12,
                 ),
-                Text(desc!, style: KFont.cardGreyStyle,)
+                Text(
+                  desc!,
+                  style: isSelect == false
+                      ? KFont.cardGreyStyle
+                      : KFont.cardSelectGreyStyle,
+                )
               ],
             ),
           ),

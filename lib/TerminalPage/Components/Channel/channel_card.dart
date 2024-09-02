@@ -27,7 +27,8 @@ class _ChannelCardState extends State<ChannelCard> {
   String? serviceName;
   List<String>? resourceName;
   List<String>? resourceValue;
-  List<Widget> resource = [];
+  //List<Widget> resource = [];
+  bool? isSelect;
 
   @override
   void initState() {
@@ -37,32 +38,54 @@ class _ChannelCardState extends State<ChannelCard> {
     serviceName = widget.serviceName;
     resourceName = widget.resourceName;
     resourceValue = widget.resourceValue;
-    resource = List.generate(resourceName!.length, (q) {
+    isSelect = false;
+
+    /*resource = List.generate(resourceName!.length, (q) {
       return Container(
           margin: const EdgeInsets.only(bottom: 12),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(resourceName![q], style: KFont.cardGreyStyle),
-              const Text(" : "),
-              Text(resourceValue![q], style: KFont.cardGreyStyle,)]
-          ));
-    });
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(resourceName![q],
+                    style: isSelect == false
+                        ? KFont.cardGreyStyle
+                        : KFont.cardSelectGreyStyle),
+                const Text(" : "),
+                Text(
+                  resourceValue![q],
+                  style: isSelect == false
+                      ? KFont.cardGreyStyle
+                      : KFont.cardSelectGreyStyle,
+                )
+              ]));
+    });*/
+  }
+
+  void refreshUi() {
+    setState(() {});
+  }
+
+  void onTap() {
+    isSelect = !isSelect!;
+    refreshUi();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:const EdgeInsets.only(bottom: 24),
+      margin: const EdgeInsets.only(bottom: 24),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: (){},
+        onTap: onTap,
         child: Container(
           width: 213,
-          decoration: KDecoration.cardDecoration,
+          decoration: isSelect == false
+              ? KDecoration.cardDecoration
+              : KDecoration.cardSelectedDecoration,
           child: Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 0),
+            padding:
+                const EdgeInsets.only(left: 24, right: 24, top: 12, bottom: 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,24 +96,50 @@ class _ChannelCardState extends State<ChannelCard> {
                   children: [
                     Text(
                       date!,
-                      style: KFont.cardGreyStyle,
+                      style: isSelect == false
+                          ? KFont.cardGreyStyle
+                          : KFont.cardSelectGreyStyle,
                     ),
                     const Expanded(child: SizedBox()),
                     Text(
                       time!,
-                      style: KFont.cardGreyStyle,
+                      style: isSelect == false
+                          ? KFont.cardGreyStyle
+                          : KFont.cardSelectGreyStyle,
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                Text(serviceName!, style: KFont.cardNameStyle),
+                Text(serviceName!,
+                    style: isSelect == false
+                        ? KFont.cardNameStyle
+                        : KFont.cardSelectNameStyle),
                 const SizedBox(
                   height: 24,
                 ),
                 Column(
-                  children: resource,
+                  children: List.generate(resourceName!.length, (q) {
+      return Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(resourceName![q],
+                    style: isSelect == false
+                        ? KFont.cardGreyStyle
+                        : KFont.cardSelectGreyStyle),
+                Text(" : ", style: isSelect == false ? KFont.cardGreyStyle: KFont.cardSelectGreyStyle),
+                Text(
+                  resourceValue![q],
+                  style: isSelect == false
+                      ? KFont.cardGreyStyle
+                      : KFont.cardSelectGreyStyle,
+                )
+              ]));
+    }),
                 )
               ],
             ),

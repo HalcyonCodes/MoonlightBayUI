@@ -50,12 +50,30 @@ class KFont {
     decoration: TextDecoration.none,
   );
 
+  //card 选中时灰色字体
+  static TextStyle cardSelectGreyStyle = const TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+    decoration: TextDecoration.none,
+  );
+
   //card 主题字体
   static TextStyle cardNameStyle = TextStyle(
     fontFamily: 'MiSans',
     fontSize: 18,
     fontWeight: FontWeight.bold,
     color: KColor.blackColor,
+    decoration: TextDecoration.none,
+  );
+
+  //card 选中时 主题字体
+  static TextStyle cardSelectNameStyle = const TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
     decoration: TextDecoration.none,
   );
 

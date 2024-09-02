@@ -26,9 +26,7 @@ class _TerminalCardListState extends State<TerminalCardList> {
       terminalName: '终端名称',
       terminalDesc: '简介',
       terminalStatus: 1,
-      playCircleOnTap: () {},
-      stopCircleOnTap: () {},
-      pauseCircleOnTap: () {},
+
     );
   });
   }
