@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:moonlight_bay_ui/TerminalPage/Components/Channel/channel_card_list.dart';
+import '../../Components/Channel/channel_card_list.dart';
 import './channel_title.dart';
 import './future_channel_card_list.dart';
+import '../../Model/ViewModel/channel_view_model.dart';
 
 class Channel extends StatefulWidget {
+  final ChannelViewModel viewModel;
   final String? channelName;
-  const Channel({super.key, required this.channelName});
+  const Channel({super.key, required this.channelName, required this.viewModel});
 
   @override
   State<Channel> createState() => _ChannelState();
@@ -29,7 +31,9 @@ class _ChannelState extends State<Channel> {
         const SizedBox(
           height: 24,
         ),
-        ChannelCardList()
+        ChannelCardListFuture(
+          viewModel: widget.viewModel,
+        )
       ],
     );
   }

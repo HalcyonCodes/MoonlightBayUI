@@ -13,8 +13,6 @@ class ChannelCardListFuture extends StatefulWidget {
 }
 
 class _ChannelCardListFutureState extends State<ChannelCardListFuture> {
-
-  
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -31,7 +29,9 @@ class _ChannelCardListFutureState extends State<ChannelCardListFuture> {
               return Text('waiting');
 
             case ConnectionState.done:
-              return ChannelCardList();
+              return ChannelCardList(
+                viewModel: widget.viewModel,
+              );
           }
         });
   }

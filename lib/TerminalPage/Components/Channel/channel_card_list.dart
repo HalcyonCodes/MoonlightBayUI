@@ -1,9 +1,13 @@
 import 'package:double_bladed_axe/double_bladed_axe.dart';
 import 'package:flutter/material.dart';
 import './channel_card.dart';
+import '../../Model/ViewModel/channel_view_model.dart';
 
 class ChannelCardList extends StatefulWidget {
-  const ChannelCardList({super.key});
+
+  final ChannelViewModel viewModel;
+
+  const ChannelCardList({super.key, required this.viewModel});
 
   @override
   State<ChannelCardList> createState() => _ChannelCardListState();
@@ -11,21 +15,15 @@ class ChannelCardList extends StatefulWidget {
 
 class _ChannelCardListState extends State<ChannelCardList> {
   ListUtil? listUtil;
-  List<Widget> test = [];
+  List<Widget> initWidgets = [];
 
   @override
   void initState() {
     super.initState();
     listUtil = ListUtil();
-
-    test = List.generate(12, (q) {
-       return ChannelCard(
-        date: '2024/8/28', 
-        time: '20:26', 
-        serviceName: '开启电灯订单服务', 
-        resourceName: ['资源1', '资源2'], 
-        resourceValue: ['值1', '值2']);
-    });
+    listUtil!.setFuncGetLoadMoreWidgets(loadMore);
+    listUtil!.setFuncGetLoadPreWidgets(loadPre);
+    initItem();
   }
 
   @override
@@ -35,7 +33,7 @@ class _ChannelCardListState extends State<ChannelCardList> {
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
         child: DoubleBladedAxe(
-            initWidgets: test,
+            initWidgets: initWidgets,
             initPage: '0',
             maxPage: '5',
             pageMaxContainCount: '5',
@@ -44,5 +42,60 @@ class _ChannelCardListState extends State<ChannelCardList> {
     );
   }
 
-  
+  //利用viewModel进行Http请求
+  Future<List<Widget>> loadPre() async {
+    await widget.viewModel.loadPre();
+    List<Widget> widgets = List.generate(
+        widget.viewModel.channelFromJsonModel!.data.channel.length, (q) {
+      return ChannelCard(
+          date: widget.viewModel.channelFromJsonModel!.data.channel[q].date,
+          time: widget.viewModel.channelFromJsonModel!.data.channel[q].time,
+          serviceName: widget.viewModel.channelFromJsonModel!.data.channel[q].name,
+          resourceName: List.generate(widget.viewModel.channelFromJsonModel!.data.channel[q].resource!.length, (q){
+            return widget.viewModel.channelFromJsonModel!.data.channel[q].resource![q].resourceName!;
+          }),
+          resourceValue: List.generate(widget.viewModel.channelFromJsonModel!.data.channel[q].resource!.length, (q){
+            return widget.viewModel.channelFromJsonModel!.data.channel[q].resource![q].resourceValue!;
+          }),
+          );
+    });
+    return widgets;
+  }
+
+  //利用viewModel进行Http请求
+  Future<List<Widget>> loadMore() async {
+    await widget.viewModel.loadMore();
+    List<Widget> widgets = List.generate(
+        widget.viewModel.channelFromJsonModel!.data.channel.length, (q) {
+      return ChannelCard(
+          date: widget.viewModel.channelFromJsonModel!.data.channel[q].date,
+          time: widget.viewModel.channelFromJsonModel!.data.channel[q].time,
+          serviceName: widget.viewModel.channelFromJsonModel!.data.channel[q].name,
+          resourceName: List.generate(widget.viewModel.channelFromJsonModel!.data.channel[q].resource!.length, (q){
+            return widget.viewModel.channelFromJsonModel!.data.channel[q].resource![q].resourceName!;
+          }),
+          resourceValue: List.generate(widget.viewModel.channelFromJsonModel!.data.channel[q].resource!.length, (q){
+            return widget.viewModel.channelFromJsonModel!.data.channel[q].resource![q].resourceValue!;
+          }),
+          );
+    });
+    return widgets;
+  }
+
+  void initItem() {
+    initWidgets = List.generate(
+        widget.viewModel.channelFromJsonModel!.data.channel.length, (q) {
+      return ChannelCard(
+          date: widget.viewModel.channelFromJsonModel!.data.channel[q].date,
+          time: widget.viewModel.channelFromJsonModel!.data.channel[q].time,
+          serviceName: widget.viewModel.channelFromJsonModel!.data.channel[q].name,
+          resourceName: List.generate(widget.viewModel.channelFromJsonModel!.data.channel[q].resource!.length, (q){
+            return widget.viewModel.channelFromJsonModel!.data.channel[q].resource![q].resourceName!;
+          }),
+          resourceValue: List.generate(widget.viewModel.channelFromJsonModel!.data.channel[q].resource!.length, (q){
+            return widget.viewModel.channelFromJsonModel!.data.channel[q].resource![q].resourceValue!;
+          }),
+          );
+    });
+  }
 }

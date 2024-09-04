@@ -6,6 +6,7 @@ import './Components/Channel/channel.dart';
 import '../Config/string.dart';
 import './Util/edit_util.dart';
 import './Model/ViewModel/terminal_view_model.dart';
+import './Model/ViewModel/channel_view_model.dart';
 
 class TerminalPage extends StatefulWidget {
   const TerminalPage({super.key});
@@ -16,13 +17,23 @@ class TerminalPage extends StatefulWidget {
 
 class _TerminalPageState extends State<TerminalPage> {
   EditUtil? pageEditUtil;
-  TerminalViewModel? terminalViewMode;
+  TerminalViewModel? terminalViewModel;
+  ChannelViewModel? channelViewModel0;
+  ChannelViewModel? channelViewModel1;
+  ChannelViewModel? channelViewModel2;
+  ChannelViewModel? channelViewModel3;
+  ChannelViewModel? channelViewModel4;
 
   @override
   void initState() {
     super.initState();
     pageEditUtil = EditUtil();
-    terminalViewMode = TerminalViewModel();
+    terminalViewModel = TerminalViewModel();
+    channelViewModel0 = ChannelViewModel();
+     channelViewModel1 = ChannelViewModel();
+     channelViewModel2 = ChannelViewModel();
+     channelViewModel3 = ChannelViewModel();
+     channelViewModel4 = ChannelViewModel();
   }
 
   @override
@@ -49,7 +60,9 @@ class _TerminalPageState extends State<TerminalPage> {
                   ),
                   SizedBox(
                     width: 450,
-                    child: Terminal(viewModel: terminalViewMode!,),
+                    child: Terminal(
+                      viewModel: terminalViewModel!,
+                    ),
                   ),
                   SizedBox(
                     width: 24,
@@ -58,6 +71,7 @@ class _TerminalPageState extends State<TerminalPage> {
                     width: 213,
                     child: Channel(
                       channelName: KString.channel0,
+                      viewModel: channelViewModel0!,
                     ),
                   ),
                   SizedBox(
@@ -67,6 +81,7 @@ class _TerminalPageState extends State<TerminalPage> {
                     width: 213,
                     child: Channel(
                       channelName: KString.channel1,
+                      viewModel: channelViewModel1!,
                     ),
                   ),
                   SizedBox(
@@ -76,6 +91,7 @@ class _TerminalPageState extends State<TerminalPage> {
                     width: 213,
                     child: Channel(
                       channelName: KString.channel2,
+                      viewModel: channelViewModel2!,
                     ),
                   ),
                   SizedBox(
@@ -85,6 +101,7 @@ class _TerminalPageState extends State<TerminalPage> {
                     width: 213,
                     child: Channel(
                       channelName: KString.channel3,
+                      viewModel: channelViewModel3!,
                     ),
                   ),
                   SizedBox(
@@ -94,6 +111,7 @@ class _TerminalPageState extends State<TerminalPage> {
                     width: 213,
                     child: Channel(
                       channelName: KString.channel4,
+                      viewModel: channelViewModel4!,
                     ),
                   ),
                 ],

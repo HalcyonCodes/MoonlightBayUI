@@ -39,7 +39,7 @@ class TerminalOrderModel {
     id = json['id'];
     date = json['date'];
     time = json['time'];
-    name = json['mame'];
+    name = json['name'];
     resource = [];
     TerminalOrderResourceModel temp;
     json['resource'].forEach((v) {
