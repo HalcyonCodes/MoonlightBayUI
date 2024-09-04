@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moonlight_bay_ui/TerminalPage/Components/Terminal/terminal_card_list.dart';
+import '../../Components/Terminal/terminal_card_list.dart';
+
 import '../../Model/ViewModel/terminal_view_model.dart';
 
 class TerminalCardListFuture extends StatefulWidget {
@@ -28,7 +29,7 @@ class _TerminalCardListFutureState extends State<TerminalCardListFuture> {
               return Text('waiting');
 
             case ConnectionState.done:
-              return TerminalCardList();
+              return TerminalCardList(viewModel: widget.viewModel,);
           }
         });
   }

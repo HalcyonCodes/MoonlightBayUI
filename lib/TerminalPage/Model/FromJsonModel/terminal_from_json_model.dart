@@ -27,11 +27,13 @@ class TerminalModel {
   late String terminalIP;
   late String terminalName;
   late String terminalDesc;
+  late int status;
 
   TerminalModel.fromJson(Map<String, dynamic> json) {
     terminalID = json['id'];
     terminalIP = json['ip'];
     terminalName = json['name'];
     terminalDesc = json['desc'];
+    status = json['status'];
   }
 }

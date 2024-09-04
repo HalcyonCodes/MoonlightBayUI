@@ -43,4 +43,6 @@ class _ChannelCardListState extends State<ChannelCardList> {
       ),
     );
   }
+
+  
 }
