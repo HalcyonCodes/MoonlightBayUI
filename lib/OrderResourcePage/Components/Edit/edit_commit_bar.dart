@@ -4,25 +4,22 @@ import 'package:moonlight_bay_ui/Config/color.dart';
 import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
+import '../../Util/edit_util.dart';
 
 class EditCommitBar extends StatefulWidget {
-  const EditCommitBar({super.key});
+  final EditUtil editUtil;
+  const EditCommitBar({super.key, required this.editUtil});
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
 }
 
 class _EditCommitBarState extends State<EditCommitBar> {
-
-   
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +27,16 @@ class _EditCommitBarState extends State<EditCommitBar> {
       height: 46,
       width: 658,
       decoration: BoxDecoration(
-        color: KColor.primaryColor,
-        borderRadius:const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))
-      ),
+          color: KColor.primaryColor,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(width: 24,),
+          const SizedBox(
+            width: 24,
+          ),
           SizedBox(
             height: 18,
             width: 18,
@@ -46,14 +45,16 @@ class _EditCommitBarState extends State<EditCommitBar> {
               color: Colors.white,
             ),
           ),
-          SizedBox(width: 4,),
+          SizedBox(
+            width: 4,
+          ),
           Text(
             KString.addOrderResource,
             style: KFont.navTitleStyle,
           ),
           const Expanded(child: SizedBox()),
           InkWell(
-            onTap: () {},
+            onTap: () {widget.editUtil.removeEdit!();},
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(color: KColor.navIconColor),
@@ -65,7 +66,7 @@ class _EditCommitBarState extends State<EditCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {},
+            onTap: () {widget.editUtil.removeEdit!();},
             child: Container(
               decoration: BoxDecoration(
                   color: KColor.primaryColor,
@@ -81,8 +82,4 @@ class _EditCommitBarState extends State<EditCommitBar> {
       ),
     );
   }
-
-
-
-
 }

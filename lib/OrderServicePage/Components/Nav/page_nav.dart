@@ -6,13 +6,15 @@ import 'package:moonlight_bay_ui/Config/shadow.dart';
 import './title_page_nav.dart';
 import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
-
+import '../../Util/nav_util.dart';
 
 class PageNav extends StatefulWidget {
- 
+  final NavUtil? navUtil;
+
   const PageNav({
     super.key,
     //required this.editUtil,
+    required this.navUtil,
   });
 
   @override
@@ -97,7 +99,9 @@ class _PageNavState extends State<PageNav> {
                     }),
               ],
             ),
-            const SizedBox(height: 24,),
+            const SizedBox(
+              height: 24,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,11 +115,9 @@ class _PageNavState extends State<PageNav> {
                         //widget.editUtil!.showRemove!();
                       }),
                 ),
-                
                 const SizedBox(
                   width: 12,
                 ),
-                
                 NavIconButton(
                     iconPath: 'svg/move.svg',
                     onClick: () {
@@ -123,8 +125,10 @@ class _PageNavState extends State<PageNav> {
                     }),
               ],
             ),
-            const SizedBox(height: 24,),
-             Row(
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -132,24 +136,26 @@ class _PageNavState extends State<PageNav> {
                     iconPath: 'svg/order.svg',
                     onClick: () {
                       //widget.editUtil!.showEdit!();
+                      widget.navUtil!.switchNav!(0);
                     }),
                 const SizedBox(
                   width: 12,
                 ),
-               
                 NavIconButton(
-                      iconPath: 'svg/serviceResource.svg',
-                      onClick: () {
-                        //widget.editUtil!.showRemove!();
-                }),
+                    iconPath: 'svg/serviceResource.svg',
+                    onClick: () {
+                      //widget.editUtil!.showRemove!();
+                      widget.navUtil!.switchNav!(1);
+                    }),
                 const SizedBox(
                   width: 12,
                 ),
                 NavIconButton(
-                      iconPath: 'svg/script.svg',
-                      onClick: () {
-                        //widget.editUtil!.showRemove!();
-                }),
+                    iconPath: 'svg/script.svg',
+                    onClick: () {
+                      //widget.editUtil!.showRemove!();
+                      widget.navUtil!.switchNav!(2);
+                    }),
               ],
             ),
           ],

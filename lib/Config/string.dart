@@ -1,4 +1,4 @@
-import 'package:double_bladed_axe/components/status_card/status_card.dart';
+
 
 class KString {
   static String tset = 'test';

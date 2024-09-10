@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import './order_service_resource_list.dart';
 import './order_service_resource_title.dart';
+import '../../Models/ViewModel/order_resource_view_model.dart';
 
 class OrderServiceResource extends StatefulWidget {
+  final ResourceViewModel? viewModel;
+
   final String? title;
-  const OrderServiceResource({super.key, required this.title});
+  const OrderServiceResource({super.key, required this.title, required this.viewModel});
 
   @override
   State<OrderServiceResource> createState() => _OrderServiceResourceState();
@@ -31,7 +34,7 @@ class _OrderServiceResourceState extends State<OrderServiceResource> {
           SizedBox(
             height: 24,
           ),
-          OrderServiceResourceList()
+          OrderServiceResourceList(viewModel: widget.viewModel!,)
         ],
       ),
     );

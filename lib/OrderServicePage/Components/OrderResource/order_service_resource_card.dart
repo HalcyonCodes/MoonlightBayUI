@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:moonlight_bay_ui/Config/font.dart';
 import 'package:moonlight_bay_ui/Config/string.dart';
 import '../../../Config/decoration.dart';
+import '../../Util/resource_util.dart';
 
 class OrderServiceResourceCard extends StatelessWidget {
+  
   final String? orderResourceID;
   final String? bindingCount;
   final String? orderResourceName;
@@ -61,4 +63,6 @@ class OrderServiceResourceCard extends StatelessWidget {
       ),
     );
   }
+
+  
 }

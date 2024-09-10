@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../Config/decoration.dart';
-import '../../../Config/string.dart';
+
 import '../../../Config/font.dart';
 
 class OrderServiceResourceTitle extends StatelessWidget {

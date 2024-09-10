@@ -1,9 +1,12 @@
 import 'package:double_bladed_axe/double_bladed_axe.dart';
 import 'package:flutter/material.dart';
 import '../OrderResource/order_service_resource_card.dart';
+import '../../Models/ViewModel/order_resource_view_model.dart';
 
 class OrderServiceResourceList extends StatefulWidget {
-  const OrderServiceResourceList({super.key});
+  final ResourceViewModel viewModel;
+
+  const OrderServiceResourceList({super.key, required this.viewModel});
 
   @override
   State<OrderServiceResourceList> createState() =>
@@ -12,19 +15,13 @@ class OrderServiceResourceList extends StatefulWidget {
 
 class _OrderServiceResourceListState extends State<OrderServiceResourceList> {
   ListUtil? listUtil;
-  List<Widget>? test;
+  List<Widget>? initWidgets;
 
   @override
   void initState() {
     super.initState();
     listUtil = ListUtil();
-    test = List.generate(6, (q) {
-      return OrderServiceResourceCard(
-          orderResourceID: 're001',
-          bindingCount: '3',
-          orderResourceName: '水力',
-          desc: '水力能源资源');
-    });
+    initWidget();
   }
 
   @override
@@ -33,12 +30,34 @@ class _OrderServiceResourceListState extends State<OrderServiceResourceList> {
       height: MediaQuery.of(context).size.height - 24 - 24 - 24 - 46,
       child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-          child: DoubleBladedAxe(
-              initWidgets: test!,
-              initPage: '0',
-              maxPage: '5',
-              pageMaxContainCount: '5',
-              listUtil: listUtil!)),
+          child: ListView(children: initWidgets!)),
     );
+  }
+
+
+  void initWidget() {
+    initWidgets = List.generate(
+        widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
+            .length, (q) {
+      return OrderServiceResourceCard(
+          orderResourceID: widget
+              .viewModel.orderResourceFromJsonModel!.data.orderResources![q].id,
+          bindingCount: widget.viewModel.orderResourceFromJsonModel!.data
+              .orderResources![q].bindingCount,
+          orderResourceName: widget.viewModel.orderResourceFromJsonModel!.data
+              .orderResources![q].name,
+          desc: widget.viewModel.orderResourceFromJsonModel!.data
+              .orderResources![q].desc);
+    });
+  }
+
+  //移出item
+  void removeWidget() {
+    
+  }
+
+  //添加item
+  void addWidget() {
+    
   }
 }

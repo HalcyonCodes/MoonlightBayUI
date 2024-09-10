@@ -24,10 +24,14 @@ class _PageNavState extends State<PageNav> {
   OverlayEntry? overlayEntry;
   OverlayEntry? fOverlayEntry;
 
+  bool? isOverlay;
+
   @override
   void initState() {
     super.initState();
     width = 213;
+    isOverlay = false;
+
     overlayEntry = dOverlayEntry();
     fOverlayEntry = qOverlayEntry();
     //注册
@@ -108,16 +112,22 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Edit()));
+          child: Material(child: Edit(editUtil: widget.editUtil!,)));
     });
   }
 
   Future<void> showEdit() async {
-    Overlay.of(context).insert(overlayEntry!);
+    if (isOverlay == false) {
+      Overlay.of(context).insert(overlayEntry!);
+      isOverlay = true;
+    }
   }
 
   Future<void> removeEdit() async {
-    overlayEntry?.remove();
+    if (isOverlay == true) {
+      overlayEntry?.remove();
+      isOverlay = false;
+    }
   }
 
   OverlayEntry qOverlayEntry() {
@@ -125,15 +135,21 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Remove()));
+          child: Material(child: Remove(editUtil: widget.editUtil!,)));
     });
   }
 
   Future<void> showDelete() async {
-    Overlay.of(context).insert(fOverlayEntry!);
+    if (isOverlay == false) {
+      Overlay.of(context).insert(fOverlayEntry!);
+      isOverlay = true;
+    }
   }
 
   Future<void> removeDelete() async {
-    fOverlayEntry?.remove();
+    if (isOverlay == true) {
+      fOverlayEntry?.remove();
+      isOverlay = false;
+    }
   }
 }

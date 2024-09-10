@@ -5,9 +5,11 @@ import 'package:moonlight_bay_ui/Config/string.dart';
 import 'package:moonlight_bay_ui/OrderResourcePage/Components/Edit/edit_commit_bar.dart';
 import '../../../Config/decoration.dart';
 import '../../../Config/color.dart';
+import '../../Util/edit_util.dart';
 
 class Edit extends StatefulWidget {
-  const Edit({super.key});
+  final EditUtil editUtil;
+  const Edit({super.key, required this.editUtil});
 
   @override
   State<Edit> createState() => _EditState();
@@ -28,21 +30,20 @@ class _EditState extends State<Edit> {
   Widget build(BuildContext context) {
     return Container(
       decoration: KDecoration.cardDecoration,
-      
       width: 658,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))
-            ),
-            child: EditCommitBar()),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16))),
+              child: EditCommitBar(editUtil: widget.editUtil,)),
           const SizedBox(
             height: 12,
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
@@ -50,11 +51,16 @@ class _EditState extends State<Edit> {
               style: KFont.cardGreyStyle,
             ),
           ),
-          const SizedBox(height: 12,),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Expanded(
-              child: Container(
+          const SizedBox(
+            height: 12,
+          ),
+         //Padding(
+           // padding: const EdgeInsets.symmetric(horizontal: 24),
+            //child: 
+            //Expanded(
+              //child:
+               Container(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 height: 26,
                 color: KColor.containerColor,
                 alignment: Alignment.center,
@@ -70,7 +76,7 @@ class _EditState extends State<Edit> {
                     LengthLimitingTextInputFormatter(200),
                   ],
                   maxLength: null,
-                  onSubmitted: (q){},
+                  onSubmitted: (q) {},
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: KString.inputOrderServiceResourceName,
@@ -80,11 +86,13 @@ class _EditState extends State<Edit> {
                     hintMaxLines: 1,
                   ),
                   strutStyle: const StrutStyle(leading: 0),
-                ),
-              ),
+               // ),
+              //),
             ),
           ),
-          const SizedBox(height: 24,),
+          const SizedBox(
+            height: 24,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
@@ -92,11 +100,16 @@ class _EditState extends State<Edit> {
               style: KFont.cardGreyStyle,
             ),
           ),
-          const SizedBox(height: 12,),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Expanded(
-              child: Container(
+          const SizedBox(
+            height: 12,
+          ),
+          //Padding(
+           // padding: const EdgeInsets.symmetric(horizontal: 24),
+            //child: 
+            //Expanded(
+              //child: 
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 height: 26,
                 color: KColor.containerColor,
                 alignment: Alignment.center,
@@ -112,7 +125,7 @@ class _EditState extends State<Edit> {
                     LengthLimitingTextInputFormatter(200),
                   ],
                   maxLength: null,
-                  onSubmitted: (q){},
+                  onSubmitted: (q) {},
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: KString.inputOrderServiceResourceDesc,
@@ -123,10 +136,12 @@ class _EditState extends State<Edit> {
                   ),
                   strutStyle: const StrutStyle(leading: 0),
                 ),
-              ),
-            ),
+              //),
+            //),
           ),
-          const SizedBox(height: 12,)
+          const SizedBox(
+            height: 12,
+          )
         ],
       ),
     );
