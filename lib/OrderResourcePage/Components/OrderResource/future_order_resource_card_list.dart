@@ -26,13 +26,13 @@ class _OrderResourceCardListFutureState
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              return Text('none');
+              return const Text('none');
 
             case ConnectionState.active:
-              return Text('active');
+              return const Text('active');
 
             case ConnectionState.waiting:
-              return Text('waiting');
+              return const Text('waiting');
 
             case ConnectionState.done:
               return OrderResourceCardList(

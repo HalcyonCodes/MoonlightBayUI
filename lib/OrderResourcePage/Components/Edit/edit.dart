@@ -36,7 +36,7 @@ class _EditState extends State<Edit> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16))),

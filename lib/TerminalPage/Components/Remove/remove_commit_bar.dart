@@ -44,7 +44,7 @@ class _RemoveCommitBarState extends State<RemoveCommitBar> {
               color: Colors.white,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 4,
           ),
           Text(

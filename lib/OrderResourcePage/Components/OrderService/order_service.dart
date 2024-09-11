@@ -25,14 +25,14 @@ class _OrderServiceState extends State<OrderService> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 1161,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          OrderServiceTitle(),
-          SizedBox(
+          const OrderServiceTitle(),
+          const SizedBox(
             height: 24,
           ),
           OrderServiceCardListFuture(

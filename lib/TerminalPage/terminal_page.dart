@@ -64,7 +64,7 @@ class _TerminalPageState extends State<TerminalPage> {
                       viewModel: terminalViewModel!,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   SizedBox(
@@ -74,7 +74,7 @@ class _TerminalPageState extends State<TerminalPage> {
                       viewModel: channelViewModel0!,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   SizedBox(
@@ -84,7 +84,7 @@ class _TerminalPageState extends State<TerminalPage> {
                       viewModel: channelViewModel1!,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   SizedBox(
@@ -94,7 +94,7 @@ class _TerminalPageState extends State<TerminalPage> {
                       viewModel: channelViewModel2!,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   SizedBox(
@@ -104,7 +104,7 @@ class _TerminalPageState extends State<TerminalPage> {
                       viewModel: channelViewModel3!,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   SizedBox(

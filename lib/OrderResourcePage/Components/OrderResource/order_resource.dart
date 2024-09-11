@@ -16,14 +16,14 @@ class OrderResource extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 450,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          OrderResourceSearchBar(),
-          SizedBox(
+          const OrderResourceSearchBar(),
+          const SizedBox(
             height: 24,
           ),
           OrderResourceCardListFuture(

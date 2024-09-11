@@ -1,4 +1,3 @@
-
 class OrderResourceFromJsonModel {
   late String? code;
   late String? message;
@@ -12,6 +11,7 @@ class OrderResourceFromJsonModel {
 }
 
 class OrderResourceData {
+  OrderResourceData();
   late List<OrderResource>? orderResources;
 
   OrderResourceData.fromJson(Map<String, dynamic> json) {
@@ -30,7 +30,7 @@ class OrderResource {
   late String? desc;
   late String? name;
 
-   OrderResource({this.id, this.bindingCount, this.desc, this.name});
+  OrderResource({this.id, this.bindingCount, this.desc, this.name});
 
   OrderResource.fromJson(Map<String, dynamic> json) {
     id = json['id'];

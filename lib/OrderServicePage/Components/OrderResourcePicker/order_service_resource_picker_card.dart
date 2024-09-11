@@ -2,32 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:moonlight_bay_ui/Config/font.dart';
 import 'package:moonlight_bay_ui/Config/string.dart';
 import '../../../Config/decoration.dart';
-import '../../Util/resource_util.dart';
+import '../../Util/resource_picker_util.dart';
 
-class OrderServiceResourceCard extends StatefulWidget {
+
+class OrderServiceResourcePickerCard extends StatefulWidget {
   final String? orderResourceID;
   final String? bindingCount;
   final String? orderResourceName;
   final String? desc;
   final Function()? onTap;
-  final ResourceUtil? resourceUtil;
+  final ResourcePickerUtil? resourcePickerUtil;
 
-  const OrderServiceResourceCard({
+  const OrderServiceResourcePickerCard({
     super.key,
     required this.orderResourceID,
     required this.bindingCount,
     required this.orderResourceName,
     required this.desc,
     required this.onTap,
-    required this.resourceUtil,
+    required this.resourcePickerUtil,
   });
 
   @override
-  State<OrderServiceResourceCard> createState() =>
-      _OrderServiceResourceCardState();
+  State<OrderServiceResourcePickerCard> createState() =>
+      _OrderServiceResourcePickerCardState();
 }
 
-class _OrderServiceResourceCardState extends State<OrderServiceResourceCard> {
+class _OrderServiceResourcePickerCardState extends State<OrderServiceResourcePickerCard> {
   String? orderResourceID;
   String? bindingCount;
   String? orderResourceName;
@@ -43,15 +44,15 @@ class _OrderServiceResourceCardState extends State<OrderServiceResourceCard> {
     orderResourceName = widget.orderResourceName;
     desc = widget.desc;
     isSelect = false;
-    widget.resourceUtil!.addFuncSetItemUnSelect(setUnSelect);
-    widget.resourceUtil!.addFuncSetItemSelect(setSelect);
+    widget.resourcePickerUtil!.addFuncSetItemUnSelect(setUnSelect);
+    widget.resourcePickerUtil!.addFuncSetItemSelect(setSelect);
   }
 
   @override
   void dispose() {
     super.dispose();
-    widget.resourceUtil!.removFuncSetItemUnSelect(setUnSelect);
-    widget.resourceUtil!.removFuncSetItemSelect(setSelect);
+    widget.resourcePickerUtil!.removFuncSetItemUnSelect(setUnSelect);
+    widget.resourcePickerUtil!.removFuncSetItemSelect(setSelect);
   }
 
   @override

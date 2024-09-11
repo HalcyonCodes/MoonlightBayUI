@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class OrderResourceUtil {
   //清空所有选中的方法

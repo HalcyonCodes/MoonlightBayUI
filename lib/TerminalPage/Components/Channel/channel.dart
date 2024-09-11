@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../Components/Channel/channel_card_list.dart';
 import './channel_title.dart';
 import './future_channel_card_list.dart';
 import '../../Model/ViewModel/channel_view_model.dart';

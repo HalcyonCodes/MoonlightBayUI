@@ -18,7 +18,7 @@ class _WorkScriptCardListState extends State<WorkScriptCardList> {
     super.initState();
     listUtil = ListUtil();
     test = List.generate(12, (q) {
-      return WorkScriptCard(
+      return const WorkScriptCard(
           id: 'sr001',
           bindingCount: '3',
           name: 'turnOnTheLight.lua',

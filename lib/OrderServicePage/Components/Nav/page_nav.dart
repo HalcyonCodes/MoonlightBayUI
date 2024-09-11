@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
 import 'package:moonlight_bay_ui/Config/shadow.dart';
+import 'package:moonlight_bay_ui/OrderServicePage/Util/resource_picker_util.dart';
+import 'package:moonlight_bay_ui/OrderServicePage/Util/resource_util.dart';
 import './title_page_nav.dart';
 import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
@@ -10,11 +12,13 @@ import '../../Util/nav_util.dart';
 
 class PageNav extends StatefulWidget {
   final NavUtil? navUtil;
+  final ResourceUtil? resourceUtil;
+  final ResourcePickerUtil? resourcePickerUtil;
 
   const PageNav({
     super.key,
     //required this.editUtil,
-    required this.navUtil,
+    required this.navUtil, required this.resourceUtil, required this.resourcePickerUtil,
   });
 
   @override
@@ -25,6 +29,7 @@ class _PageNavState extends State<PageNav> {
   double? width;
   OverlayEntry? overlayEntry;
   OverlayEntry? fOverlayEntry;
+  int switchIndex = 0;
 
   @override
   void initState() {
@@ -88,6 +93,7 @@ class _PageNavState extends State<PageNav> {
                     iconPath: 'svg/add.svg',
                     onClick: () {
                       //widget.editUtil!.showEdit!();
+
                     }),
                 const SizedBox(
                   width: 12,
@@ -113,6 +119,10 @@ class _PageNavState extends State<PageNav> {
                       iconPath: 'svg/move.svg',
                       onClick: () {
                         //widget.editUtil!.showRemove!();
+                        //ServiceResource方面
+                        if(switchIndex == 1){
+                         widget.resourceUtil!.addItem!(widget.resourcePickerUtil!.orderResource!);
+                        }
                       }),
                 ),
                 const SizedBox(
@@ -121,7 +131,22 @@ class _PageNavState extends State<PageNav> {
                 NavIconButton(
                     iconPath: 'svg/move.svg',
                     onClick: () {
-                      //widget.editUtil!.showEdit!();
+                       if(switchIndex == 1){
+                         int? index = widget.resourceUtil!.itemIndex;
+                         widget.resourceUtil!.removeItem!();
+                        }
+                    }),
+                SizedBox(width: 12,),
+                  //提交按钮
+                NavIconButton(
+                    iconPath: 'svg/add.svg',
+                    onClick: () {
+                       if(switchIndex == 1){
+                          //提交的代码
+                          //退出的代码
+                          switchIndex = 0;
+                          widget.navUtil!.switchNav!(0);
+                        }
                     }),
               ],
             ),
@@ -137,6 +162,7 @@ class _PageNavState extends State<PageNav> {
                     onClick: () {
                       //widget.editUtil!.showEdit!();
                       widget.navUtil!.switchNav!(0);
+                      switchIndex = 0;
                     }),
                 const SizedBox(
                   width: 12,
@@ -146,6 +172,7 @@ class _PageNavState extends State<PageNav> {
                     onClick: () {
                       //widget.editUtil!.showRemove!();
                       widget.navUtil!.switchNav!(1);
+                      switchIndex = 1;
                     }),
                 const SizedBox(
                   width: 12,
@@ -155,6 +182,7 @@ class _PageNavState extends State<PageNav> {
                     onClick: () {
                       //widget.editUtil!.showRemove!();
                       widget.navUtil!.switchNav!(2);
+                      switchIndex = 2;
                     }),
               ],
             ),

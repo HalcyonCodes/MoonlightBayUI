@@ -36,4 +36,5 @@ class KString {
   static String terminalDesc = '终端简介';
   static String editTerminalName = '修改终端名称';
   static String editTerminalDesc = '修改终端简介';
+  static String allServiceResource = '所有服务资源';
 }

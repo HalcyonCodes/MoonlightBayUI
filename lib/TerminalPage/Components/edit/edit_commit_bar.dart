@@ -45,7 +45,7 @@ class _EditCommitBarState extends State<EditCommitBar> {
               color: Colors.white,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 4,
           ),
           Text(

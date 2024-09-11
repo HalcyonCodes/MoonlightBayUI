@@ -36,12 +36,12 @@ class WorkScriptCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children:[ 
                     Text(id!, style: KFont.cardGreyStyle,),
-                    Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                     Text(KString.scriptBindingCount + bindingCount!, style: KFont.cardGreyStyle,)
                   ]),
                 const SizedBox(height: 24,),
                 Text(name!, style: KFont.cardNameStyle,),
-                SizedBox(height: 12,),
+                const SizedBox(height: 12,),
                 Text(desc!, style: KFont.cardGreyStyle,),
               ],
             ),

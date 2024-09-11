@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../FromJsonModel/order_resource_from_json_model.dart';
+import '../FromJsonModel/order_resource_picker_from_json_model.dart';
 
-import '../DataModel/order_resource_data_model.dart' as tData;
+import '../DataModel/order_resource_picker_data_model.dart' as tData;
 
-class OrderResourceViewModel {
+class OrderResourcePickerViewModel {
   Response? response;
   OrderResourceFromJsonModel? orderResourceFromJsonModel;
 

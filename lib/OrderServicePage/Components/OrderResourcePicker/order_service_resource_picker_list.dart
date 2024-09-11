@@ -1,24 +1,29 @@
 import 'package:double_bladed_axe/double_bladed_axe.dart';
 import 'package:flutter/material.dart';
-
+import '../../Util/resource_picker_util.dart';
 import '../OrderResource/order_service_resource_card.dart';
-import '../../Models/ViewModel/order_resource_view_model.dart';
+import '../../Models/ViewModel/order_resource_picker_view_model.dart';
 import '../../Util/resource_util.dart';
-import '../../Models/FromJsonModel/order_resource_from_json_model.dart';
+import 'order_service_resource_picker_card.dart';
 
-class OrderServiceResourceList extends StatefulWidget {
-  final OrderResourceViewModel viewModel;
+class OrderServiceResourcePickerList extends StatefulWidget {
+  final OrderResourcePickerViewModel viewModel;
+  final ResourcePickerUtil resourcePickerUtil;
   final ResourceUtil resourceUtil;
 
-  const OrderServiceResourceList(
-      {super.key, required this.viewModel, required this.resourceUtil});
+  const OrderServiceResourcePickerList(
+      {super.key,
+      required this.viewModel,
+      required this.resourceUtil,
+      required this.resourcePickerUtil});
 
   @override
-  State<OrderServiceResourceList> createState() =>
-      _OrderServiceResourceListState();
+  State<OrderServiceResourcePickerList> createState() =>
+      _OrderServiceResourcePickerListState();
 }
 
-class _OrderServiceResourceListState extends State<OrderServiceResourceList> {
+class _OrderServiceResourcePickerListState
+    extends State<OrderServiceResourcePickerList> {
   ListUtil? listUtil;
   List<Widget>? initWidgets;
 
@@ -26,9 +31,7 @@ class _OrderServiceResourceListState extends State<OrderServiceResourceList> {
   void initState() {
     super.initState();
     listUtil = ListUtil();
-    //initWidget();
-    widget.resourceUtil.setFuncAddItem(addWidget);
-    widget.resourceUtil.setFuncRemoveItem(removeWidget);
+    initWidget();
   }
 
   @override
@@ -46,18 +49,25 @@ class _OrderServiceResourceListState extends State<OrderServiceResourceList> {
     initWidgets = List.generate(
         widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
             .length, (q) {
-      return OrderServiceResourceCard(
-        key: UniqueKey(),
+      return OrderServiceResourcePickerCard(
           onTap: () {
             //设置单选
-            for (var q in widget.resourceUtil.setItemUnSelect!) {
+            for (var q in widget.resourcePickerUtil.setItemUnSelect!) {
               q();
             }
-            widget.resourceUtil.setItemSelect![q]();
-            widget.resourceUtil.setItemIndex(q);
-            
+            widget.resourcePickerUtil.setItemSelect![q]();
+            widget.resourcePickerUtil.setItemIndex(q);
+            widget.resourcePickerUtil.setOrderResource(
+                widget.viewModel.orderResourceFromJsonModel!.data
+                    .orderResources![q].id,
+                widget.viewModel.orderResourceFromJsonModel!.data
+                    .orderResources![q].name,
+                widget.viewModel.orderResourceFromJsonModel!.data
+                    .orderResources![q].bindingCount,
+                widget.viewModel.orderResourceFromJsonModel!.data
+                    .orderResources![q].desc);
           },
-          resourceUtil: widget.resourceUtil,
+          resourcePickerUtil: widget.resourcePickerUtil,
           orderResourceID: widget
               .viewModel.orderResourceFromJsonModel!.data.orderResources![q].id,
           bindingCount: widget.viewModel.orderResourceFromJsonModel!.data
@@ -71,14 +81,7 @@ class _OrderServiceResourceListState extends State<OrderServiceResourceList> {
 
   //移出item
   void removeWidget() {
-    //initWidgets!.removeAt(widget.resourceUtil.itemIndex!);
-     widget .viewModel.orderResourceFromJsonModel!.data.orderResources!.removeAt(widget.resourceUtil.itemIndex!);
-    refreshUi();
-  }
-
-  //添加item
-  void addWidget(OrderResource orderResource) {
-    widget.viewModel.orderResourceFromJsonModel!.data.orderResources!.add(orderResource);
+    initWidgets!.removeAt(widget.resourceUtil.itemIndex!);
     refreshUi();
   }
 

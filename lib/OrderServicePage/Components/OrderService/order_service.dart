@@ -11,14 +11,14 @@ class OrderService extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 529,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          OrderServiceSearchBar(),
-          SizedBox(
+          const OrderServiceSearchBar(),
+          const SizedBox(
             height: 24,
           ),
           OrderServiceCardListFuture(

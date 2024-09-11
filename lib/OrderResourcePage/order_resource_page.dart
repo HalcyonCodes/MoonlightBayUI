@@ -64,7 +64,7 @@ class _OrderResourcePageState extends State<OrderResourcePage> {
                     orderResourceUtil: orderResourceUtil!,
                     orderServiceUtil: orderServiceUtil!,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 24,
                   ),
                   OrderService(

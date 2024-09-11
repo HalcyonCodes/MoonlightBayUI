@@ -9,7 +9,7 @@ import '../../Model/ViewModel/terminal_view_model.dart';
 class Terminal extends StatefulWidget {
   final TerminalViewModel viewModel;
 
-  Terminal({super.key, required this.viewModel});
+  const Terminal({super.key, required this.viewModel});
 
   @override
   State<Terminal> createState() => _TerminalState();
@@ -22,8 +22,8 @@ class _TerminalState extends State<Terminal> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TerminalSearchBar(), 
-        SizedBox(height: 24), 
+        const TerminalSearchBar(), 
+        const SizedBox(height: 24), 
         TerminalCardListFuture(viewModel: widget.viewModel,)
         ],
     );

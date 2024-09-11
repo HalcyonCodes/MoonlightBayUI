@@ -8,6 +8,10 @@ import './Models/ViewModel/order_service_view_model.dart';
 import './Util/nav_util.dart';
 import './Components/OrderResource/order_service_resource.dart';
 import './Models/ViewModel/order_resource_view_model.dart';
+import './Util/resource_util.dart';
+import './Components/OrderResourcePicker/order_service_resource_picker.dart';
+import './Models/ViewModel/order_resource_picker_view_model.dart';
+import 'Util/resource_picker_util.dart';
 
 class OrderServicePage extends StatefulWidget {
   const OrderServicePage({super.key});
@@ -18,7 +22,10 @@ class OrderServicePage extends StatefulWidget {
 
 class _OrderServicePageState extends State<OrderServicePage> {
   OrderServiceViewModel? viewModel;
-  ResourceViewModel? resourceViewModel;
+  OrderResourceViewModel? resourceViewModel;
+  OrderResourcePickerViewModel? resourcePickerViewModel;
+  ResourceUtil? resourceUtil;
+  ResourcePickerUtil? resourcePickerUtil;
 
   int navPage = 0;
   NavUtil? navUtil;
@@ -28,6 +35,10 @@ class _OrderServicePageState extends State<OrderServicePage> {
     super.initState();
     viewModel = OrderServiceViewModel();
     navUtil = NavUtil();
+    resourceUtil = ResourceUtil();
+    resourceViewModel = OrderResourceViewModel();
+    resourcePickerViewModel = OrderResourcePickerViewModel();
+    resourcePickerUtil = ResourcePickerUtil();
     //注册
     navUtil!.setFuncSwitchNav(switchNav);
   }
@@ -57,7 +68,9 @@ class _OrderServicePageState extends State<OrderServicePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  PageNav(navUtil: navUtil!,),
+                  PageNav(
+                    navUtil: navUtil!, resourceUtil: resourceUtil, resourcePickerUtil: resourcePickerUtil,
+                  ),
                   const SizedBox(
                     width: 24,
                   ),
@@ -67,15 +80,25 @@ class _OrderServicePageState extends State<OrderServicePage> {
                   const SizedBox(
                     width: 24,
                   ),
-                    navPage == 1 ? OrderServiceResource(title: KString.addOrderResource, viewModel: resourceViewModel) :
-                    navPage == 2 ? WorkScript() : SizedBox(),
+                  navPage == 1
+                      ? OrderServiceResource(
+                          title: KString.addOrderResource,
+                          viewModel: resourceViewModel,
+                          resourceUtil: resourceUtil,
+                        )
+                      : navPage == 2
+                          ? const WorkScript()
+                          : const SizedBox(),
+                  const SizedBox(
+                          width: 24,
+                        ),
 
-                    navPage == 1 ? SizedBox(width: 24,):
-                    navPage == 2 ? SizedBox(width: 24,): SizedBox(),
-                  
-                    //OrderServiceResource(title: KString.allOrderServiceResource)
-                    navPage == 2 ? WorkScript(): SizedBox()
-                  
+                  navPage == 1
+                      ? OrderServiceResourcePicker(
+                        resourceUtil: resourceUtil!,
+                        title: KString.allServiceResource, viewModel: resourcePickerViewModel, resourcePickerUtil: resourcePickerUtil)
+                      : 
+                  navPage == 2 ? const WorkScript() : const SizedBox()
                 ],
               ),
             )),

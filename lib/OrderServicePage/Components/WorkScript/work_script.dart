@@ -13,15 +13,15 @@ class WorkScript extends StatefulWidget {
 class _WorkScriptState extends State<WorkScript> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 529,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           WorkScriptTitle(title: KString.orderScript),
-          SizedBox(height: 24,),
-          WorkScriptCardList()
+          const SizedBox(height: 24,),
+          const WorkScriptCardList()
 
         ],
       ),
