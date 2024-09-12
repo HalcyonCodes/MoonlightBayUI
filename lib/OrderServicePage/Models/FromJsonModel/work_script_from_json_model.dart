@@ -30,6 +30,7 @@ class WorkScript {
   String? name;
   String? bindingCount;
   String? desc;
+  WorkScript({this.id, this.name, this.bindingCount, this.desc});
 
   WorkScript.fromJson(Map<String, dynamic> json) {
     id = json['id'];

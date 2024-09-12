@@ -10,17 +10,19 @@ import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
 import '../../Util/nav_util.dart';
 import '../../Util/work_script_util.dart';
+import '../../Util/work_script_picker_util.dart';
 
 class PageNav extends StatefulWidget {
   final NavUtil? navUtil;
   final ResourceUtil? resourceUtil;
   final ResourcePickerUtil? resourcePickerUtil;
   final WorkScriptUtil? workScriptUtil;
+  final WorkScriptPickertUtil workScriptPickertUtil;
 
   const PageNav({
     super.key,
     //required this.editUtil,
-    required this.navUtil, required this.resourceUtil, required this.resourcePickerUtil,required this.workScriptUtil,
+    required this.navUtil, required this.resourceUtil, required this.resourcePickerUtil,required this.workScriptUtil, required this.workScriptPickertUtil,
   });
 
   @override
@@ -72,12 +74,17 @@ class _PageNavState extends State<PageNav> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {}),
+                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {
+         
+
+                }),
                 const SizedBox(
                   width: 12,
                 ),
                 NavIconButton(
-                    iconPath: 'svg/serviceResource.svg', onClick: () {}),
+                    iconPath: 'svg/serviceResource.svg', onClick: () {
+
+                    }),
               ],
             ),
             const SizedBox(
@@ -95,6 +102,14 @@ class _PageNavState extends State<PageNav> {
                     iconPath: 'svg/add.svg',
                     onClick: () {
                       //widget.editUtil!.showEdit!();
+                      //资源相关
+                      if(switchIndex == 1){
+
+                      }
+                      //脚本相关
+                      if(switchIndex == 2){
+
+                      }
 
                     }),
                 const SizedBox(
@@ -104,6 +119,14 @@ class _PageNavState extends State<PageNav> {
                     iconPath: 'svg/remove.svg',
                     onClick: () {
                       //widget.editUtil!.showRemove!();
+                      //资源相关
+                      if(switchIndex == 1){
+                        
+                      }
+                      //脚本相关
+                      if(switchIndex == 2){
+
+                      }
                     }),
               ],
             ),
@@ -126,7 +149,7 @@ class _PageNavState extends State<PageNav> {
                          widget.resourceUtil!.addItem!(widget.resourcePickerUtil!.orderResource!);
                         }
                         if(switchIndex == 2){
-                          
+                          widget.workScriptUtil!.addItem!(widget.workScriptPickertUtil.workScript!);
                         }
                       }),
                 ),

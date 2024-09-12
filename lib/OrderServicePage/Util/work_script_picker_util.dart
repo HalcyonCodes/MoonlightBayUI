@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-
-import '../Models/FromJsonModel/order_resource_from_json_model.dart';
-import '../Models/ViewModel/order_resource_view_model.dart';
 
 
-class ResourcePickerUtil {
-  //设置选中的itemIndex
+import '../Models/FromJsonModel/work_script_from_json_model.dart';
+
+class WorkScriptPickertUtil {
+
+
+    //设置选中的itemIndex
   int? _itemIndex;
   int? get itemIndex => _itemIndex;
   void setItemIndex(int? index) {
@@ -21,6 +21,7 @@ class ResourcePickerUtil {
 
   void removFuncSetItemUnSelect(Function() q) {
     _setItemUnSelect!.remove(q);
+
   }
 
   //设置单选
@@ -34,7 +35,8 @@ class ResourcePickerUtil {
     _setItemSelect!.remove(q);
   }
 
-  //移除item
+
+    //移除item
   Function()? _removeItem;
   Function()? get removeItem => _removeItem;
   void setFuncRemoveItem(Function()? q) {
@@ -48,9 +50,13 @@ class ResourcePickerUtil {
     _addItem = q;
   }
 
-  //设置item属性
-  OrderResource? orderResource;
-  void setOrderResource(String? id, String? name, String? bindingCount, String? desc){
-    orderResource = OrderResource(id: id, name: name, bindingCount: bindingCount, desc: desc);
+   //设置item属性
+
+  WorkScript? workScript;
+  void  setWorkScript(String? id, String? name, String? desc, String? bindingCount){
+    workScript = WorkScript(id: id, name: name, desc: desc, bindingCount: bindingCount);
   }
+
+
+
 }
