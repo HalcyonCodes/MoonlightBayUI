@@ -9,16 +9,18 @@ import './title_page_nav.dart';
 import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
 import '../../Util/nav_util.dart';
+import '../../Util/work_script_util.dart';
 
 class PageNav extends StatefulWidget {
   final NavUtil? navUtil;
   final ResourceUtil? resourceUtil;
   final ResourcePickerUtil? resourcePickerUtil;
+  final WorkScriptUtil? workScriptUtil;
 
   const PageNav({
     super.key,
     //required this.editUtil,
-    required this.navUtil, required this.resourceUtil, required this.resourcePickerUtil,
+    required this.navUtil, required this.resourceUtil, required this.resourcePickerUtil,required this.workScriptUtil,
   });
 
   @override
@@ -123,6 +125,9 @@ class _PageNavState extends State<PageNav> {
                         if(switchIndex == 1){
                          widget.resourceUtil!.addItem!(widget.resourcePickerUtil!.orderResource!);
                         }
+                        if(switchIndex == 2){
+                          
+                        }
                       }),
                 ),
                 const SizedBox(
@@ -132,8 +137,12 @@ class _PageNavState extends State<PageNav> {
                     iconPath: 'svg/move.svg',
                     onClick: () {
                        if(switchIndex == 1){
-                         int? index = widget.resourceUtil!.itemIndex;
+                        
                          widget.resourceUtil!.removeItem!();
+                        }
+                        if(switchIndex == 2){
+                         
+                         widget.workScriptUtil!.removeItem!();
                         }
                     }),
                 SizedBox(width: 12,),

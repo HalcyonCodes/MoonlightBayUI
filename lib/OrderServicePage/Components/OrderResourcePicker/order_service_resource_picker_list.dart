@@ -6,6 +6,7 @@ import '../../Models/ViewModel/order_resource_picker_view_model.dart';
 import '../../Util/resource_util.dart';
 import 'order_service_resource_picker_card.dart';
 
+
 class OrderServiceResourcePickerList extends StatefulWidget {
   final OrderResourcePickerViewModel viewModel;
   final ResourcePickerUtil resourcePickerUtil;
@@ -84,6 +85,8 @@ class _OrderServiceResourcePickerListState
     initWidgets!.removeAt(widget.resourceUtil.itemIndex!);
     refreshUi();
   }
+
+ 
 
   refreshUi() {
     setState(() {});
