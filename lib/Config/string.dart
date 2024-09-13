@@ -1,5 +1,3 @@
-
-
 class KString {
   static String tset = 'test';
   static String manage = '管理';
@@ -37,4 +35,13 @@ class KString {
   static String editTerminalName = '修改终端名称';
   static String editTerminalDesc = '修改终端简介';
   static String allServiceResource = '所有服务资源';
+  static String serviceName = '服务名称';
+  static String serviceDesc = '服务简介';
+  static String addService = '添加订单服务';  
+  static String scriptName = '脚本名称';
+  static String scriptDesc = '脚本简介';
+  static String addWorkScript = '添加工作脚本';
+  static String removeScript = '删除脚本';
+  
+
 }

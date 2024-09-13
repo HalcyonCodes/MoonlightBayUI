@@ -3,17 +3,21 @@ import './order_service_resource_title.dart';
 import '../../Models/ViewModel/order_resource_view_model.dart';
 import '../../Util/resource_util.dart';
 import './future_order_service_resource_list.dart';
+import '../../Util/service_util.dart';
 
 class OrderServiceResource extends StatefulWidget {
   final OrderResourceViewModel? viewModel;
+
   final ResourceUtil? resourceUtil;
+
 
   final String? title;
   const OrderServiceResource(
       {super.key,
       required this.title,
       required this.viewModel,
-      required this.resourceUtil});
+      required this.resourceUtil,
+      });
 
   @override
   State<OrderServiceResource> createState() => _OrderServiceResourceState();
@@ -46,6 +50,7 @@ class _OrderServiceResourceState extends State<OrderServiceResource> {
           OrderServiceResourceListFuture(
             viewModel: widget.viewModel!,
             resourceUtil: widget.resourceUtil!,
+
           )
         ],
       ),

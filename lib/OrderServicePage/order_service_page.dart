@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import '../Config/color.dart';
 import '../Config/string.dart';
@@ -17,6 +19,8 @@ import './Util/work_script_util.dart';
 import './Util/work_script_picker_util.dart';
 import './Components/WorkScriptPicker/work_script_picker.dart';
 import './Models/ViewModel/work_script_picker_view_model.dart';
+import './Util/edit_util.dart';
+import './Util/service_util.dart';
 
 class OrderServicePage extends StatefulWidget {
   const OrderServicePage({super.key});
@@ -35,6 +39,10 @@ class _OrderServicePageState extends State<OrderServicePage> {
   WorkScriptUtil? workScriptUtil;
   WorkScriptPickertUtil? workScriptPickerUtil;
   WorkScriptPickerViewModel? workScriptPickerViewModel;
+  ServiceUtil? serviceUtil;
+  EditUtil? editUtil1;
+  EditUtil? editUtil2;
+  EditUtil? editUtil3;
 
 
   int navPage = 0;
@@ -53,6 +61,10 @@ class _OrderServicePageState extends State<OrderServicePage> {
     workScriptUtil = WorkScriptUtil();
     workScriptPickerUtil = WorkScriptPickertUtil();
     workScriptPickerViewModel = WorkScriptPickerViewModel();
+    editUtil1 = EditUtil();
+    editUtil2 = EditUtil();
+    editUtil3 = EditUtil();
+    serviceUtil = ServiceUtil();
     //注册
     navUtil!.setFuncSwitchNav(switchNav);
   }
@@ -86,13 +98,14 @@ class _OrderServicePageState extends State<OrderServicePage> {
                     navUtil: navUtil!, resourceUtil: resourceUtil, 
                     resourcePickerUtil: resourcePickerUtil, 
                     workScriptUtil: workScriptUtil,
-                    workScriptPickertUtil: workScriptPickerUtil! ,
+                    workScriptPickertUtil: workScriptPickerUtil!, editUtil1: editUtil1, editUtil2: editUtil2, editUtil3: null,
                   ),
                   const SizedBox(
                     width: 24,
                   ),
                   OrderService(
                     viewModel: viewModel!,
+                    serviceUtil: serviceUtil!,
                   ),
                   const SizedBox(
                     width: 24,
@@ -102,6 +115,7 @@ class _OrderServicePageState extends State<OrderServicePage> {
                           title: KString.addOrderResource,
                           viewModel: resourceViewModel,
                           resourceUtil: resourceUtil,
+                          
                         )
                       : navPage == 2
                           ?  WorkScript(viewModel: workScriptViewModel!,workScriptUtil: workScriptUtil,)
@@ -125,4 +139,6 @@ class _OrderServicePageState extends State<OrderServicePage> {
       ),
     );
   }
+
+ 
 }

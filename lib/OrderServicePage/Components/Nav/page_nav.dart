@@ -1,10 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:moonlight_bay_ui/Config/color.dart';
-import 'package:moonlight_bay_ui/Config/shadow.dart';
-import 'package:moonlight_bay_ui/OrderServicePage/Util/resource_picker_util.dart';
-import 'package:moonlight_bay_ui/OrderServicePage/Util/resource_util.dart';
+import '../../Components/ScriptRemove/script_remove.dart';
+import '../../Components/WorkScriptEdit/script_edit.dart';
+import '../../../Config/color.dart';
+import '../../../Config/shadow.dart';
+import '../../Util/edit_util.dart';
+import '../../Util/resource_picker_util.dart';
+import '../../Util/resource_util.dart';
+import '../OrderServiceEdit/service_edit.dart';
 import './title_page_nav.dart';
 import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
@@ -18,11 +22,20 @@ class PageNav extends StatefulWidget {
   final ResourcePickerUtil? resourcePickerUtil;
   final WorkScriptUtil? workScriptUtil;
   final WorkScriptPickertUtil workScriptPickertUtil;
+  final EditUtil? editUtil1;
+  final EditUtil? editUtil2;
+  final EditUtil? editUtil3;
 
   const PageNav({
     super.key,
-    //required this.editUtil,
-    required this.navUtil, required this.resourceUtil, required this.resourcePickerUtil,required this.workScriptUtil, required this.workScriptPickertUtil,
+    required this.editUtil1,
+    required this.navUtil,
+    required this.resourceUtil,
+    required this.resourcePickerUtil,
+    required this.workScriptUtil,
+    required this.workScriptPickertUtil,
+    required this.editUtil2,
+    required this.editUtil3
   });
 
   @override
@@ -33,19 +46,24 @@ class _PageNavState extends State<PageNav> {
   double? width;
   OverlayEntry? overlayEntry;
   OverlayEntry? fOverlayEntry;
+  OverlayEntry? dOverlayEntry;
+  OverlayEntry? qOverlayEntry;
   int switchIndex = 0;
 
   @override
   void initState() {
     super.initState();
     width = 213;
-    //overlayEntry = dOverlayEntry();
-    //fOverlayEntry = qOverlayEntry();
+    overlayEntry = ddOverlayEntry();
+    fOverlayEntry = ffOverlayEntry();
+    qOverlayEntry = qqOverlayEntry();
     //注册
-    //widget.editUtil!.setFuncRemoveEdit(removeEdit);
-    //widget.editUtil!.setFuncShowEdit(showEdit);
-    //widget.editUtil!.setFuncShowRemove(showDelete);
-    //widget.editUtil!.setFuncRemoveRemove(removeDelete);
+    widget.editUtil1!.setFuncRemoveEdit(removeEdit);
+    widget.editUtil1!.setFuncShowEdit(showEdit);
+    widget.editUtil2!.setFuncRemoveEdit(removeEdit2);
+    widget.editUtil2!.setFuncShowEdit(showEdit2);
+    widget.editUtil2!.setFuncShowRemove(showDelete2);
+    widget.editUtil2!.setFuncRemoveRemove(removeDelete2);
   }
 
   @override
@@ -74,17 +92,12 @@ class _PageNavState extends State<PageNav> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {
-         
-
-                }),
+                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {}),
                 const SizedBox(
                   width: 12,
                 ),
                 NavIconButton(
-                    iconPath: 'svg/serviceResource.svg', onClick: () {
-
-                    }),
+                    iconPath: 'svg/serviceResource.svg', onClick: () {}),
               ],
             ),
             const SizedBox(
@@ -102,15 +115,14 @@ class _PageNavState extends State<PageNav> {
                     iconPath: 'svg/add.svg',
                     onClick: () {
                       //widget.editUtil!.showEdit!();
-                      //资源相关
-                      if(switchIndex == 1){
-
+                      //
+                      if (switchIndex == 0) {
+                        widget.editUtil1!.showEdit!();
                       }
                       //脚本相关
-                      if(switchIndex == 2){
-
+                      if (switchIndex == 2) {
+                        widget.editUtil2!.showEdit!();
                       }
-
                     }),
                 const SizedBox(
                   width: 12,
@@ -119,13 +131,11 @@ class _PageNavState extends State<PageNav> {
                     iconPath: 'svg/remove.svg',
                     onClick: () {
                       //widget.editUtil!.showRemove!();
-                      //资源相关
-                      if(switchIndex == 1){
-                        
-                      }
+                      //
+                      if (switchIndex == 0) {}
                       //脚本相关
-                      if(switchIndex == 2){
-
+                      if (switchIndex == 2) {
+                        widget.editUtil2!.showRemove!();
                       }
                     }),
               ],
@@ -145,11 +155,13 @@ class _PageNavState extends State<PageNav> {
                       onClick: () {
                         //widget.editUtil!.showRemove!();
                         //ServiceResource方面
-                        if(switchIndex == 1){
-                         widget.resourceUtil!.addItem!(widget.resourcePickerUtil!.orderResource!);
+                        if (switchIndex == 1) {
+                          widget.resourceUtil!.addItem!(
+                              widget.resourcePickerUtil!.orderResource!);
                         }
-                        if(switchIndex == 2){
-                          widget.workScriptUtil!.addItem!(widget.workScriptPickertUtil.workScript!);
+                        if (switchIndex == 2) {
+                          widget.workScriptUtil!.addItem!(
+                              widget.workScriptPickertUtil.workScript!);
                         }
                       }),
                 ),
@@ -159,26 +171,26 @@ class _PageNavState extends State<PageNav> {
                 NavIconButton(
                     iconPath: 'svg/move.svg',
                     onClick: () {
-                       if(switchIndex == 1){
-                        
-                         widget.resourceUtil!.removeItem!();
-                        }
-                        if(switchIndex == 2){
-                         
-                         widget.workScriptUtil!.removeItem!();
-                        }
+                      if (switchIndex == 1) {
+                        widget.resourceUtil!.removeItem!();
+                      }
+                      if (switchIndex == 2) {
+                        widget.workScriptUtil!.removeItem!();
+                      }
                     }),
-                SizedBox(width: 12,),
-                  //提交按钮
+                SizedBox(
+                  width: 12,
+                ),
+                //提交按钮
                 NavIconButton(
                     iconPath: 'svg/add.svg',
                     onClick: () {
-                       if(switchIndex == 1){
-                          //提交的代码
-                          //退出的代码
-                          switchIndex = 0;
-                          widget.navUtil!.switchNav!(0);
-                        }
+                      if (switchIndex == 1) {
+                        //提交的代码
+                        //退出的代码
+                        switchIndex = 0;
+                        widget.navUtil!.switchNav!(0);
+                      }
                     }),
               ],
             ),
@@ -224,13 +236,37 @@ class _PageNavState extends State<PageNav> {
     );
   }
 
-  /*
-  OverlayEntry dOverlayEntry() {
+ 
+
+  OverlayEntry ffOverlayEntry() {
     return OverlayEntry(builder: (context) {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Edit()));
+          child: Material(
+              child: ScriptEdit(
+            editUtil: widget.editUtil2,
+          )));
+    });
+  }
+
+  Future<void> showEdit2() async {
+    Overlay.of(context).insert(fOverlayEntry!);
+  }
+
+  Future<void> removeEdit2() async {
+    fOverlayEntry?.remove();
+  }
+
+   OverlayEntry ddOverlayEntry() {
+    return OverlayEntry(builder: (context) {
+      return Positioned(
+          left: MediaQuery.of(context).size.width / 2 - 658 / 2,
+          top: MediaQuery.of(context).size.height / 2 - 208 / 2,
+          child: Material(
+              child: ServiceEdit(
+            editUtil: widget.editUtil1,
+          )));
     });
   }
 
@@ -242,20 +278,20 @@ class _PageNavState extends State<PageNav> {
     overlayEntry?.remove();
   }
 
-  OverlayEntry qOverlayEntry() {
+  OverlayEntry qqOverlayEntry() {
     return OverlayEntry(builder: (context) {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Remove()));
+          child: Material(child: ScriptRemove(editUtil: widget.editUtil2!)));
     });
   }
 
-  Future<void> showDelete() async {
-    Overlay.of(context).insert(fOverlayEntry!);
+  Future<void> showDelete2() async {
+    Overlay.of(context).insert(qOverlayEntry!);
   }
 
-  Future<void> removeDelete() async {
-    fOverlayEntry?.remove();
-  }*/
+  Future<void> removeDelete2() async {
+    qOverlayEntry?.remove();
+  }
 }

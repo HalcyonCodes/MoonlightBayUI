@@ -12,14 +12,16 @@ class OrderResourceViewModel {
 
   var data = tData.data;
 
- 
+  //设置当前要发起请求的orderServiceID
+  String? orderServiceID;
+
 
   //refresh
   Future<int> refresh() async {
     response = null;
     //
     response = await Dio().get('www.baidu.com');
-    
+
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
       orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(data);
@@ -28,8 +30,6 @@ class OrderResourceViewModel {
       return response!.statusCode!;
     }
   }
-
-  
 
   //loadMore
   Future<int> loadMore() async {

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:double_bladed_axe/double_bladed_axe.dart';
 import './order_service_card.dart';
 import '../../Models/ViewModel/order_service_view_model.dart';
+import '../../Util/service_util.dart';
 
 class OrderServiceCardList extends StatefulWidget {
   final OrderServiceViewModel viewModel;
-  const OrderServiceCardList({super.key, required this.viewModel});
+  final ServiceUtil serviceUtil;
+  const OrderServiceCardList(
+      {super.key, required this.viewModel, required this.serviceUtil});
 
   @override
   State<OrderServiceCardList> createState() => _OrderServiceCardListState();
@@ -45,6 +48,7 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
     List<Widget> widgets = List.generate(
         widget.viewModel.fromJsonModel!.data.orderServices.length, (q) {
       return OrderServiceCard(
+        serviceUtil: widget.serviceUtil,
         id: widget.viewModel.fromJsonModel!.data.orderServices[q].id,
         bindingOrderCount:
             widget.viewModel.fromJsonModel!.data.orderServices[q].bindingCount,
@@ -54,6 +58,14 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             widget.viewModel.fromJsonModel!.data.orderServices[q].resources,
         script:
             widget.viewModel.fromJsonModel!.data.orderServices[q].workScript,
+        onTap: () {
+          for (var q in widget.serviceUtil.setItemUnSelect!) {
+            q();
+          }
+          widget.serviceUtil.setItemSelect![q]();
+          widget.serviceUtil.setItemID(
+              widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+        },
       );
     });
     return widgets;
@@ -62,9 +74,10 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
   //利用viewModel进行Http请求
   Future<List<Widget>> loadMore() async {
     await widget.viewModel.loadMore();
-      List<Widget> widgets = List.generate(
+    List<Widget> widgets = List.generate(
         widget.viewModel.fromJsonModel!.data.orderServices.length, (q) {
       return OrderServiceCard(
+        serviceUtil: widget.serviceUtil,
         id: widget.viewModel.fromJsonModel!.data.orderServices[q].id,
         bindingOrderCount:
             widget.viewModel.fromJsonModel!.data.orderServices[q].bindingCount,
@@ -74,6 +87,15 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             widget.viewModel.fromJsonModel!.data.orderServices[q].resources,
         script:
             widget.viewModel.fromJsonModel!.data.orderServices[q].workScript,
+        onTap: () {
+          for (var q in widget.serviceUtil.setItemUnSelect!) {
+            q();
+          }
+          widget.serviceUtil.setItemSelect![q]();
+          widget.serviceUtil.setItemID(
+              widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+          
+        },
       );
     });
     return widgets;
@@ -83,6 +105,7 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
     initWidgets = List.generate(
         widget.viewModel.fromJsonModel!.data.orderServices.length, (q) {
       return OrderServiceCard(
+        serviceUtil: widget.serviceUtil,
         id: widget.viewModel.fromJsonModel!.data.orderServices[q].id,
         bindingOrderCount:
             widget.viewModel.fromJsonModel!.data.orderServices[q].bindingCount,
@@ -92,6 +115,16 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             widget.viewModel.fromJsonModel!.data.orderServices[q].resources,
         script:
             widget.viewModel.fromJsonModel!.data.orderServices[q].workScript,
+        onTap: () {
+          for (var q in widget.serviceUtil.setItemUnSelect!) {
+            q();
+          }
+          widget.serviceUtil.setItemSelect![q]();
+          widget.serviceUtil.setItemID(
+              widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+        },
+        
+        
       );
     });
   }

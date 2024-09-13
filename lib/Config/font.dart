@@ -105,6 +105,16 @@ class KFont {
     height: 16/11
   );  
 
+  //order Service 徽章被选中字体
+  static TextStyle serviceResourceSelectStyle = TextStyle(
+    fontFamily: 'MiSans',
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    color: KColor.primaryColor,
+    decoration: TextDecoration.none,
+    height: 16/11
+  );  
+
   //orderService 脚本字体
     static TextStyle serviceScriptStyle = const TextStyle(
     fontFamily: 'MiSans',
