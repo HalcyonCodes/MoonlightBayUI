@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 
 class EditUtil {
   //nav 工具栏中，点击打开添加编辑框
@@ -28,6 +29,19 @@ class EditUtil {
     _removeRemove = func;
   }
 
+  TextEditingController? _textCtrl1;
+  TextEditingController? get textCtrl1 => _textCtrl1;
+  void setTextCtrl1(TextEditingController? textCtrl) {
+    _textCtrl1 = textCtrl;
+  }
+
+  TextEditingController? _textCtrl2;
+  TextEditingController? get textCtrl2 => _textCtrl2;
+  void setTextCtrl2(TextEditingController? textCtrl) {
+    _textCtrl2 = textCtrl;
+  }
+  
+  
 
 
 }

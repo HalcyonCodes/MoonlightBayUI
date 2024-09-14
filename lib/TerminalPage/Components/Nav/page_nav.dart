@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
 import 'package:moonlight_bay_ui/Config/shadow.dart';
+import 'package:moonlight_bay_ui/Route/application.dart';
+
 import './title_page_nav.dart';
 import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
 import '../edit/edit.dart';
 import '../Remove/remove.dart';
 import '../../Util/edit_util.dart';
+
+import 'package:fluro/fluro.dart';
+import '../../../Route/application.dart';
 
 class PageNav extends StatefulWidget {
   final EditUtil? editUtil;
@@ -75,7 +80,18 @@ class _PageNavState extends State<PageNav> {
                   width: 12,
                 ),
                 NavIconButton(
-                    iconPath: 'svg/serviceResource.svg', onClick: () {}),
+                    iconPath: 'svg/serviceResource.svg', onClick: () {
+                      Application.router!.navigateTo(context, '/OrderResourcePage', transition: TransitionType.fadeIn);
+                      
+                    }),
+                const SizedBox(
+                  width: 12,
+                ),
+                
+                NavIconButton(
+                    iconPath: 'svg/serviceResource.svg', onClick: () {
+                       Application.router!.navigateTo(context, '/OrderServicePage', transition: TransitionType.fadeIn);
+                    }),
               ],
             ),
             const SizedBox(

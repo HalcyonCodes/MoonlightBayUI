@@ -25,6 +25,9 @@ class _ScriptEditState extends State<ScriptEdit> {
     super.initState();
     ctrl1 = TextEditingController();
     ctrl2 = TextEditingController();
+
+    widget.editUtil!.setTextCtrl1(ctrl1);
+    widget.editUtil!.setTextCtrl2(ctrl2);
   }
 
   

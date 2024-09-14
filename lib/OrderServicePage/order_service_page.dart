@@ -1,4 +1,3 @@
-import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import '../Config/color.dart';
@@ -98,14 +97,16 @@ class _OrderServicePageState extends State<OrderServicePage> {
                     navUtil: navUtil!, resourceUtil: resourceUtil, 
                     resourcePickerUtil: resourcePickerUtil, 
                     workScriptUtil: workScriptUtil,
-                    workScriptPickertUtil: workScriptPickerUtil!, editUtil1: editUtil1, editUtil2: editUtil2, editUtil3: null,
+                    workScriptPickertUtil: workScriptPickerUtil!, editUtil1: editUtil1, editUtil2: editUtil2, editUtil3: editUtil3,
+                    orderServiceViewModel: viewModel!, orderResourceViewModel: resourceViewModel!,
                   ),
                   const SizedBox(
                     width: 24,
                   ),
                   OrderService(
                     viewModel: viewModel!,
-                    serviceUtil: serviceUtil!,
+                    serviceUtil: serviceUtil!, resourceViewModel: resourceViewModel!, resourceUtil: resourceUtil!, navUtil: navUtil!, workScriptUtil: workScriptUtil!, workScriptViewModel: workScriptViewModel!,
+                    
                   ),
                   const SizedBox(
                     width: 24,

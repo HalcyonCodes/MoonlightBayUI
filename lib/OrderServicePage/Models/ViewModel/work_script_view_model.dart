@@ -14,6 +14,14 @@ class WorkScriptViewModel {
 
   var data = tData.data;
 
+  //设置当前要发起请求的orderServiceID
+  String? _orderServiceID;
+  String? get orderServiceID => _orderServiceID;
+  void setOrderServiceID(String orderServiceID) {
+    _orderServiceID = orderServiceID;
+  }
+
+
   //refresh
   Future<int> refresh() async {
     response = null;

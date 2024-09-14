@@ -1,6 +1,8 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
 import 'package:moonlight_bay_ui/Config/shadow.dart';
+import '../../../Route/application.dart';
 import './title_page_nav.dart';
 import '../../../Config/string.dart';
 import 'nav_icon_button.dart';
@@ -67,12 +69,22 @@ class _PageNavState extends State<PageNav> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {}),
+                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {
+                  Application.router!.navigateTo(context, '/TerminalPage', transition: TransitionType.fadeIn);
+                      
+                }),
                 const SizedBox(
                   width: 12,
                 ),
                 NavIconButton(
                     iconPath: 'svg/serviceResource.svg', onClick: () {}),
+                const SizedBox(
+                  width: 12,
+                ),
+                NavIconButton(
+                    iconPath: 'svg/serviceResource.svg', onClick: () {
+                       Application.router!.navigateTo(context, '/OrderServicePage', transition: TransitionType.fadeIn);
+                    }),
               ],
             ),
             const SizedBox(

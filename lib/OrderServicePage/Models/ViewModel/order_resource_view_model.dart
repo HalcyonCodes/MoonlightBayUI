@@ -6,6 +6,8 @@ import '../FromJsonModel/order_resource_from_json_model.dart';
 
 import '../DataModel/order_resource_data_model.dart' as tData;
 
+import '../ToJsonModel/order_resource_to_json_model.dart';
+
 class OrderResourceViewModel {
   Response? response;
   OrderResourceFromJsonModel? orderResourceFromJsonModel;
@@ -13,8 +15,23 @@ class OrderResourceViewModel {
   var data = tData.data;
 
   //设置当前要发起请求的orderServiceID
-  String? orderServiceID;
+  String? _orderServiceID;
+  String? get orderServiceID => _orderServiceID;
+  void setOrderServiceID(String orderServiceID) {
+    _orderServiceID = orderServiceID;
+  }
 
+  //提交添加resources
+  Future<int> commitAddResources() async {
+    List<OrderResource>? resources =
+        orderResourceFromJsonModel!.data.orderResources;
+    SettingOrderResourceToJson json = SettingOrderResourceToJson.toJsonModel(resources!);
+    //通过json和dio发起http请求
+    response = null;
+    //
+    response = await Dio().get('www.baidu.com');
+    return response!.statusCode!;
+  }
 
   //refresh
   Future<int> refresh() async {

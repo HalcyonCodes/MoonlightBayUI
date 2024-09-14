@@ -1,6 +1,10 @@
 import 'dart:math';
 
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+
+import '../../Models/ViewModel/order_service_view_model.dart';
+import '../../../Route/application.dart';
 import '../../Components/ScriptRemove/script_remove.dart';
 import '../../Components/WorkScriptEdit/script_edit.dart';
 import '../../../Config/color.dart';
@@ -15,6 +19,7 @@ import 'nav_icon_button.dart';
 import '../../Util/nav_util.dart';
 import '../../Util/work_script_util.dart';
 import '../../Util/work_script_picker_util.dart';
+import '../../Models/ViewModel/order_resource_view_model.dart';
 
 class PageNav extends StatefulWidget {
   final NavUtil? navUtil;
@@ -25,18 +30,21 @@ class PageNav extends StatefulWidget {
   final EditUtil? editUtil1;
   final EditUtil? editUtil2;
   final EditUtil? editUtil3;
+  final OrderServiceViewModel orderServiceViewModel;
+  final OrderResourceViewModel orderResourceViewModel;
 
-  const PageNav({
-    super.key,
-    required this.editUtil1,
-    required this.navUtil,
-    required this.resourceUtil,
-    required this.resourcePickerUtil,
-    required this.workScriptUtil,
-    required this.workScriptPickertUtil,
-    required this.editUtil2,
-    required this.editUtil3
-  });
+
+  const PageNav(
+      {super.key,
+      required this.editUtil1,
+      required this.navUtil,
+      required this.resourceUtil,
+      required this.resourcePickerUtil,
+      required this.workScriptUtil,
+      required this.workScriptPickertUtil,
+      required this.editUtil2,
+      required this.editUtil3,
+      required this.orderServiceViewModel, required this.orderResourceViewModel,});
 
   @override
   State<PageNav> createState() => _PageNavState();
@@ -97,7 +105,22 @@ class _PageNavState extends State<PageNav> {
                   width: 12,
                 ),
                 NavIconButton(
-                    iconPath: 'svg/serviceResource.svg', onClick: () {}),
+                    iconPath: 'svg/serviceResource.svg',
+                    onClick: () {
+                      Application.router!.navigateTo(
+                          context, '/OrderResourcePage',
+                          transition: TransitionType.fadeIn);
+                    }),
+                const SizedBox(
+                  width: 12,
+                ),
+                NavIconButton(
+                    iconPath: 'svg/serviceResource.svg',
+                    onClick: () {
+                      Application.router!.navigateTo(
+                          context, '/OrderServicePage',
+                          transition: TransitionType.fadeIn);
+                    }),
               ],
             ),
             const SizedBox(
@@ -184,13 +207,17 @@ class _PageNavState extends State<PageNav> {
                 //提交按钮
                 NavIconButton(
                     iconPath: 'svg/add.svg',
-                    onClick: () {
+                    onClick: () async{
+                      //resource相关
                       if (switchIndex == 1) {
                         //提交的代码
+                       await widget.orderResourceViewModel.commitAddResources();
                         //退出的代码
-                        switchIndex = 0;
-                        widget.navUtil!.switchNav!(0);
+                        switchIndex = 1;
+                        widget.navUtil!.switchNav!(1);
                       }
+                      //script相关
+                      if (switchIndex == 2) {}
                     }),
               ],
             ),
@@ -207,6 +234,7 @@ class _PageNavState extends State<PageNav> {
                       //widget.editUtil!.showEdit!();
                       widget.navUtil!.switchNav!(0);
                       switchIndex = 0;
+                      widget.navUtil!.setCurrentNavIndex(0);
                     }),
                 const SizedBox(
                   width: 12,
@@ -217,6 +245,7 @@ class _PageNavState extends State<PageNav> {
                       //widget.editUtil!.showRemove!();
                       widget.navUtil!.switchNav!(1);
                       switchIndex = 1;
+                      widget.navUtil!.setCurrentNavIndex(1);
                     }),
                 const SizedBox(
                   width: 12,
@@ -227,6 +256,7 @@ class _PageNavState extends State<PageNav> {
                       //widget.editUtil!.showRemove!();
                       widget.navUtil!.switchNav!(2);
                       switchIndex = 2;
+                      widget.navUtil!.setCurrentNavIndex(2);
                     }),
               ],
             ),
@@ -235,8 +265,6 @@ class _PageNavState extends State<PageNav> {
       ),
     );
   }
-
- 
 
   OverlayEntry ffOverlayEntry() {
     return OverlayEntry(builder: (context) {
@@ -258,7 +286,7 @@ class _PageNavState extends State<PageNav> {
     fOverlayEntry?.remove();
   }
 
-   OverlayEntry ddOverlayEntry() {
+  OverlayEntry ddOverlayEntry() {
     return OverlayEntry(builder: (context) {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
@@ -266,6 +294,7 @@ class _PageNavState extends State<PageNav> {
           child: Material(
               child: ServiceEdit(
             editUtil: widget.editUtil1,
+            viewModel: widget.orderServiceViewModel,
           )));
     });
   }

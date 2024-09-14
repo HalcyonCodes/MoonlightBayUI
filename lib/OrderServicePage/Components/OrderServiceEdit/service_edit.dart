@@ -7,10 +7,12 @@ import 'service_edit_commit_bar.dart';
 import '../../../Config/decoration.dart';
 import '../../../Config/color.dart';
 import '../../Util/edit_util.dart';
+import '../../Models/ViewModel/order_service_view_model.dart';
 
 class ServiceEdit extends StatefulWidget {
+  final OrderServiceViewModel viewModel;
   final EditUtil? editUtil;
-  const ServiceEdit({super.key, required this.editUtil});
+  const ServiceEdit({super.key, required this.editUtil, required this.viewModel});
 
   @override
   State<ServiceEdit> createState() => _ServiceEditState();
@@ -25,9 +27,12 @@ class _ServiceEditState extends State<ServiceEdit> {
     super.initState();
     ctrl1 = TextEditingController();
     ctrl2 = TextEditingController();
+
+    //注册
+    widget.editUtil!.setTextCtrl1(ctrl1);
+    widget.editUtil!.setTextCtrl2(ctrl2);
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +47,9 @@ class _ServiceEditState extends State<ServiceEdit> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16))),
-              child: EditCommitBar(editUtil: widget.editUtil,)),
+              child: EditCommitBar(
+                editUtil: widget.editUtil, viewModel: widget.viewModel,
+              )),
           const SizedBox(
             height: 12,
           ),
@@ -56,39 +63,39 @@ class _ServiceEditState extends State<ServiceEdit> {
           const SizedBox(
             height: 12,
           ),
-         //Padding(
-           // padding: const EdgeInsets.symmetric(horizontal: 24),
-            //child: 
-            //Expanded(
-              //child:
-               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                height: 26,
-                color: KColor.containerColor,
-                alignment: Alignment.center,
-                child: TextField(
-                  controller: ctrl1,
-                  maxLines: 1,
-                  style: KFont.searchBarInputStyle,
-                  autofocus: false,
-                  cursorColor: Colors.black,
-                  cursorWidth: 2,
-                  cursorHeight: 22,
-                  inputFormatters: <TextInputFormatter>[
-                    LengthLimitingTextInputFormatter(200),
-                  ],
-                  maxLength: null,
-                  onSubmitted: (q) {},
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    //hintText: KString.inputOrderServiceResourceName,
-                    contentPadding: EdgeInsets.zero,
-                    hintStyle: KFont.searchBarTipStyle,
-                    isDense: true,
-                    hintMaxLines: 1,
-                  ),
-                  strutStyle: const StrutStyle(leading: 0),
-               // ),
+          //Padding(
+          // padding: const EdgeInsets.symmetric(horizontal: 24),
+          //child:
+          //Expanded(
+          //child:
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            height: 26,
+            color: KColor.containerColor,
+            alignment: Alignment.center,
+            child: TextField(
+              controller: ctrl1,
+              maxLines: 1,
+              style: KFont.searchBarInputStyle,
+              autofocus: false,
+              cursorColor: Colors.black,
+              cursorWidth: 2,
+              cursorHeight: 22,
+              inputFormatters: <TextInputFormatter>[
+                LengthLimitingTextInputFormatter(200),
+              ],
+              maxLength: null,
+              onSubmitted: (q) {},
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                //hintText: KString.inputOrderServiceResourceName,
+                contentPadding: EdgeInsets.zero,
+                hintStyle: KFont.searchBarTipStyle,
+                isDense: true,
+                hintMaxLines: 1,
+              ),
+              strutStyle: const StrutStyle(leading: 0),
+              // ),
               //),
             ),
           ),
@@ -106,39 +113,39 @@ class _ServiceEditState extends State<ServiceEdit> {
             height: 12,
           ),
           //Padding(
-           // padding: const EdgeInsets.symmetric(horizontal: 24),
-            //child: 
-            //Expanded(
-              //child: 
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                height: 26,
-                color: KColor.containerColor,
-                alignment: Alignment.center,
-                child: TextField(
-                  controller: ctrl2,
-                  maxLines: 1,
-                  style: KFont.searchBarInputStyle,
-                  autofocus: false,
-                  cursorColor: Colors.black,
-                  cursorWidth: 2,
-                  cursorHeight: 22,
-                  inputFormatters: <TextInputFormatter>[
-                    LengthLimitingTextInputFormatter(200),
-                  ],
-                  maxLength: null,
-                  onSubmitted: (q) {},
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    //hintText: KString.inputOrderServiceResourceDesc,
-                    contentPadding: EdgeInsets.zero,
-                    hintStyle: KFont.searchBarTipStyle,
-                    isDense: true,
-                    hintMaxLines: 1,
-                  ),
-                  strutStyle: const StrutStyle(leading: 0),
-                ),
-              //),
+          // padding: const EdgeInsets.symmetric(horizontal: 24),
+          //child:
+          //Expanded(
+          //child:
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            height: 26,
+            color: KColor.containerColor,
+            alignment: Alignment.center,
+            child: TextField(
+              controller: ctrl2,
+              maxLines: 1,
+              style: KFont.searchBarInputStyle,
+              autofocus: false,
+              cursorColor: Colors.black,
+              cursorWidth: 2,
+              cursorHeight: 22,
+              inputFormatters: <TextInputFormatter>[
+                LengthLimitingTextInputFormatter(200),
+              ],
+              maxLength: null,
+              onSubmitted: (q) {},
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                //hintText: KString.inputOrderServiceResourceDesc,
+                contentPadding: EdgeInsets.zero,
+                hintStyle: KFont.searchBarTipStyle,
+                isDense: true,
+                hintMaxLines: 1,
+              ),
+              strutStyle: const StrutStyle(leading: 0),
+            ),
+            //),
             //),
           ),
           const SizedBox(

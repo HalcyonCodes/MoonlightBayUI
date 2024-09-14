@@ -3,12 +3,27 @@ import 'package:double_bladed_axe/double_bladed_axe.dart';
 import './order_service_card.dart';
 import '../../Models/ViewModel/order_service_view_model.dart';
 import '../../Util/service_util.dart';
+import '../../Util/resource_util.dart';
+import '../../Models/ViewModel/order_resource_view_model.dart';
+import '../../Util/nav_util.dart';
+import '../../Util/work_script_util.dart';
+import '../../Models/ViewModel/work_script_view_model.dart';
 
 class OrderServiceCardList extends StatefulWidget {
   final OrderServiceViewModel viewModel;
   final ServiceUtil serviceUtil;
+  final OrderResourceViewModel orderResourceViewModel;
+  final ResourceUtil resourceUtil;
+  final NavUtil navUtil;
+  final WorkScriptUtil workScriptUtil;
+  final WorkScriptViewModel workScriptViewModel;
   const OrderServiceCardList(
-      {super.key, required this.viewModel, required this.serviceUtil});
+      {super.key,
+      required this.viewModel,
+      required this.serviceUtil,
+      required this.orderResourceViewModel,
+      required this.resourceUtil,
+      required this.navUtil, required this.workScriptUtil, required this.workScriptViewModel});
 
   @override
   State<OrderServiceCardList> createState() => _OrderServiceCardListState();
@@ -63,8 +78,19 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             q();
           }
           widget.serviceUtil.setItemSelect![q]();
-          widget.serviceUtil.setItemID(
-              widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+          if (widget.navUtil.currentNavIndex == 1) {
+            //print(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.serviceUtil.setItemID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.orderResourceViewModel.setOrderServiceID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.resourceUtil.refreshList!();
+          }
+          if(widget.navUtil.currentNavIndex == 2){
+            widget.workScriptViewModel.setOrderServiceID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.workScriptUtil.refreshList!();
+          }
         },
       );
     });
@@ -92,9 +118,19 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             q();
           }
           widget.serviceUtil.setItemSelect![q]();
-          widget.serviceUtil.setItemID(
-              widget.viewModel.fromJsonModel!.data.orderServices[q].id);
-          
+          if (widget.navUtil.currentNavIndex == 1) {
+            // print(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.serviceUtil.setItemID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.orderResourceViewModel.setOrderServiceID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.resourceUtil.refreshList!();
+          }
+          if(widget.navUtil.currentNavIndex == 2){
+            widget.workScriptViewModel.setOrderServiceID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.workScriptUtil.refreshList!();
+          }
         },
       );
     });
@@ -120,11 +156,20 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             q();
           }
           widget.serviceUtil.setItemSelect![q]();
-          widget.serviceUtil.setItemID(
-              widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+          if (widget.navUtil.currentNavIndex == 1) {
+            //print(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.serviceUtil.setItemID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.orderResourceViewModel.setOrderServiceID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.resourceUtil.refreshList!();
+          }
+          if(widget.navUtil.currentNavIndex == 2){
+            widget.workScriptViewModel.setOrderServiceID(
+                widget.viewModel.fromJsonModel!.data.orderServices[q].id);
+            widget.workScriptUtil.refreshList!();
+          }
         },
-        
-        
       );
     });
   }

@@ -21,6 +21,8 @@ class _OrderServiceResourceListFutureState
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    widget.resourceUtil.setFuncRefrshList(refreshUi);
   }
 
   @override
@@ -46,5 +48,9 @@ class _OrderServiceResourceListFutureState
         }
       },
     );
+  }
+
+  void refreshUi() {
+    setState(() {});
   }
 }

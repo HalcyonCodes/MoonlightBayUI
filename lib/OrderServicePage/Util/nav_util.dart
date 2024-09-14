@@ -5,4 +5,11 @@ class NavUtil {
     _switchNav = func;
   }
 
+  int? _currentNavIndex;
+  int? get currentNavIndex => _currentNavIndex;
+  void setCurrentNavIndex(int index) {
+    _currentNavIndex = index;
+    switchNav!(index);
+  }
+
 }

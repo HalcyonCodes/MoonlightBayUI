@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import './work_script_card_list.dart';
 import '../../Models/ViewModel/work_script_view_model.dart';
@@ -8,16 +6,25 @@ import '../../Util/work_script_util.dart';
 class FutureWorkScriptCardListFuture extends StatefulWidget {
   final WorkScriptViewModel viewModel;
   final WorkScriptUtil workScriptUtil;
-  const FutureWorkScriptCardListFuture({super.key, required this.viewModel, required this.workScriptUtil});
+  const FutureWorkScriptCardListFuture(
+      {super.key, required this.viewModel, required this.workScriptUtil});
 
   @override
-  State<FutureWorkScriptCardListFuture> createState() => _FutureWorkScriptCardListFutureState();
+  State<FutureWorkScriptCardListFuture> createState() =>
+      _FutureWorkScriptCardListFutureState();
 }
 
-class _FutureWorkScriptCardListFutureState extends State<FutureWorkScriptCardListFuture> {
+class _FutureWorkScriptCardListFutureState
+    extends State<FutureWorkScriptCardListFuture> {
+  @override
+  void initState() {
+    super.initState();
+    widget.workScriptUtil.setFuncRefrshList(refreshUi);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return   FutureBuilder(
+    return FutureBuilder(
       future: widget.viewModel.refresh(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
@@ -32,9 +39,15 @@ class _FutureWorkScriptCardListFutureState extends State<FutureWorkScriptCardLis
 
           case ConnectionState.done:
             return WorkScriptCardList(
-              viewModel: widget.viewModel, workScriptUtil: widget.workScriptUtil,);
+              viewModel: widget.viewModel,
+              workScriptUtil: widget.workScriptUtil,
+            );
         }
       },
     );
+  }
+
+  void refreshUi() {
+    setState(() {});
   }
 }

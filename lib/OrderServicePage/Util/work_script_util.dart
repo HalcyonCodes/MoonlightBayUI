@@ -49,5 +49,12 @@ class WorkScriptUtil {
   }
 
 
+  //重新加载列表
+  Function? _refreshList;
+  Function? get refreshList => _refreshList;
+  void setFuncRefrshList(Function? q) {
+    _refreshList = q;
+  }
+
 
 }

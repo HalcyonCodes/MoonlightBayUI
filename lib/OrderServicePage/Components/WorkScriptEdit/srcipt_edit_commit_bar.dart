@@ -18,6 +18,7 @@ class _EditCommitBarState extends State<EditCommitBar> {
   @override
   void initState() {
     super.initState();
+    
   }
 
   @override

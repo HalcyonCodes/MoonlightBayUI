@@ -5,11 +5,14 @@ import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
+import '../../Models/ViewModel/order_service_view_model.dart';
 
 class EditCommitBar extends StatefulWidget {
   final EditUtil? editUtil;
+  final OrderServiceViewModel viewModel;
 
-  const EditCommitBar({super.key, required this.editUtil});
+  const EditCommitBar(
+      {super.key, required this.editUtil, required this.viewModel});
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
@@ -68,9 +71,7 @@ class _EditCommitBarState extends State<EditCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {
-              widget.editUtil!.removeEdit!();
-            },
+            onTap: commit,
             child: Container(
               decoration: BoxDecoration(
                   color: KColor.primaryColor,
@@ -85,5 +86,12 @@ class _EditCommitBarState extends State<EditCommitBar> {
         ],
       ),
     );
+  }
+
+  void commit() {
+    String name = widget.editUtil!.textCtrl1!.value.toString();
+    String desc = widget.editUtil!.textCtrl2!.value.toString();
+    widget.viewModel.addCommit(name, desc);
+    widget.editUtil!.removeEdit!();
   }
 }
