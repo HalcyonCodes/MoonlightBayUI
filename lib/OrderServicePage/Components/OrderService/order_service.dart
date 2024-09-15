@@ -42,8 +42,6 @@ class OrderService extends StatelessWidget {
             serviceUtil: serviceUtil, 
             orderResourceViewModel: resourceViewModel, 
             resourceUtil: resourceUtil, navUtil: navUtil, workScriptUtil: workScriptUtil, workScriptViewModel: workScriptViewModel,
-            
-            
           )
         ],
       ),

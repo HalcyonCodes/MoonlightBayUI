@@ -5,11 +5,19 @@ import 'package:dio/dio.dart';
 import '../FromJsonModel/channel_from_json_model.dart';
 import '../DataModel/channel_data_model.dart' as tData;
 
-class ChannelViewModel {
+class Channel4ViewModel {
   Response? response;
   ChannelFromJsonModel? channelFromJsonModel;
 
   var data = tData.data;
+
+
+  String? _currentTerminalID;
+  String? get currentTerminalID => _currentTerminalID;
+  void setCurrentTerminalID(String? value) {
+    _currentTerminalID = value;
+  }
+
 
    //refresh
   Future<int> refresh() async {
@@ -24,6 +32,7 @@ class ChannelViewModel {
       return response!.statusCode!;
     }
   }
+  
 
   //loadMore
   Future<int> loadMore() async {

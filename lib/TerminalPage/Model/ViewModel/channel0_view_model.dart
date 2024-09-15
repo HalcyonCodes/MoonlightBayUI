@@ -1,35 +1,38 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import '../FromJsonModel/terminal_from_json_model.dart';
-import '../DataModel/terminal_data_model.dart' as tData;
 
-class TerminalViewModel {
+import '../FromJsonModel/channel_from_json_model.dart';
+import '../DataModel/channel_data_model.dart' as tData;
+
+class Channel0ViewModel {
   Response? response;
-  TerminalFromJsonModel? terminalFromJsonModel;
+  ChannelFromJsonModel? channelFromJsonModel;
 
   var data = tData.data;
 
-  //写入teminalID
   String? _currentTerminalID;
   String? get currentTerminalID => _currentTerminalID;
   void setCurrentTerminalID(String? value) {
     _currentTerminalID = value;
   }
 
-  //refresh
+
+
+   //refresh
   Future<int> refresh() async {
     response = null;
     //
     response = await Dio().get('www.baidu.com');
-    terminalFromJsonModel = null;
+    channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      terminalFromJsonModel = TerminalFromJsonModel.fromJson(data);
+      channelFromJsonModel= ChannelFromJsonModel.fromJson(data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
     }
   }
+  
 
   //loadMore
   Future<int> loadMore() async {
@@ -38,10 +41,9 @@ class TerminalViewModel {
     //response = await Dio().get('http://localhost:4040/');
     //
     response = await Dio().get('www.baidu.com');
-    terminalFromJsonModel = null;
-
+    channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      terminalFromJsonModel = TerminalFromJsonModel.fromJson(data);
+      channelFromJsonModel= ChannelFromJsonModel.fromJson(data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
@@ -54,19 +56,14 @@ class TerminalViewModel {
     //
     //response = await Dio().get('http://localhost:4040/');
     //
-    terminalFromJsonModel = null;
-    response = await Dio().get('www.baidu.com');
-
+    channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      terminalFromJsonModel = TerminalFromJsonModel.fromJson(data);
+      channelFromJsonModel= ChannelFromJsonModel.fromJson(data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
     }
   }
 
-  //removePre
 
-  //search
-  //Future<int> seachr()
 }

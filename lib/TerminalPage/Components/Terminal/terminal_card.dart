@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
 import 'package:moonlight_bay_ui/Config/font.dart';
 import '../../../Config/decoration.dart';
+import '../../Util/terminal_util.dart';
 
 class TerminalCard extends StatefulWidget {
   final String? terminalID;
@@ -10,6 +11,8 @@ class TerminalCard extends StatefulWidget {
   final String? terminalName;
   final String? terminalDesc;
   final int? terminalStatus;
+  final TerminalUtil? terminalUtil;
+  final Function() onTap;
 
   const TerminalCard({
     super.key,
@@ -18,6 +21,8 @@ class TerminalCard extends StatefulWidget {
     required this.terminalName,
     required this.terminalDesc,
     required this.terminalStatus,
+    required this.terminalUtil,
+    required this.onTap,
   });
 
   @override
@@ -42,6 +47,27 @@ class _TerminalCardState extends State<TerminalCard> {
     terminalDesc = widget.terminalDesc;
     status = widget.terminalStatus;
     isSelect = false;
+
+    //注册
+    widget.terminalUtil!.addFuncSetItemSelect(setSelect);
+    widget.terminalUtil!.addFuncSetItemUnSelect(setUnSelect);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.terminalUtil!.removFuncSetItemSelect(setSelect);
+    widget.terminalUtil!.removFuncSetItemUnSelect(setUnSelect);
+  }
+
+  void setUnSelect() {
+    isSelect = false;
+    refreshUi();
+  }
+
+  void setSelect() {
+    isSelect = true;
+    refreshUi();
   }
 
   @override
@@ -49,7 +75,7 @@ class _TerminalCardState extends State<TerminalCard> {
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       child: InkWell(
-        onTap: cardOnSelect,
+        onTap: widget.onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
           decoration: isSelect == false

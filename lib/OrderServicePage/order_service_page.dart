@@ -98,7 +98,7 @@ class _OrderServicePageState extends State<OrderServicePage> {
                     resourcePickerUtil: resourcePickerUtil, 
                     workScriptUtil: workScriptUtil,
                     workScriptPickertUtil: workScriptPickerUtil!, editUtil1: editUtil1, editUtil2: editUtil2, editUtil3: editUtil3,
-                    orderServiceViewModel: viewModel!, orderResourceViewModel: resourceViewModel!,
+                    orderServiceViewModel: viewModel!, orderResourceViewModel: resourceViewModel!, workScriptViewModel: workScriptViewModel!,
                   ),
                   const SizedBox(
                     width: 24,

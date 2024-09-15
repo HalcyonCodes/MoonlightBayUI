@@ -1,11 +1,11 @@
 import 'package:double_bladed_axe/double_bladed_axe.dart';
 import 'package:flutter/material.dart';
-import './channel_card.dart';
-import '../../Model/ViewModel/channel_view_model.dart';
+import 'channel_card.dart';
+import '../../Model/ViewModel/channel3_view_model.dart';
 
 class ChannelCardList extends StatefulWidget {
 
-  final ChannelViewModel viewModel;
+  final Channel3ViewModel viewModel;
 
   const ChannelCardList({super.key, required this.viewModel});
 

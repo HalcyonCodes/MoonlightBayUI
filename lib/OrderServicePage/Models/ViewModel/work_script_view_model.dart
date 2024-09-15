@@ -1,12 +1,10 @@
-
-
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 
 import '../DataModel/work_script_data_model.dart' as tData;
 import '../FromJsonModel/work_script_from_json_model.dart';
+import '../ToJsonModel/order_script_to_json_model.dart';
 
 class WorkScriptViewModel {
   Response? response;
@@ -21,6 +19,16 @@ class WorkScriptViewModel {
     _orderServiceID = orderServiceID;
   }
 
+  //提交添加的script
+  Future<int> commitAddScript() async {
+    WorkScript? workScript = fromJsonModel!.data!.workScripts![0];
+    WorkScriptToJson workScriptToJson = WorkScriptToJson.toJsonModel(workScript);
+    //通过json和dio发起http请求
+    response = null;
+    //
+    response = await Dio().get('www.baidu.com');
+    return response!.statusCode!;
+  }
 
   //refresh
   Future<int> refresh() async {
@@ -58,7 +66,7 @@ class WorkScriptViewModel {
     //
     //response = await Dio().get('http://localhost:4040/');
     //
-       response = await Dio().get('www.baidu.com');
+    response = await Dio().get('www.baidu.com');
     fromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
       fromJsonModel = WorkScriptFromJsonModel.fromJson(data);

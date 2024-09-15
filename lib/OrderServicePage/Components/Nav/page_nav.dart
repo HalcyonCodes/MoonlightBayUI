@@ -20,6 +20,7 @@ import '../../Util/nav_util.dart';
 import '../../Util/work_script_util.dart';
 import '../../Util/work_script_picker_util.dart';
 import '../../Models/ViewModel/order_resource_view_model.dart';
+import '../../Models/ViewModel/work_script_view_model.dart';
 
 class PageNav extends StatefulWidget {
   final NavUtil? navUtil;
@@ -32,6 +33,8 @@ class PageNav extends StatefulWidget {
   final EditUtil? editUtil3;
   final OrderServiceViewModel orderServiceViewModel;
   final OrderResourceViewModel orderResourceViewModel;
+  final WorkScriptViewModel workScriptViewModel;
+  
 
 
   const PageNav(
@@ -44,7 +47,7 @@ class PageNav extends StatefulWidget {
       required this.workScriptPickertUtil,
       required this.editUtil2,
       required this.editUtil3,
-      required this.orderServiceViewModel, required this.orderResourceViewModel,});
+      required this.orderServiceViewModel, required this.orderResourceViewModel, required this.workScriptViewModel,});
 
   @override
   State<PageNav> createState() => _PageNavState();
@@ -217,7 +220,12 @@ class _PageNavState extends State<PageNav> {
                         widget.navUtil!.switchNav!(1);
                       }
                       //script相关
-                      if (switchIndex == 2) {}
+                      if (switchIndex == 2) {
+                        await widget.workScriptViewModel.commitAddScript();
+                        //退出的代码
+                        switchIndex = 2;
+                        widget.navUtil!.switchNav!(2);
+                      }
                     }),
               ],
             ),
