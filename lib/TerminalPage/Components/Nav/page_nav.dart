@@ -11,14 +11,28 @@ import '../Remove/remove.dart';
 import '../../Util/edit_util.dart';
 
 import 'package:fluro/fluro.dart';
-import '../../../Route/application.dart';
+
+import '../../Model/ViewModel/terminal_view_model.dart';
+import '../../Model/ViewModel/channel0_view_model.dart';
+import '../../Model/ViewModel/channel1_view_model.dart';
+import '../../Model/ViewModel/channel2_view_model.dart';
+import '../../Model/ViewModel/channel3_view_model.dart';
+import '../../Model/ViewModel/channel4_view_model.dart';
 
 class PageNav extends StatefulWidget {
   final EditUtil? editUtil;
+  final TerminalViewModel terminalViewModel;
+  final Channel0ViewModel channel0ViewModel;
+  final Channel1ViewModel channel1ViewModel;
+  final Channel2ViewModel channel2ViewModel;
+  final Channel3ViewModel channel3ViewModel;
+  final Channel4ViewModel channel4ViewModel;
 
   const PageNav({
     super.key,
     required this.editUtil,
+    required this.terminalViewModel,
+    required this.channel0ViewModel, required this.channel1ViewModel, required this.channel2ViewModel, required this.channel3ViewModel, required this.channel4ViewModel,
   });
 
   @override
@@ -80,17 +94,21 @@ class _PageNavState extends State<PageNav> {
                   width: 12,
                 ),
                 NavIconButton(
-                    iconPath: 'svg/serviceResource.svg', onClick: () {
-                      Application.router!.navigateTo(context, '/OrderResourcePage', transition: TransitionType.fadeIn);
-                      
+                    iconPath: 'svg/serviceResource.svg',
+                    onClick: () {
+                      Application.router!.navigateTo(
+                          context, '/OrderResourcePage',
+                          transition: TransitionType.fadeIn);
                     }),
                 const SizedBox(
                   width: 12,
                 ),
-                
                 NavIconButton(
-                    iconPath: 'svg/serviceResource.svg', onClick: () {
-                       Application.router!.navigateTo(context, '/OrderServicePage', transition: TransitionType.fadeIn);
+                    iconPath: 'svg/serviceResource.svg',
+                    onClick: () {
+                      Application.router!.navigateTo(
+                          context, '/OrderServicePage',
+                          transition: TransitionType.fadeIn);
                     }),
               ],
             ),
@@ -131,7 +149,11 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Edit(editUtil: widget.editUtil,)));
+          child: Material(
+              child: Edit(
+            editUtil: widget.editUtil,
+            terminalViewModel: widget.terminalViewModel,
+          )));
     });
   }
 
@@ -139,7 +161,6 @@ class _PageNavState extends State<PageNav> {
     if (isShowEdit == false) {
       Overlay.of(context).insert(doverlayEntry!);
       isShowEdit = true;
-
     }
   }
 
@@ -155,7 +176,15 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Remove(editUtil: widget.editUtil!,)));
+          child: Material(
+              child: Remove(
+            editUtil: widget.editUtil!, 
+            channel0ViewModel: widget.channel0ViewModel, 
+            channel1ViewModel: widget.channel1ViewModel, 
+            channel2ViewModel: widget.channel2ViewModel, 
+            channel3ViewModel: widget.channel3ViewModel, 
+            channel4ViewModel: widget.channel4ViewModel,
+          )));
     });
   }
 

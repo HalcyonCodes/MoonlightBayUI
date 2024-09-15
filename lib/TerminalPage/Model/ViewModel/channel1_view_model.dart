@@ -17,6 +17,33 @@ class Channel1ViewModel {
     _currentTerminalID = value;
   }
 
+  //终端当前订单
+  List<String>? _currentOrderID = [];
+  List<String>? get currentOrderID => _currentOrderID;
+  void addCurrentOrderID(String? value) {
+    _currentOrderID!.add(value!);
+  }
+  void removeCurrentOrderID(String? value) {
+    _currentOrderID!.remove(value!);
+  }
+    //向服务器发送删除订单请求
+  Future<int> deleteOrders() async {
+
+    Map<String, dynamic> data = {
+      "terminalID": _currentTerminalID,
+      "orderID": currentOrderID,
+    };
+    response = null;
+    //
+    response = await Dio().get('www.baidu.com');
+    if (response!.statusCode == HttpStatus.ok) {
+      return response!.statusCode!;
+    } else {
+      return response!.statusCode!;
+    }
+  }
+
+
 
    //refresh
   Future<int> refresh() async {

@@ -71,7 +71,12 @@ class _TerminalPageState extends State<TerminalPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PageNav(
-                    editUtil: pageEditUtil,
+                    editUtil: pageEditUtil, terminalViewModel: terminalViewModel!,
+                    channel0ViewModel: channelViewModel0!, 
+                    channel1ViewModel: channelViewModel1!, 
+                    channel2ViewModel: channelViewModel2!, 
+                    channel3ViewModel: channelViewModel3!, 
+                    channel4ViewModel: channelViewModel4!,
                   ),
                   const SizedBox(
                     width: 24,

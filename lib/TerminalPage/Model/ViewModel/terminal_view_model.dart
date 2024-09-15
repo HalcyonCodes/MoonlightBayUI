@@ -10,11 +10,30 @@ class TerminalViewModel {
 
   var data = tData.data;
 
-  //写入teminalID
+
+
+  //写入teminalID确定当前所选中的终端
   String? _currentTerminalID;
   String? get currentTerminalID => _currentTerminalID;
   void setCurrentTerminalID(String? value) {
     _currentTerminalID = value;
+  }
+
+  //提交修改终端名字和简介
+  Future<int> submitTerminalEdit(String terminalNamem, String desc) async{
+    Map<String, dynamic> data = {
+      'terminalID': _currentTerminalID,
+      "terminalName": terminalNamem,
+      "desc": desc,
+    };
+    response = null;
+    response = await Dio().get('www.baidu.com');
+    terminalFromJsonModel = null;
+    if (response!.statusCode == HttpStatus.ok) {
+      return response!.statusCode!;
+    } else {
+      return response!.statusCode!;
+    }
   }
 
   //refresh

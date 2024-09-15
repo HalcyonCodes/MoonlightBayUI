@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 class EditUtil {
   //nav 工具栏中，点击打开添加编辑框
   Future<void> Function()? _showEdit;
@@ -29,5 +31,16 @@ class EditUtil {
   }
 
 
+  TextEditingController? _textEditingController1;
+  TextEditingController? get textEditingController1 => _textEditingController1;
+  void setTextEditingController1(TextEditingController? textEditingController) {
+    _textEditingController1 = textEditingController;
+  }
+
+  TextEditingController? _textEditingController2;
+  TextEditingController? get textEditingController2 => _textEditingController2;
+  void setTextEditingController2(TextEditingController? textEditingController) {
+    _textEditingController2 = textEditingController;
+  }
 
 }

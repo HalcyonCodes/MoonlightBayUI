@@ -48,6 +48,8 @@ class _ChannelCardListState extends State<ChannelCardList> {
     List<Widget> widgets = List.generate(
         widget.viewModel.channelFromJsonModel!.data.channel.length, (q) {
       return ChannelCard(
+        orderID: widget.viewModel.channelFromJsonModel!.data.channel[q].id,
+          viewModel: widget.viewModel,
           date: widget.viewModel.channelFromJsonModel!.data.channel[q].date,
           time: widget.viewModel.channelFromJsonModel!.data.channel[q].time,
           serviceName: widget.viewModel.channelFromJsonModel!.data.channel[q].name,
@@ -68,6 +70,8 @@ class _ChannelCardListState extends State<ChannelCardList> {
     List<Widget> widgets = List.generate(
         widget.viewModel.channelFromJsonModel!.data.channel.length, (q) {
       return ChannelCard(
+        orderID: widget.viewModel.channelFromJsonModel!.data.channel[q].id,
+          viewModel: widget.viewModel,
           date: widget.viewModel.channelFromJsonModel!.data.channel[q].date,
           time: widget.viewModel.channelFromJsonModel!.data.channel[q].time,
           serviceName: widget.viewModel.channelFromJsonModel!.data.channel[q].name,
@@ -86,6 +90,8 @@ class _ChannelCardListState extends State<ChannelCardList> {
     initWidgets = List.generate(
         widget.viewModel.channelFromJsonModel!.data.channel.length, (q) {
       return ChannelCard(
+        orderID: widget.viewModel.channelFromJsonModel!.data.channel[q].id,
+          viewModel: widget.viewModel,
           date: widget.viewModel.channelFromJsonModel!.data.channel[q].date,
           time: widget.viewModel.channelFromJsonModel!.data.channel[q].time,
           serviceName: widget.viewModel.channelFromJsonModel!.data.channel[q].name,

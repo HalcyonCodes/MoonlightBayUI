@@ -17,22 +17,46 @@ class Channel0ViewModel {
     _currentTerminalID = value;
   }
 
+  //终端当前订单
+  List<String>? _currentOrderID = [];
+  List<String>? get currentOrderID => _currentOrderID;
+  void addCurrentOrderID(String? value) {
+    _currentOrderID!.add(value!);
+  }
+  void removeCurrentOrderID(String? value) {
+    _currentOrderID!.remove(value!);
+  }
 
+  //向服务器发送删除订单请求
+  Future<int> deleteOrders() async {
 
-   //refresh
+    Map<String, dynamic> data = {
+      "terminalID": _currentTerminalID,
+      "orderID": currentOrderID,
+    };
+    response = null;
+    //
+    response = await Dio().get('www.baidu.com');
+    if (response!.statusCode == HttpStatus.ok) {
+      return response!.statusCode!;
+    } else {
+      return response!.statusCode!;
+    }
+  }
+
+  //refresh
   Future<int> refresh() async {
     response = null;
     //
     response = await Dio().get('www.baidu.com');
     channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      channelFromJsonModel= ChannelFromJsonModel.fromJson(data);
+      channelFromJsonModel = ChannelFromJsonModel.fromJson(data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
     }
   }
-  
 
   //loadMore
   Future<int> loadMore() async {
@@ -43,7 +67,7 @@ class Channel0ViewModel {
     response = await Dio().get('www.baidu.com');
     channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      channelFromJsonModel= ChannelFromJsonModel.fromJson(data);
+      channelFromJsonModel = ChannelFromJsonModel.fromJson(data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
@@ -58,12 +82,10 @@ class Channel0ViewModel {
     //
     channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      channelFromJsonModel= ChannelFromJsonModel.fromJson(data);
+      channelFromJsonModel = ChannelFromJsonModel.fromJson(data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
     }
   }
-
-
 }

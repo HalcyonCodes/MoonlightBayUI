@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import '../../../Config/decoration.dart';
 import '../../../Config/font.dart';
+import '../../Model/ViewModel/channel2_view_model.dart';
 
 class ChannelCard extends StatefulWidget {
+  final String? orderID;
   final String? date;
   final String? time;
   final String? serviceName;
   final List<String>? resourceName;
   final List<String>? resourceValue;
+  final Channel2ViewModel viewModel;
 
   const ChannelCard(
       {super.key,
@@ -15,13 +18,17 @@ class ChannelCard extends StatefulWidget {
       required this.time,
       required this.serviceName,
       required this.resourceName,
-      required this.resourceValue});
+      required this.resourceValue,
+      required this.orderID,
+      required this.viewModel
+      });
 
   @override
   State<ChannelCard> createState() => _ChannelCardState();
 }
 
 class _ChannelCardState extends State<ChannelCard> {
+  String? orderID;
   String? date;
   String? time;
   String? serviceName;
@@ -39,27 +46,8 @@ class _ChannelCardState extends State<ChannelCard> {
     resourceName = widget.resourceName;
     resourceValue = widget.resourceValue;
     isSelect = false;
+    orderID = widget.orderID;
 
-    /*resource = List.generate(resourceName!.length, (q) {
-      return Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(resourceName![q],
-                    style: isSelect == false
-                        ? KFont.cardGreyStyle
-                        : KFont.cardSelectGreyStyle),
-                const Text(" : "),
-                Text(
-                  resourceValue![q],
-                  style: isSelect == false
-                      ? KFont.cardGreyStyle
-                      : KFont.cardSelectGreyStyle,
-                )
-              ]));
-    });*/
   }
 
   void refreshUi() {
@@ -68,7 +56,19 @@ class _ChannelCardState extends State<ChannelCard> {
 
   void onTap() {
     isSelect = !isSelect!;
+    if (isSelect == true) {
+      widget.viewModel.addCurrentOrderID(orderID);
+    }
+    if (isSelect == false) {
+      widget.viewModel.removeCurrentOrderID(orderID);
+    }
     refreshUi();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.viewModel.removeCurrentOrderID(orderID);
   }
 
   @override

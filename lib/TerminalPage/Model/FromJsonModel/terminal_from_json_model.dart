@@ -29,6 +29,8 @@ class TerminalModel {
   late String terminalDesc;
   late int status;
 
+  TerminalModel({required this.terminalID, required this.terminalIP, required this.terminalName, required this.terminalDesc, required this.status});
+
   TerminalModel.fromJson(Map<String, dynamic> json) {
     terminalID = json['id'];
     terminalIP = json['ip'];
