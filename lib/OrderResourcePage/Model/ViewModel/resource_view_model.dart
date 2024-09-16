@@ -11,14 +11,12 @@ class ResourceViewModel {
 
   var data = tData.data;
 
- 
-
   //refresh
   Future<int> refresh() async {
     response = null;
     //
     response = await Dio().get('www.baidu.com');
-    
+
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
       orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(data);
@@ -28,7 +26,44 @@ class ResourceViewModel {
     }
   }
 
-  
+  //当前选中的项目
+  String? _currentID;
+  String? get currentID => _currentID;
+  void setCurrentID(String id) {
+    _currentID = id;
+  }
+
+  //删除选中的项目
+  Future<int> deleteItem() async {
+    var data = {"ID": currentID};
+     response = null;
+    response = await Dio().get('www.baidu.com');
+    orderResourceFromJsonModel = null;
+    if (response!.statusCode == HttpStatus.ok) {
+      return response!.statusCode!;
+    } else {
+      return response!.statusCode!;
+    }
+  }
+
+  //添加项目
+  Future<int> addItem(String name, String desc) async {
+    var data = {"name": name, "desc": desc};
+
+    response = null;
+ 
+    response = await Dio().get('www.baidu.com');
+    orderResourceFromJsonModel = null;
+    if (response!.statusCode == HttpStatus.ok) {
+      
+      return response!.statusCode!;
+    } else {
+      return response!.statusCode!;
+    }
+
+  }
+
+
 
   //loadMore
   Future<int> loadMore() async {

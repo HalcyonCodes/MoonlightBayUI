@@ -1,16 +1,22 @@
 import 'package:double_bladed_axe/double_bladed_axe.dart';
 import 'package:flutter/material.dart';
+
 import '../../Util/order_service_util.dart';
 import './order_resource_card.dart';
 import '../../Model/ViewModel/resource_view_model.dart';
 import '../../Util/order_resource_util.dart';
+import '../../Model/ViewModel/resource_view_model.dart';
 
 class OrderResourceCardList extends StatefulWidget {
   final OrderResourceUtil orderResourceUtil;
   final ResourceViewModel viewModel;
   final OrderServiceUtil orderServiceUtil;
+  final ResourceViewModel resourceViewModel;
   const OrderResourceCardList(
-      {super.key, required this.viewModel, required this.orderResourceUtil, required this.orderServiceUtil});
+      {super.key,
+      required this.viewModel,
+      required this.orderResourceUtil,
+      required this.orderServiceUtil, required this.resourceViewModel});
 
   @override
   State<OrderResourceCardList> createState() => _OrderResourceCardListState();
@@ -62,7 +68,8 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
             .viewModel.orderResourceFromJsonModel!.data.orderResources![q].name,
         desc: widget
             .viewModel.orderResourceFromJsonModel!.data.orderResources![q].desc,
-        orderServiceUtil: widget.orderServiceUtil
+        orderServiceUtil: widget.orderServiceUtil,
+        resourceViewModel: widget.resourceViewModel,
       );
     });
     return widgets;
@@ -83,8 +90,9 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
         orderResourceName: widget
             .viewModel.orderResourceFromJsonModel!.data.orderResources![q].name,
         desc: widget
-            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].desc, 
+            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].desc,
         orderServiceUtil: widget.orderServiceUtil,
+        resourceViewModel: widget.resourceViewModel,
       );
     });
     return widgets;
@@ -95,17 +103,18 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
         widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
             .length, (q) {
       return OrderResourceCard(
-        util: widget.orderResourceUtil,
-        orderResourceID: widget
-            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].id,
-        bindingCount: widget.viewModel.orderResourceFromJsonModel!.data
-            .orderResources![q].bindingCount,
-        orderResourceName: widget
-            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].name,
-        desc: widget
-            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].desc,
-        orderServiceUtil: widget.orderServiceUtil
-      );
+          util: widget.orderResourceUtil,
+          orderResourceID: widget
+              .viewModel.orderResourceFromJsonModel!.data.orderResources![q].id,
+          bindingCount: widget.viewModel.orderResourceFromJsonModel!.data
+              .orderResources![q].bindingCount,
+          orderResourceName: widget.viewModel.orderResourceFromJsonModel!.data
+              .orderResources![q].name,
+          desc: widget.viewModel.orderResourceFromJsonModel!.data
+              .orderResources![q].desc,
+          orderServiceUtil: widget.orderServiceUtil,
+          resourceViewModel: widget.resourceViewModel,
+          );
     });
   }
 }

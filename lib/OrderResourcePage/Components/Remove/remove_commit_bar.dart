@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
+import '../../Model/ViewModel/resource_view_model.dart';
 import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
@@ -8,8 +9,10 @@ import '../../Util/edit_util.dart';
 
 class RemoveCommitBar extends StatefulWidget {
   final EditUtil editUtil;
+  final ResourceViewModel resourceViewModel;
 
-  const RemoveCommitBar({super.key, required this.editUtil});
+  const RemoveCommitBar(
+      {super.key, required this.editUtil, required this.resourceViewModel});
 
   @override
   State<RemoveCommitBar> createState() => _RemoveCommitBarState();
@@ -54,7 +57,8 @@ class _RemoveCommitBarState extends State<RemoveCommitBar> {
           ),
           const Expanded(child: SizedBox()),
           InkWell(
-            onTap: () {
+            onTap: ()async {
+             
               widget.editUtil.removeRemove!();
             },
             child: Container(
@@ -68,7 +72,11 @@ class _RemoveCommitBarState extends State<RemoveCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {widget.editUtil.removeRemove!();},
+            onTap: () async{
+               //加入http请求逻辑
+              await widget.resourceViewModel.deleteItem();
+              widget.editUtil.removeRemove!();
+            },
             child: Container(
               decoration: BoxDecoration(
                   color: KColor.primaryColor,

@@ -4,6 +4,7 @@ import 'package:moonlight_bay_ui/Config/string.dart';
 import '../../../Config/decoration.dart';
 import '../../Util/order_resource_util.dart';
 import '../../Util/order_service_util.dart';
+import '../../Model/ViewModel/resource_view_model.dart';
 
 class OrderResourceCard extends StatefulWidget {
   final String? orderResourceID;
@@ -12,6 +13,7 @@ class OrderResourceCard extends StatefulWidget {
   final String? desc;
   final OrderResourceUtil util;
   final OrderServiceUtil orderServiceUtil;
+  final ResourceViewModel resourceViewModel;
 
   const OrderResourceCard(
       {super.key,
@@ -20,7 +22,7 @@ class OrderResourceCard extends StatefulWidget {
       required this.orderResourceName,
       required this.desc,
       required this.util,
-      required this.orderServiceUtil});
+      required this.orderServiceUtil, required this.resourceViewModel});
 
   @override
   State<OrderResourceCard> createState() => _OrderResourceCardState();
@@ -58,6 +60,9 @@ class _OrderResourceCardState extends State<OrderResourceCard> {
     }
     isSelect = !isSelect!;
     refreshUi();
+
+    widget.resourceViewModel.setCurrentID(orderResourceID!);
+
     //刷新service部分
     int? para = int.tryParse(orderResourceID!);
     widget.orderServiceUtil.loadServiceByResourceID!(para!);

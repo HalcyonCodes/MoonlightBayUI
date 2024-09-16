@@ -29,9 +29,7 @@ class TerminalCardList extends StatefulWidget {
       required this.channel2ViewModel,
       required this.channel3ViewModel,
       required this.channel4ViewModel,
-      required this.channelUtil
-      
-      });
+      required this.channelUtil});
 
   @override
   State<TerminalCardList> createState() => _TerminalCardListState();
@@ -88,14 +86,28 @@ class _TerminalCardListState extends State<TerminalCardList> {
             q();
           }
           widget.terminalUtil.setItemSelect![q]();
-          widget.channel0ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel1ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel2ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel3ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel4ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-
+          widget.channel0ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel1ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel2ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel3ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel4ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
         },
         terminalUtil: widget.terminalUtil,
+        onPlay: ()  {
+          //这里有bug，点击之后不会刷新频道
+          widget.viewModel.setTerminalStatus(1);
+        },
+        onPause: () {
+          widget.viewModel.setTerminalStatus(2);
+        },
+        onStop: () {
+          widget.viewModel.setTerminalStatus(3);
+        },
       );
     });
     return widgets;
@@ -121,17 +133,31 @@ class _TerminalCardListState extends State<TerminalCardList> {
           for (var q in widget.terminalUtil.setItemUnSelect!) {
             q();
           }
-          widget.channel0ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel1ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel2ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel3ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel4ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel0ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel1ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel2ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel3ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel4ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.terminalUtil.setItemSelect![q]();
           for (var q in widget.channelUtil.refreshChannels!) {
             q();
-
-          }},
+          }
+        },
         terminalUtil: widget.terminalUtil,
+        onPlay: () {
+          widget.viewModel.setTerminalStatus(1);
+        },
+        onPause: () {
+          widget.viewModel.setTerminalStatus(2);
+        },
+        onStop: () {
+           widget.viewModel.setTerminalStatus(3);
+        },
       );
     });
     return widgets;
@@ -156,18 +182,30 @@ class _TerminalCardListState extends State<TerminalCardList> {
             q();
           }
           widget.terminalUtil.setItemSelect![q]();
-          widget.channel0ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel1ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel2ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel3ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel4ViewModel.setCurrentTerminalID(widget.viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel0ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel1ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel2ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel3ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel4ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           for (var q in widget.channelUtil.refreshChannels!) {
             q();
-
           }
-
         },
         terminalUtil: widget.terminalUtil,
+        onPlay: ()  {
+          widget.viewModel.setTerminalStatus(1);
+        },
+        onPause: () {
+          widget.viewModel.setTerminalStatus(2);
+        },
+        onStop: () {
+          widget.viewModel.setTerminalStatus(3);
+        },
       );
     });
   }

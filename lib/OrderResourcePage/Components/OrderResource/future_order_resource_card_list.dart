@@ -38,7 +38,7 @@ class _OrderResourceCardListFutureState
               return OrderResourceCardList(
                 orderServiceUtil: widget.orderServiceUtil,
                 viewModel: widget.viewModel,
-                orderResourceUtil: widget.orderResourceUtil,
+                orderResourceUtil: widget.orderResourceUtil, resourceViewModel: widget.viewModel,
               );
           }
         });

@@ -13,6 +13,9 @@ class TerminalCard extends StatefulWidget {
   final int? terminalStatus;
   final TerminalUtil? terminalUtil;
   final Function() onTap;
+  final Function onPlay;
+  final Function onPause;
+  final Function onStop;
 
   const TerminalCard({
     super.key,
@@ -23,6 +26,9 @@ class TerminalCard extends StatefulWidget {
     required this.terminalStatus,
     required this.terminalUtil,
     required this.onTap,
+    required this.onPlay,
+    required this.onPause,
+    required this.onStop,
   });
 
   @override
@@ -194,7 +200,6 @@ class _TerminalCardState extends State<TerminalCard> {
 
   void cardOnSelect() {
     isSelect = !isSelect!;
-
     refreshUi();
   }
 
@@ -202,17 +207,21 @@ class _TerminalCardState extends State<TerminalCard> {
     status = 1;
     //添加服务器请求
     refreshUi();
+    widget.onPlay();
+    int a;
   }
 
   void stopCircleOnTap() {
     status = 2;
     //添加服务器请求
     refreshUi();
+    widget.onStop();
   }
 
   void pauseCircleOnTap() {
     status = 3;
     //添加服务器请求
     refreshUi();
+    widget.onPause();
   }
 }

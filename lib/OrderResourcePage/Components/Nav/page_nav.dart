@@ -9,12 +9,14 @@ import 'nav_icon_button.dart';
 import '../../Util/edit_util.dart';
 import '../Edit/edit.dart';
 import '../Remove/remove.dart';
+import '../../Model/ViewModel/resource_view_model.dart';
 
 class PageNav extends StatefulWidget {
   final EditUtil? editUtil;
+  final ResourceViewModel? resourceViewModel;
   const PageNav({
     super.key,
-    required this.editUtil,
+    required this.editUtil, required this.resourceViewModel,
   });
 
   @override
@@ -124,7 +126,7 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Edit(editUtil: widget.editUtil!,)));
+          child: Material(child: Edit(editUtil: widget.editUtil!, resourceViewModel: widget.resourceViewModel!,)));
     });
   }
 
@@ -147,7 +149,7 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Remove(editUtil: widget.editUtil!,)));
+          child: Material(child: Remove(editUtil: widget.editUtil!, resourceViewModel:  widget.resourceViewModel!,)));
     });
   }
 

@@ -36,6 +36,23 @@ class TerminalViewModel {
     }
   }
 
+  //修改终端状态
+  Future<int> setTerminalStatus(int status) async{
+    Map<String, dynamic> data = {
+      'terminalID': _currentTerminalID,
+      "status": status,
+    };
+
+    response = null;
+    response = await Dio().get('www.baidu.com');
+    terminalFromJsonModel = null;
+    if (response!.statusCode == HttpStatus.ok) {
+      return response!.statusCode!;
+    } else {
+      return response!.statusCode!;
+    }
+  }
+
   //refresh
   Future<int> refresh() async {
     response = null;

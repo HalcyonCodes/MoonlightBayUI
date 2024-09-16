@@ -103,7 +103,11 @@ class _PageNavState extends State<PageNav> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {}),
+                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {
+                  Application.router!.navigateTo(
+                          context, '/TerminalPage',
+                          transition: TransitionType.fadeIn);
+                }),
                 const SizedBox(
                   width: 12,
                 ),
@@ -214,7 +218,7 @@ class _PageNavState extends State<PageNav> {
                       //resource相关
                       if (switchIndex == 1) {
                         //提交的代码
-                       await widget.orderResourceViewModel.commitAddResources();
+                        await widget.orderResourceViewModel.commitAddResources();
                         //退出的代码
                         switchIndex = 1;
                         widget.navUtil!.switchNav!(1);

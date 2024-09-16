@@ -5,10 +5,12 @@ import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
+import '../../Model/ViewModel/resource_view_model.dart';
 
 class EditCommitBar extends StatefulWidget {
+   final ResourceViewModel resourceViewModel;
   final EditUtil editUtil;
-  const EditCommitBar({super.key, required this.editUtil});
+  const EditCommitBar({super.key, required this.editUtil, required this.resourceViewModel,});
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
@@ -54,7 +56,9 @@ class _EditCommitBarState extends State<EditCommitBar> {
           ),
           const Expanded(child: SizedBox()),
           InkWell(
-            onTap: () {widget.editUtil.removeEdit!();},
+            onTap: () {
+              widget.editUtil.removeEdit!();
+              },
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(color: KColor.navIconColor),
@@ -66,7 +70,11 @@ class _EditCommitBarState extends State<EditCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {widget.editUtil.removeEdit!();},
+            onTap: () {
+              //加入提交的逻辑
+              widget.resourceViewModel.addItem(widget.editUtil.textEditingController1!.text, widget.editUtil.textEditingController2!.text);
+              widget.editUtil.removeEdit!();
+              },
             child: Container(
               decoration: BoxDecoration(
                   color: KColor.primaryColor,
