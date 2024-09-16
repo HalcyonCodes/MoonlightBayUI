@@ -21,6 +21,7 @@ import '../../Util/work_script_util.dart';
 import '../../Util/work_script_picker_util.dart';
 import '../../Models/ViewModel/order_resource_view_model.dart';
 import '../../Models/ViewModel/work_script_view_model.dart';
+import '../../Models/ViewModel/work_script_picker_view_model.dart';
 
 class PageNav extends StatefulWidget {
   final NavUtil? navUtil;
@@ -34,6 +35,7 @@ class PageNav extends StatefulWidget {
   final OrderServiceViewModel orderServiceViewModel;
   final OrderResourceViewModel orderResourceViewModel;
   final WorkScriptViewModel workScriptViewModel;
+  final WorkScriptPickerViewModel workScriptPickerViewModel;
   
 
 
@@ -47,7 +49,7 @@ class PageNav extends StatefulWidget {
       required this.workScriptPickertUtil,
       required this.editUtil2,
       required this.editUtil3,
-      required this.orderServiceViewModel, required this.orderResourceViewModel, required this.workScriptViewModel,});
+      required this.orderServiceViewModel, required this.orderResourceViewModel, required this.workScriptViewModel, required this.workScriptPickerViewModel,});
 
   @override
   State<PageNav> createState() => _PageNavState();
@@ -285,7 +287,7 @@ class _PageNavState extends State<PageNav> {
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
           child: Material(
               child: ScriptEdit(
-            editUtil: widget.editUtil2,
+            editUtil: widget.editUtil2, workScriptViewModel: widget.workScriptViewModel,
           )));
     });
   }
@@ -324,7 +326,7 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: ScriptRemove(editUtil: widget.editUtil2!)));
+          child: Material(child: ScriptRemove(editUtil: widget.editUtil2!, workScriptPickerViewModel: widget.workScriptPickerViewModel,)));
     });
   }
 

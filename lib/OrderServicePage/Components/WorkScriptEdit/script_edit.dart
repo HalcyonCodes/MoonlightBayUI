@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:moonlight_bay_ui/Config/font.dart';
 import 'package:moonlight_bay_ui/Config/string.dart';
+import 'package:moonlight_bay_ui/OrderServicePage/Models/ViewModel/work_script_view_model.dart';
 
 import 'srcipt_edit_commit_bar.dart';
 import '../../../Config/decoration.dart';
@@ -10,7 +11,8 @@ import '../../Util/edit_util.dart';
 
 class ScriptEdit extends StatefulWidget {
   final EditUtil? editUtil;
-  const ScriptEdit({super.key, required this.editUtil});
+  final WorkScriptViewModel workScriptViewModel;
+  const ScriptEdit({super.key, required this.editUtil, required this.workScriptViewModel});
 
   @override
   State<ScriptEdit> createState() => _ScriptEditState();
@@ -45,7 +47,7 @@ class _ScriptEditState extends State<ScriptEdit> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16))),
-              child: EditCommitBar(editUtil: widget.editUtil,)),
+              child: EditCommitBar(editUtil: widget.editUtil, workScriptViewModel: widget.workScriptViewModel,)),
           const SizedBox(
             height: 12,
           ),

@@ -4,11 +4,14 @@ import 'package:moonlight_bay_ui/Config/color.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
+import '../../Models/ViewModel/work_script_view_model.dart';
 
 class EditCommitBar extends StatefulWidget {
   final EditUtil? editUtil;
+  final WorkScriptViewModel? workScriptViewModel;
 
-  const EditCommitBar({super.key, required this.editUtil});
+  const EditCommitBar(
+      {super.key, required this.editUtil, required this.workScriptViewModel});
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
@@ -18,7 +21,6 @@ class _EditCommitBarState extends State<EditCommitBar> {
   @override
   void initState() {
     super.initState();
-    
   }
 
   @override
@@ -69,6 +71,11 @@ class _EditCommitBarState extends State<EditCommitBar> {
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
             onTap: () {
+              //提交的逻辑
+              widget.workScriptViewModel!.addItem(
+                  widget.editUtil!.textCtrl1!.text,
+                  widget.editUtil!.textCtrl2!.text);
+
               widget.editUtil!.removeEdit!();
             },
             child: Container(

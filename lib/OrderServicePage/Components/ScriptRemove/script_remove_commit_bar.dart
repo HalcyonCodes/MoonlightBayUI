@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
+
+import '../../Models/ViewModel/work_script_picker_view_model.dart';
 import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
@@ -8,7 +10,8 @@ import '../../Util/edit_util.dart';
 
 class ScriptRemoveCommitBar extends StatefulWidget {
   final EditUtil? editUtil;
-  const ScriptRemoveCommitBar({super.key, required this.editUtil});
+  final WorkScriptPickerViewModel workScriptPickerViewModel;
+  const ScriptRemoveCommitBar({super.key, required this.editUtil, required this.workScriptPickerViewModel});
 
   @override
   State<ScriptRemoveCommitBar> createState() => _ScriptRemoveCommitBarState();
@@ -67,7 +70,12 @@ class _ScriptRemoveCommitBarState extends State<ScriptRemoveCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {widget.editUtil!.removeRemove!();},
+            onTap: () {
+              //加入提交逻辑
+              widget.workScriptPickerViewModel.removeScript();
+
+              widget.editUtil!.removeRemove!();
+            },
             child: Container(
               decoration: BoxDecoration(
                   color: KColor.primaryColor,

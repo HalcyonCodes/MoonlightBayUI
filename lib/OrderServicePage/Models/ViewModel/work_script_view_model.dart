@@ -19,6 +19,19 @@ class WorkScriptViewModel {
     _orderServiceID = orderServiceID;
   }
 
+  //添加项目
+  Future<int> addItem(String name, String desc) async {
+    var data = {"name": name, "desc": desc};
+    response = null;
+    response = await Dio().get('www.baidu.com');
+
+    if (response!.statusCode == HttpStatus.ok) {
+      return response!.statusCode!;
+    } else {
+      return response!.statusCode!;
+    }
+  }
+
   //提交添加的script
   Future<int> commitAddScript() async {
     WorkScript? workScript = fromJsonModel!.data!.workScripts![0];

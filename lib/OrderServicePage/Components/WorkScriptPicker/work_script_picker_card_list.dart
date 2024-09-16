@@ -68,6 +68,7 @@ class _WorkScriptPickerCardListState extends State<WorkScriptPickerCardList> {
             widget.viewModel.fromJsonModel!.data!.workScripts![q].desc,
             widget.viewModel.fromJsonModel!.data!.workScripts![q].bindingCount,
           );
+          widget.viewModel.setScriptID(widget.viewModel.fromJsonModel!.data!.workScripts![q].id);
         },
         workScriptUtil: widget.workScriptUtil,
       );

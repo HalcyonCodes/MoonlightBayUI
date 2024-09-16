@@ -5,11 +5,13 @@ import '../../../Config/shadow.dart';
 import 'script_remove_commit_bar.dart';
 import '../../../Config/string.dart';
 import '../../Util/edit_util.dart';
+import '../../Models/ViewModel/work_script_picker_view_model.dart';
 
 class ScriptRemove extends StatefulWidget {
   final EditUtil editUtil;
+  final WorkScriptPickerViewModel workScriptPickerViewModel;
 
-  const ScriptRemove({super.key, required this.editUtil});
+  const ScriptRemove({super.key, required this.editUtil, required this.workScriptPickerViewModel});
 
   @override
   State<ScriptRemove> createState() => _ScriptRemoveState();
@@ -31,7 +33,7 @@ class _ScriptRemoveState extends State<ScriptRemove> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScriptRemoveCommitBar(editUtil: widget.editUtil,),
+          ScriptRemoveCommitBar(editUtil: widget.editUtil, workScriptPickerViewModel: widget.workScriptPickerViewModel,),
           const SizedBox(
             height: 12,
           ),
