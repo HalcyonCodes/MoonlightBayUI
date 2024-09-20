@@ -46,15 +46,15 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
           child: DoubleBladedAxe(
               initWidgets: initWidgets,
               initPage: '0',
-              maxPage: '5',
-              pageMaxContainCount: '5',
+              maxPage: '99',
+              pageMaxContainCount: '12',
               listUtil: listUtil!)),
     );
   }
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadPre() async {
-    await widget.viewModel.loadPre();
+    await widget.viewModel.loadPre((listUtil!.getPageStartIndex!() - 1).toString());
     List<Widget> widgets = List.generate(
         widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
             .length, (q) {
@@ -77,7 +77,7 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadMore() async {
-    await widget.viewModel.loadMore();
+    await widget.viewModel.loadMore((listUtil!.getPageEndIndex!() + 1).toString());
     List<Widget> widgets = List.generate(
         widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
             .length, (q) {

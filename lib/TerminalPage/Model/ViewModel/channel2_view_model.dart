@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/channel_from_json_model.dart';
 import '../DataModel/channel_data_model.dart' as tData;
 
@@ -46,12 +47,22 @@ class Channel2ViewModel {
 
    //refresh
   Future<int> refresh() async {
-    response = null;
+           response = null;
     //
-    response = await Dio().get('www.baidu.com');
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    response = await dio
+        .get('http://localhost:5036/api/v1/Order/GetOrderChannel?channelLevels=2&terminalID=' + currentTerminalID.toString());
     channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      channelFromJsonModel= ChannelFromJsonModel.fromJson(data);
+      channelFromJsonModel = ChannelFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;

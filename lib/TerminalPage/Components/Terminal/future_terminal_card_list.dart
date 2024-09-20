@@ -30,7 +30,7 @@ class TerminalCardListFuture extends StatefulWidget {
 class _TerminalCardListFutureState extends State<TerminalCardListFuture> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return  FutureBuilder(
         future: widget.viewModel.refresh(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {

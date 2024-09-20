@@ -35,7 +35,7 @@ class _ChannelCardListFutureState extends State<ChannelCardListFuture> {
   }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return widget.viewModel.currentTerminalID == null? SizedBox() : FutureBuilder(
         future: widget.viewModel.refresh(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {

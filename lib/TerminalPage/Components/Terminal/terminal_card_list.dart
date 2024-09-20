@@ -58,8 +58,8 @@ class _TerminalCardListState extends State<TerminalCardList> {
         child: DoubleBladedAxe(
             initWidgets: initWidgets!,
             initPage: '0',
-            maxPage: '4',
-            pageMaxContainCount: '2',
+            maxPage: '999', //bug
+            pageMaxContainCount: '24',
             listUtil: listUtil!),
       ),
     );
@@ -67,7 +67,7 @@ class _TerminalCardListState extends State<TerminalCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadPre() async {
-    await widget.viewModel.loadPre();
+    await widget.viewModel.loadPre((listUtil!.getPageEndIndex!() - 1).toString());
     List<Widget> widgets = List.generate(
         widget.viewModel.terminalFromJsonModel!.data.terminals!.length, (q) {
       return TerminalCard(
@@ -115,7 +115,7 @@ class _TerminalCardListState extends State<TerminalCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadMore() async {
-    await widget.viewModel.loadMore();
+    await widget.viewModel.loadMore((listUtil!.getPageEndIndex!() + 1).toString());
     List<Widget> widgets = List.generate(
         widget.viewModel.terminalFromJsonModel!.data.terminals!.length, (q) {
       return TerminalCard(

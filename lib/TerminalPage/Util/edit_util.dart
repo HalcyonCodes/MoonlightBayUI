@@ -2,6 +2,21 @@
 import 'package:flutter/material.dart';
 
 class EditUtil {
+    //nav 工具栏中，点击打开添加编辑框
+  Future<void> Function()? _showLogin;
+  Future<void> Function()? get showLogin => _showLogin;
+  void setFuncShowLogin(Future<void> Function()? func) {
+    _showLogin = func;
+  }
+
+  //用于移除添加编辑框的方法
+  Future<void> Function()? _removeLogin;
+  Future<void> Function()? get removeLogin => _removeLogin;
+  void setFuncRemoveLogin(Future<void> Function()? func) {
+    _removeLogin = func;
+  }
+
+
   //nav 工具栏中，点击打开添加编辑框
   Future<void> Function()? _showEdit;
   Future<void> Function()? get showEdit => _showEdit;

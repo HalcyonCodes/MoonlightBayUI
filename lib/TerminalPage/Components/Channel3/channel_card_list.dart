@@ -32,12 +32,10 @@ class _ChannelCardListState extends State<ChannelCardList> {
       height: MediaQuery.of(context).size.height - 24 - 24 - 24 - 46,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-        child: DoubleBladedAxe(
-            initWidgets: initWidgets,
-            initPage: '0',
-            maxPage: '5',
-            pageMaxContainCount: '5',
-            listUtil: listUtil!),
+        child:ListView(
+          clipBehavior: Clip.none,
+          children: initWidgets,
+        )
       ),
     );
   }

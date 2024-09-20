@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
 import 'package:moonlight_bay_ui/Config/shadow.dart';
 import 'package:moonlight_bay_ui/Route/application.dart';
+import 'package:moonlight_bay_ui/TerminalPage/Components/LoginEdit/login_edit.dart';
 
 import './title_page_nav.dart';
 import '../../../Config/string.dart';
@@ -18,6 +19,7 @@ import '../../Model/ViewModel/channel1_view_model.dart';
 import '../../Model/ViewModel/channel2_view_model.dart';
 import '../../Model/ViewModel/channel3_view_model.dart';
 import '../../Model/ViewModel/channel4_view_model.dart';
+import '../../../Cookie/cookie.dart';
 
 class PageNav extends StatefulWidget {
   final EditUtil? editUtil;
@@ -32,7 +34,11 @@ class PageNav extends StatefulWidget {
     super.key,
     required this.editUtil,
     required this.terminalViewModel,
-    required this.channel0ViewModel, required this.channel1ViewModel, required this.channel2ViewModel, required this.channel3ViewModel, required this.channel4ViewModel,
+    required this.channel0ViewModel,
+    required this.channel1ViewModel,
+    required this.channel2ViewModel,
+    required this.channel3ViewModel,
+    required this.channel4ViewModel,
   });
 
   @override
@@ -43,6 +49,7 @@ class _PageNavState extends State<PageNav> {
   double? width;
   OverlayEntry? doverlayEntry;
   OverlayEntry? fOverlayEntry;
+  OverlayEntry? zOverlayEntry;
   bool? isShowEdit;
   bool? isShowRemove;
 
@@ -52,12 +59,15 @@ class _PageNavState extends State<PageNav> {
     width = 213;
     doverlayEntry = dOverlayEntry();
     fOverlayEntry = qOverlayEntry();
+    zOverlayEntry = zzOverlayEntry();
 
     //注册
     widget.editUtil!.setFuncRemoveEdit(removeEdit);
     widget.editUtil!.setFuncShowEdit(showEdit);
     widget.editUtil!.setFuncShowRemove(showDelete);
     widget.editUtil!.setFuncRemoveRemove(removeDelete);
+    widget.editUtil!.setFuncShowLogin(showLogin);
+    widget.editUtil!.setFuncRemoveLogin(removeLogin);
 
     isShowEdit = false;
     isShowRemove = false;
@@ -112,6 +122,14 @@ class _PageNavState extends State<PageNav> {
                     }),
               ],
             ),
+            SizedBox(height: 12),
+            NavIconButton(
+                iconPath: 'svg/serviceResource.svg',
+                onClick: () {
+                  //JwtManager.test();
+                  //login
+                  widget.editUtil!.showLogin!();
+                }),
             const SizedBox(
               height: 264,
             ),
@@ -142,6 +160,33 @@ class _PageNavState extends State<PageNav> {
         ),
       ),
     );
+  }
+
+  OverlayEntry zzOverlayEntry() {
+    return OverlayEntry(builder: (context) {
+      return Positioned(
+          left: MediaQuery.of(context).size.width / 2 - 658 / 2,
+          top: MediaQuery.of(context).size.height / 2 - 208 / 2,
+          child: Material(
+              child: LoginEdit(
+            editUtil: widget.editUtil,
+            terminalViewModel: widget.terminalViewModel,
+          )));
+    });
+  }
+
+  Future<void> showLogin() async {
+    if (isShowEdit == false) {
+      Overlay.of(context).insert(zOverlayEntry!);
+      isShowEdit = true;
+    }
+  }
+
+  Future<void> removeLogin() async {
+    if (isShowEdit == true) {
+      zOverlayEntry?.remove();
+      isShowEdit = false;
+    }
   }
 
   OverlayEntry dOverlayEntry() {
@@ -178,11 +223,11 @@ class _PageNavState extends State<PageNav> {
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
           child: Material(
               child: Remove(
-            editUtil: widget.editUtil!, 
-            channel0ViewModel: widget.channel0ViewModel, 
-            channel1ViewModel: widget.channel1ViewModel, 
-            channel2ViewModel: widget.channel2ViewModel, 
-            channel3ViewModel: widget.channel3ViewModel, 
+            editUtil: widget.editUtil!,
+            channel0ViewModel: widget.channel0ViewModel,
+            channel1ViewModel: widget.channel1ViewModel,
+            channel2ViewModel: widget.channel2ViewModel,
+            channel3ViewModel: widget.channel3ViewModel,
             channel4ViewModel: widget.channel4ViewModel,
           )));
     });
