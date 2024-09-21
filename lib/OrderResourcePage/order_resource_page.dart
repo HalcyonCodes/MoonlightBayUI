@@ -54,7 +54,7 @@ class _OrderResourcePageState extends State<OrderResourcePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PageNav(
-                    editUtil: editUtil, resourceViewModel: viewModel,
+                    editUtil: editUtil, resourceViewModel: viewModel, orderResourceUtil: orderResourceUtil,
                   ),
                   const SizedBox(
                     width: 24,

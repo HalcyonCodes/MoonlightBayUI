@@ -10,7 +10,11 @@ class OrderResourceCardListFuture extends StatefulWidget {
 
   final ResourceViewModel viewModel;
 
-  const OrderResourceCardListFuture({super.key, required this.viewModel, required this.orderResourceUtil, required this.orderServiceUtil});
+  const OrderResourceCardListFuture(
+      {super.key,
+      required this.viewModel,
+      required this.orderResourceUtil,
+      required this.orderServiceUtil});
 
   @override
   State<OrderResourceCardListFuture> createState() =>
@@ -19,6 +23,12 @@ class OrderResourceCardListFuture extends StatefulWidget {
 
 class _OrderResourceCardListFutureState
     extends State<OrderResourceCardListFuture> {
+  @override
+  void initState() {
+    super.initState();
+    widget.orderResourceUtil.setRefreshList(refreshUI);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -38,9 +48,14 @@ class _OrderResourceCardListFutureState
               return OrderResourceCardList(
                 orderServiceUtil: widget.orderServiceUtil,
                 viewModel: widget.viewModel,
-                orderResourceUtil: widget.orderResourceUtil, resourceViewModel: widget.viewModel,
+                orderResourceUtil: widget.orderResourceUtil,
+                resourceViewModel: widget.viewModel,
               );
           }
         });
+  }
+
+  void refreshUI() {
+    setState(() {});
   }
 }

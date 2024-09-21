@@ -26,7 +26,9 @@ class _OrderServiceCardListFutureState
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return 
+    widget.viewModel.resourceID == null? SizedBox() : 
+    FutureBuilder(
         future: widget.viewModel.refresh(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {

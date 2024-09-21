@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
+
 import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
 import '../../Model/ViewModel/resource_view_model.dart';
+import '../../Util/order_resource_util.dart';
 
 class EditCommitBar extends StatefulWidget {
    final ResourceViewModel resourceViewModel;
   final EditUtil editUtil;
-  const EditCommitBar({super.key, required this.editUtil, required this.resourceViewModel,});
+  final OrderResourceUtil orderResourceUtil;
+
+  const EditCommitBar({super.key, required this.editUtil, required this.resourceViewModel, required this.orderResourceUtil, });
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
@@ -70,10 +74,11 @@ class _EditCommitBarState extends State<EditCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {
+            onTap: ()async {
               //加入提交的逻辑
-              widget.resourceViewModel.addItem(widget.editUtil.textEditingController1!.text, widget.editUtil.textEditingController2!.text);
+              await widget.resourceViewModel.addItem(widget.editUtil.textEditingController1!.text, widget.editUtil.textEditingController2!.text);
               widget.editUtil.removeEdit!();
+              widget.orderResourceUtil.refreshList!();
               },
             child: Container(
               decoration: BoxDecoration(

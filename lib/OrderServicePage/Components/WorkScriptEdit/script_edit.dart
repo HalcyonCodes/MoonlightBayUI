@@ -8,11 +8,13 @@ import 'srcipt_edit_commit_bar.dart';
 import '../../../Config/decoration.dart';
 import '../../../Config/color.dart';
 import '../../Util/edit_util.dart';
+import '../../Util/work_script_picker_util.dart';
 
 class ScriptEdit extends StatefulWidget {
   final EditUtil? editUtil;
   final WorkScriptViewModel workScriptViewModel;
-  const ScriptEdit({super.key, required this.editUtil, required this.workScriptViewModel});
+  final WorkScriptPickertUtil  workScriptPickerUtil;
+  const ScriptEdit({super.key, required this.editUtil, required this.workScriptViewModel, required this.workScriptPickerUtil});
 
   @override
   State<ScriptEdit> createState() => _ScriptEditState();
@@ -47,7 +49,7 @@ class _ScriptEditState extends State<ScriptEdit> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16))),
-              child: EditCommitBar(editUtil: widget.editUtil, workScriptViewModel: widget.workScriptViewModel,)),
+              child: EditCommitBar(editUtil: widget.editUtil, workScriptViewModel: widget.workScriptViewModel, workScriptPickerUtil: widget.workScriptPickerUtil,)),
           const SizedBox(
             height: 12,
           ),

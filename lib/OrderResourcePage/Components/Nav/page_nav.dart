@@ -10,13 +10,15 @@ import '../../Util/edit_util.dart';
 import '../Edit/edit.dart';
 import '../Remove/remove.dart';
 import '../../Model/ViewModel/resource_view_model.dart';
+import '../../Util/order_resource_util.dart';
 
 class PageNav extends StatefulWidget {
   final EditUtil? editUtil;
   final ResourceViewModel? resourceViewModel;
+  final OrderResourceUtil? orderResourceUtil;
   const PageNav({
     super.key,
-    required this.editUtil, required this.resourceViewModel,
+    required this.editUtil, required this.resourceViewModel,required this.orderResourceUtil,
   });
 
   @override
@@ -126,7 +128,7 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Edit(editUtil: widget.editUtil!, resourceViewModel: widget.resourceViewModel!,)));
+          child: Material(child: Edit(editUtil: widget.editUtil!, resourceViewModel: widget.resourceViewModel!, orderResourceUtil: widget.orderResourceUtil!,)));
     });
   }
 
@@ -149,7 +151,7 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: Remove(editUtil: widget.editUtil!, resourceViewModel:  widget.resourceViewModel!,)));
+          child: Material(child: Remove(editUtil: widget.editUtil!, resourceViewModel:  widget.resourceViewModel!, orderResourceUtil: widget.orderResourceUtil!,)));
     });
   }
 

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/service_from_json_model.dart';
 import '../DataModel/service_data_model.dart' as tData;
 
@@ -14,26 +15,38 @@ class ServiceViewModel {
 
   var data = tData.data;
 
-   int resourceID = 0;
+  int? resourceID = 0;
+  void setResourceID(int? id) {
+    resourceID = id;
+  }
 
   //refresh
   Future<int> refresh() async {
-    response = null;
+     response = null;
     //
-    response = await Dio().get('www.baidu.com');
-    //根据resourceID加载get请求
-    orderResourceFromJsonModel = null;
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByResource?orderResourceID=$resourceID');
+
+     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      orderResourceFromJsonModel = OrderServiceFromJsonModel.fromJson(data);
+      orderResourceFromJsonModel = OrderServiceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
     }
   }
 
-  void setResourceID(int id) {
-    resourceID = id;
-  }
+ 
 
   //loadMore
   Future<int> loadMore() async {

@@ -16,7 +16,8 @@ class OrderResourceCardList extends StatefulWidget {
       {super.key,
       required this.viewModel,
       required this.orderResourceUtil,
-      required this.orderServiceUtil, required this.resourceViewModel});
+      required this.orderServiceUtil,
+      required this.resourceViewModel});
 
   @override
   State<OrderResourceCardList> createState() => _OrderResourceCardListState();
@@ -54,7 +55,9 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadPre() async {
-    await widget.viewModel.loadPre((listUtil!.getPageStartIndex!() - 1).toString());
+    await widget.viewModel
+        .loadPre((listUtil!.getPageStartIndex!() - 1).toString());
+    widget.viewModel.orderResourceFromJsonModel!.data.orderResources ??= [];
     List<Widget> widgets = List.generate(
         widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
             .length, (q) {
@@ -77,7 +80,9 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadMore() async {
-    await widget.viewModel.loadMore((listUtil!.getPageEndIndex!() + 1).toString());
+    await widget.viewModel
+        .loadMore((listUtil!.getPageEndIndex!() + 1).toString());
+    widget.viewModel.orderResourceFromJsonModel!.data.orderResources ??= [];
     List<Widget> widgets = List.generate(
         widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
             .length, (q) {
@@ -99,22 +104,23 @@ class _OrderResourceCardListState extends State<OrderResourceCardList> {
   }
 
   void initItem() {
+    widget.viewModel.orderResourceFromJsonModel!.data.orderResources ??= [];
     initWidgets = List.generate(
         widget.viewModel.orderResourceFromJsonModel!.data.orderResources!
             .length, (q) {
       return OrderResourceCard(
-          util: widget.orderResourceUtil,
-          orderResourceID: widget
-              .viewModel.orderResourceFromJsonModel!.data.orderResources![q].id,
-          bindingCount: widget.viewModel.orderResourceFromJsonModel!.data
-              .orderResources![q].bindingCount,
-          orderResourceName: widget.viewModel.orderResourceFromJsonModel!.data
-              .orderResources![q].name,
-          desc: widget.viewModel.orderResourceFromJsonModel!.data
-              .orderResources![q].desc,
-          orderServiceUtil: widget.orderServiceUtil,
-          resourceViewModel: widget.resourceViewModel,
-          );
+        util: widget.orderResourceUtil,
+        orderResourceID: widget
+            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].id,
+        bindingCount: widget.viewModel.orderResourceFromJsonModel!.data
+            .orderResources![q].bindingCount,
+        orderResourceName: widget
+            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].name,
+        desc: widget
+            .viewModel.orderResourceFromJsonModel!.data.orderResources![q].desc,
+        orderServiceUtil: widget.orderServiceUtil,
+        resourceViewModel: widget.resourceViewModel,
+      );
     });
   }
 }

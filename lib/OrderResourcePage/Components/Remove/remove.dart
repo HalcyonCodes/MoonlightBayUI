@@ -7,11 +7,15 @@ import './remove_commit_bar.dart';
 import '../../../Config/string.dart';
 import '../../Util/edit_util.dart';
 import '../../Model/ViewModel/resource_view_model.dart';
+import '../../Util/order_resource_util.dart';
 
 class Remove extends StatefulWidget {
   final EditUtil editUtil;
   final ResourceViewModel? resourceViewModel;
-  const Remove({super.key, required this.editUtil, required this.resourceViewModel});
+  final OrderResourceUtil orderResourceUtil;
+  const Remove({super.key, required this.editUtil,
+   required this.resourceViewModel,required this.orderResourceUtil
+   });
 
   @override
   State<Remove> createState() => _RemoveState();
@@ -30,7 +34,7 @@ class _RemoveState extends State<Remove> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RemoveCommitBar(editUtil: widget.editUtil, resourceViewModel: widget.resourceViewModel!,),
+          RemoveCommitBar(editUtil: widget.editUtil, resourceViewModel: widget.resourceViewModel!, orderResourceUtil: widget.orderResourceUtil,),
           const SizedBox(
             height: 12,
           ),

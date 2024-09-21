@@ -7,12 +7,15 @@ import 'package:moonlight_bay_ui/OrderResourcePage/Model/ViewModel/resource_view
 import '../../../Config/decoration.dart';
 import '../../../Config/color.dart';
 import '../../Util/edit_util.dart';
+import '../../Util/order_resource_util.dart';
 
 class Edit extends StatefulWidget {
   final ResourceViewModel resourceViewModel;
   final EditUtil editUtil;
+  final OrderResourceUtil orderResourceUtil;
+
   const Edit(
-      {super.key, required this.editUtil, required this.resourceViewModel});
+      {super.key, required this.editUtil, required this.resourceViewModel, required this.orderResourceUtil});
 
   @override
   State<Edit> createState() => _EditState();
@@ -48,7 +51,7 @@ class _EditState extends State<Edit> {
                       topRight: Radius.circular(16))),
               child: EditCommitBar(
                 editUtil: widget.editUtil,
-                resourceViewModel: widget.resourceViewModel,
+                resourceViewModel: widget.resourceViewModel, orderResourceUtil: widget.orderResourceUtil,
               )),
           const SizedBox(
             height: 12,

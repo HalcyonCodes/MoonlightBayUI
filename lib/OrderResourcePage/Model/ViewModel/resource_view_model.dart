@@ -14,7 +14,7 @@ class ResourceViewModel {
 
   //refresh
   Future<int> refresh() async {
-       response = null;
+    response = null;
     //
     Dio dio = Dio();
     dio.interceptors.add(InterceptorsWrapper(
@@ -27,11 +27,11 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByPageIndex?pageIndex=0');
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=0');
 
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(data);
+      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
@@ -47,31 +47,44 @@ class ResourceViewModel {
 
   //删除选中的项目
   Future<int> deleteItem() async {
-    var data = {"ID": currentID};
+    var data = {"orderServiceResourceID": currentID};
+     
      response = null;
-    response = await Dio().get('www.baidu.com');
-    orderResourceFromJsonModel = null;
-    if (response!.statusCode == HttpStatus.ok) {
-      return response!.statusCode!;
-    } else {
-      return response!.statusCode!;
-    }
+    //
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .post('http://localhost:5036/api/v1/OrderService/DeleteOrderServiceResource', data: data);
+    return response!.statusCode!;
   }
 
   //添加项目
   Future<int> addItem(String name, String desc) async {
-    var data = {"name": name, "desc": desc};
+    var data = {"orderServiceResourceName": name, "orderServiceResourceDesc": desc};
 
     response = null;
- 
-    response = await Dio().get('www.baidu.com');
-    orderResourceFromJsonModel = null;
-    if (response!.statusCode == HttpStatus.ok) {
-      
-      return response!.statusCode!;
-    } else {
-      return response!.statusCode!;
-    }
+    //
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .post('http://localhost:5036/api/v1/OrderService/AddOrderServiceResource',data: data);
+    return response!.statusCode!;
 
   }
 
@@ -93,11 +106,11 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByPageIndex?pageIndex=' + pageIndex);
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=$pageIndex');
 
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(data);
+      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
@@ -120,11 +133,11 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByPageIndex?pageIndex=' + pageIndex);
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=$pageIndex');
 
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(data);
+      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;

@@ -59,7 +59,9 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadPre() async {
-    await widget.viewModel.loadPre();
+    await widget.viewModel.loadPre(
+      (listUtil!.getPageStartIndex!() - 1).toString()
+      );
     List<Widget> widgets = List.generate(
         widget.viewModel.fromJsonModel!.data.orderServices.length, (q) {
       return OrderServiceCard(
@@ -99,7 +101,7 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadMore() async {
-    await widget.viewModel.loadMore();
+    await widget.viewModel.loadMore((listUtil!.getPageStartIndex!() + 1).toString());
     List<Widget> widgets = List.generate(
         widget.viewModel.fromJsonModel!.data.orderServices.length, (q) {
       return OrderServiceCard(

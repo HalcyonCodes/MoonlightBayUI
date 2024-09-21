@@ -287,7 +287,7 @@ class _PageNavState extends State<PageNav> {
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
           child: Material(
               child: ScriptEdit(
-            editUtil: widget.editUtil2, workScriptViewModel: widget.workScriptViewModel,
+            editUtil: widget.editUtil2, workScriptViewModel: widget.workScriptViewModel, workScriptPickerUtil: widget.workScriptPickertUtil,
           )));
     });
   }

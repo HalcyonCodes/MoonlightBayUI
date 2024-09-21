@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Cookie/cookie.dart';
 import '../DataModel/work_script_data_model.dart' as tData;
 import '../FromJsonModel/work_script_from_json_model.dart';
 import '../ToJsonModel/order_script_to_json_model.dart';
@@ -21,40 +22,80 @@ class WorkScriptViewModel {
 
   //添加项目
   Future<int> addItem(String name, String desc) async {
-    var data = {"name": name, "desc": desc};
-    response = null;
-    response = await Dio().get('www.baidu.com');
+    var data = {"orderServiceScriptName": name, "orderServiceDesc": desc};
+     response = null;
+    //
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
 
-    if (response!.statusCode == HttpStatus.ok) {
-      return response!.statusCode!;
-    } else {
-      return response!.statusCode!;
-    }
+
+    response = await dio
+        .post('http://localhost:5036/api/v1/OrderService/AddOrderServiceWorkScript', data: data
+        );
+    return response!.statusCode!;
   }
 
   //提交添加的script
   Future<int> commitAddScript() async {
-    WorkScript? workScript = fromJsonModel!.data!.workScripts![0];
-    WorkScriptToJson workScriptToJson = WorkScriptToJson.toJsonModel(workScript);
-    //通过json和dio发起http请求
     response = null;
     //
-    response = await Dio().get('www.baidu.com');
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    String workScriptID = fromJsonModel!.data!.workScripts![0].id!;
+    String serviceID = orderServiceID!;
+    data = {"scriptID": workScriptID, "orderServiceID": serviceID};
+
+    response = await dio
+        .post('http://localhost:5036/api/v1/OrderService/AddOrderServiceWorkScriptToOrderSerivceUI', data: data
+        );
+
     return response!.statusCode!;
+
+    
+    
   }
 
   //refresh
   Future<int> refresh() async {
     response = null;
     //
-    response = await Dio().get('www.baidu.com');
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceWorkScriptUI?serviceID=${orderServiceID!}');
+
     fromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      fromJsonModel = WorkScriptFromJsonModel.fromJson(data);
+      fromJsonModel = WorkScriptFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
     }
+
+    
   }
 
   //loadMore

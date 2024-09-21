@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 
+import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/order_service_from_json_model.dart';
 
 import '../DataModel/order_service_data_model.dart' as tData;
@@ -18,26 +19,49 @@ class OrderServiceViewModel {
   Future<int> refresh() async {
     response = null;
     //
-    response = await Dio().get('www.baidu.com');
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByPageIndex?pageIndex=0');
+
     fromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      fromJsonModel = OrderServiceFromJsonModel.fromJson(data);
+      fromJsonModel = OrderServiceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
+      //fromJsonModel = OrderServiceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     }
   }
 
   //loadMore
-  Future<int> loadMore() async {
+  Future<int> loadMore(String pageIndex) async {
     response = null;
     //
-    //response = await Dio().get('http://localhost:4040/');
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
     //
-    response = await Dio().get('www.baidu.com');
+    response = await dio
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByPageIndex?pageIndex=$pageIndex');
+
     fromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      fromJsonModel = OrderServiceFromJsonModel.fromJson(data);
+      fromJsonModel = OrderServiceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
@@ -45,28 +69,38 @@ class OrderServiceViewModel {
   }
 
   //loadPre
-  Future<int> loadPre() async {
+  Future<int> loadPre(String pageIndex) async {
     response = null;
     //
-    //response = await Dio().get('http://localhost:4040/');
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
     //
-       response = await Dio().get('www.baidu.com');
+    response = await dio
+        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByPageIndex?pageIndex=$pageIndex');
+
     fromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      fromJsonModel = OrderServiceFromJsonModel.fromJson(data);
+      fromJsonModel = OrderServiceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;
     }
   }
 
+
+
   //提交添加的服务
    Future<int> addCommit(String name, String desc) async {
     response = null;
     //添加参数至dio链接
     
-
-
     response = await Dio().get('www.baidu.com');
     fromJsonModel = null;
    

@@ -57,6 +57,13 @@ class WorkScriptPickertUtil {
     workScript = WorkScript(id: id, name: name, desc: desc, bindingCount: bindingCount);
   }
 
+  //刷新future列表
+  Function()? _refreshFuture;
+  Function()? get refreshFuture => _refreshFuture;
+  void setFuncRefreshFuture(Function()? q) {
+    _refreshFuture = q;
+  }
+
 
 
 }

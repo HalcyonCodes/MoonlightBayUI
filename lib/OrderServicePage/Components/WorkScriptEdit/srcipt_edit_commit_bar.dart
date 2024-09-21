@@ -5,13 +5,19 @@ import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
 import '../../Models/ViewModel/work_script_view_model.dart';
+import '../../Util/work_script_picker_util.dart';
 
 class EditCommitBar extends StatefulWidget {
   final EditUtil? editUtil;
   final WorkScriptViewModel? workScriptViewModel;
+  final WorkScriptPickertUtil workScriptPickerUtil;
 
-  const EditCommitBar(
-      {super.key, required this.editUtil, required this.workScriptViewModel});
+  const EditCommitBar({
+    super.key,
+    required this.editUtil,
+    required this.workScriptViewModel,
+    required this.workScriptPickerUtil,
+  });
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
@@ -70,13 +76,14 @@ class _EditCommitBarState extends State<EditCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {
+            onTap: () async{
               //提交的逻辑
-              widget.workScriptViewModel!.addItem(
+              await widget.workScriptViewModel!.addItem(
                   widget.editUtil!.textCtrl1!.text,
                   widget.editUtil!.textCtrl2!.text);
 
               widget.editUtil!.removeEdit!();
+              widget.workScriptPickerUtil.refreshFuture!();
             },
             child: Container(
               decoration: BoxDecoration(
