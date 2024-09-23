@@ -26,7 +26,7 @@ class _WorkScriptPickerState extends State<WorkScriptPicker> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          WorkScriptTitle(title: "所有工种脚本"),
+          WorkScriptTitle(title: KString.allScript),
           const SizedBox(height: 24,),
           WorkScriptPickerCardListFuture(viewModel:widget.viewModel!, workScriptUtil: widget.workScriptUtil!,)
 

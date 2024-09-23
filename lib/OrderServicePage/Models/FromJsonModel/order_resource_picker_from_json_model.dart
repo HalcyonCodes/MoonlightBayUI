@@ -11,7 +11,7 @@ class OrderResourceFromJsonModel {
 }
 
 class OrderResourceData {
-  OrderResourceData();
+  //OrderResourceData();
   late List<OrderResource>? orderResources;
 
   OrderResourceData.fromJson(Map<String, dynamic> json) {

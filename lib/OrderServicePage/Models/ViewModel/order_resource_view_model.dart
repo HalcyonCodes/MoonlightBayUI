@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/order_resource_from_json_model.dart';
 
 import '../DataModel/order_resource_data_model.dart' as tData;
@@ -25,11 +26,40 @@ class OrderResourceViewModel {
   Future<int> commitAddResources() async {
     List<OrderResource>? resources =
         orderResourceFromJsonModel!.data.orderResources;
-    SettingOrderResourceToJson json = SettingOrderResourceToJson.toJsonModel(resources!);
+
+    Map<String,dynamic> qdata = {
+      'orderServiceId': orderServiceID,
+      'orderResources': []
+    };
+    qdata['orderResource'] = [];
+
+    for (var q in resources!) {
+      Map<String, dynamic> orderResource= {};
+       orderResource['id'] = q.id;
+    orderResource['bindingCount'] = q.bindingCount;
+    orderResource['desc'] = q.desc;
+    orderResource['name'] = q.name;
+    qdata['orderResources']!.add(orderResource);
+
+    }
+
     //通过json和dio发起http请求
     response = null;
     //
-    response = await Dio().get('www.baidu.com');
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio.post(
+        'http://localhost:5036/api/v1/OrderService/UpdateOrderServiceResources',
+        data: qdata);
+
     return response!.statusCode!;
   }
 
@@ -37,11 +67,22 @@ class OrderResourceViewModel {
   Future<int> refresh() async {
     response = null;
     //
-    response = await Dio().get('www.baidu.com');
-
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio.get(
+        'http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesByServiceID?serviceID=${orderServiceID!}');
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(data);
+      orderResourceFromJsonModel =
+          OrderResourceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;

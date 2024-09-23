@@ -19,7 +19,6 @@ class _OrderServiceResourceListFutureState
     extends State<OrderServiceResourceListFuture> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     widget.resourceUtil.setFuncRefrshList(refreshUi);
@@ -27,7 +26,7 @@ class _OrderServiceResourceListFutureState
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return widget.viewModel.orderServiceID == null? const SizedBox() :FutureBuilder(
       future: widget.viewModel.refresh(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {

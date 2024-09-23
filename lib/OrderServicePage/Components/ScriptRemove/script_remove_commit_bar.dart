@@ -7,11 +7,17 @@ import '../../../Config/decoration.dart';
 import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
+import '../../Util/work_script_picker_util.dart';
 
 class ScriptRemoveCommitBar extends StatefulWidget {
   final EditUtil? editUtil;
   final WorkScriptPickerViewModel workScriptPickerViewModel;
-  const ScriptRemoveCommitBar({super.key, required this.editUtil, required this.workScriptPickerViewModel});
+  final WorkScriptPickertUtil workScriptPickertUtil;
+  const ScriptRemoveCommitBar(
+      {super.key,
+      required this.editUtil,
+      required this.workScriptPickerViewModel,
+      required this.workScriptPickertUtil});
 
   @override
   State<ScriptRemoveCommitBar> createState() => _ScriptRemoveCommitBarState();
@@ -70,11 +76,12 @@ class _ScriptRemoveCommitBarState extends State<ScriptRemoveCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {
+            onTap: () async{
               //加入提交逻辑
-              widget.workScriptPickerViewModel.removeScript();
+              await widget.workScriptPickerViewModel.removeScript();
 
               widget.editUtil!.removeRemove!();
+              widget.workScriptPickertUtil.refreshFuture!();
             },
             child: Container(
               decoration: BoxDecoration(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/order_resource_picker_from_json_model.dart';
 
 import '../DataModel/order_resource_picker_data_model.dart' as tData;
@@ -18,11 +19,22 @@ class OrderResourcePickerViewModel {
   Future<int> refresh() async {
     response = null;
     //
-    response = await Dio().get('www.baidu.com');
-    
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio.get(
+        'http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesUI');
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
-      orderResourceFromJsonModel = OrderResourceFromJsonModel.fromJson(data);
+      orderResourceFromJsonModel =
+          OrderResourceFromJsonModel.fromJson(response!.data);
       return response!.statusCode!;
     } else {
       return response!.statusCode!;

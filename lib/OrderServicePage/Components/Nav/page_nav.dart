@@ -326,7 +326,7 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: ScriptRemove(editUtil: widget.editUtil2!, workScriptPickerViewModel: widget.workScriptPickerViewModel,)));
+          child: Material(child: ScriptRemove(editUtil: widget.editUtil2!, workScriptPickerViewModel: widget.workScriptPickerViewModel, workScriptPickerUtil: widget.workScriptPickertUtil,)));
     });
   }
 
