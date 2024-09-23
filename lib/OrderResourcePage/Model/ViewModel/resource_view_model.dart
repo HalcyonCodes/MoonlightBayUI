@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Config/host.dart';
 import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/resource_from_json_model.dart';
 import '../DataModel/resource_data_model.dart' as tData;
@@ -27,7 +28,7 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=0');
+        .get('${Host.host}/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=0');
 
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
@@ -62,7 +63,7 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .post('http://localhost:5036/api/v1/OrderService/DeleteOrderServiceResource', data: data);
+        .post('${Host.host}/api/v1/OrderService/DeleteOrderServiceResource', data: data);
     return response!.statusCode!;
   }
 
@@ -83,7 +84,7 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .post('http://localhost:5036/api/v1/OrderService/AddOrderServiceResource',data: data);
+        .post('${Host.host}/api/v1/OrderService/AddOrderServiceResource',data: data);
     return response!.statusCode!;
 
   }
@@ -106,7 +107,7 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=$pageIndex');
+        .get('${Host.host}/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=$pageIndex');
 
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
@@ -133,7 +134,7 @@ class ResourceViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=$pageIndex');
+        .get('${Host.host}/api/v1/OrderService/GetOrderServiceResourcesPage?pageIndex=$pageIndex');
 
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {

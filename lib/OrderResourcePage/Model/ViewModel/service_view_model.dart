@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Config/host.dart';
 import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/service_from_json_model.dart';
 import '../DataModel/service_data_model.dart' as tData;
@@ -35,7 +36,7 @@ class ServiceViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServicesByResource?orderResourceID=$resourceID');
+        .get('${Host.host}/api/v1/OrderService/GetOrderServicesByResource?orderResourceID=$resourceID');
 
      orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {

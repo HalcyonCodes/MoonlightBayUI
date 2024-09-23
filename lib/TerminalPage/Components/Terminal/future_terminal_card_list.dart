@@ -19,18 +19,33 @@ class TerminalCardListFuture extends StatefulWidget {
   final Channel3ViewModel channel3ViewModel;
   final Channel4ViewModel channel4ViewModel;
   final ChannelUtil channelUtil;
-  
 
-  const TerminalCardListFuture({super.key, required this.viewModel, required this.terminalUtil, required this.channel0ViewModel, required this.channel1ViewModel, required this.channel2ViewModel, required this.channel3ViewModel, required this.channel4ViewModel, required this.channelUtil});
+  const TerminalCardListFuture(
+      {super.key,
+      required this.viewModel,
+      required this.terminalUtil,
+      required this.channel0ViewModel,
+      required this.channel1ViewModel,
+      required this.channel2ViewModel,
+      required this.channel3ViewModel,
+      required this.channel4ViewModel,
+      required this.channelUtil});
 
   @override
   State<TerminalCardListFuture> createState() => _TerminalCardListFutureState();
 }
 
 class _TerminalCardListFutureState extends State<TerminalCardListFuture> {
+  
+  @override
+  void initState() {
+    super.initState();
+    widget.terminalUtil.setFuncRefreshList(refreshUI);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder(
+    return FutureBuilder(
         future: widget.viewModel.refresh(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -46,14 +61,19 @@ class _TerminalCardListFutureState extends State<TerminalCardListFuture> {
             case ConnectionState.done:
               return TerminalCardList(
                 viewModel: widget.viewModel,
-                terminalUtil: widget.terminalUtil, channel0ViewModel: widget.channel0ViewModel, 
-                channel1ViewModel: widget.channel1ViewModel, 
-                channel2ViewModel: widget.channel2ViewModel, channel3ViewModel: widget.channel3ViewModel, 
+                terminalUtil: widget.terminalUtil,
+                channel0ViewModel: widget.channel0ViewModel,
+                channel1ViewModel: widget.channel1ViewModel,
+                channel2ViewModel: widget.channel2ViewModel,
+                channel3ViewModel: widget.channel3ViewModel,
                 channel4ViewModel: widget.channel4ViewModel,
                 channelUtil: widget.channelUtil,
-
               );
           }
         });
+  }
+
+  void refreshUI() {
+    setState(() {});
   }
 }

@@ -42,6 +42,7 @@ class KString {
   static String scriptDesc = '脚本简介';
   static String addWorkScript = '添加工作脚本';
   static String removeScript = '删除脚本';
+  static String terminalIP = '终端IP';
   
 
 }

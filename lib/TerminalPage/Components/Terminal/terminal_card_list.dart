@@ -67,7 +67,59 @@ class _TerminalCardListState extends State<TerminalCardList> {
 
   //利用viewModel进行Http请求
   Future<List<Widget>> loadPre() async {
-    await widget.viewModel.loadPre((listUtil!.getPageEndIndex!() - 1).toString());
+    await widget.viewModel
+        .loadPre((listUtil!.getPageEndIndex!() - 1).toString());
+    List<Widget> widgets = List.generate(
+        widget.viewModel.terminalFromJsonModel!.data.terminals!.length, (q) {
+      return TerminalCard(
+        terminalID: widget
+            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID,
+        terminalIP: widget
+            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalIP,
+        terminalName: widget
+            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalName,
+        terminalDesc: widget
+            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalDesc,
+        terminalStatus:
+            widget.viewModel.terminalFromJsonModel!.data.terminals![q].status,
+        onTap: () {
+          for (var q in widget.terminalUtil.setItemUnSelect!) {
+            q();
+          }
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.terminalUtil.setItemSelect![q]();
+          widget.channel0ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel1ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel2ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel3ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.channel4ViewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+        },
+        terminalUtil: widget.terminalUtil,
+        onPlay: () {
+          //这里有bug，点击之后不会刷新频道
+          widget.viewModel.setTerminalStatus(1);
+        },
+        onPause: () {
+          widget.viewModel.setTerminalStatus(2);
+        },
+        onStop: () {
+          widget.viewModel.setTerminalStatus(3);
+        },
+      );
+    });
+    return widgets;
+  }
+
+  //利用viewModel进行Http请求
+  Future<List<Widget>> loadMore() async {
+    await widget.viewModel
+        .loadMore((listUtil!.getPageEndIndex!() + 1).toString());
     List<Widget> widgets = List.generate(
         widget.viewModel.terminalFromJsonModel!.data.terminals!.length, (q) {
       return TerminalCard(
@@ -86,53 +138,8 @@ class _TerminalCardListState extends State<TerminalCardList> {
             q();
           }
           widget.terminalUtil.setItemSelect![q]();
-          widget.channel0ViewModel.setCurrentTerminalID(widget
+          widget.viewModel.setCurrentTerminalID(widget
               .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel1ViewModel.setCurrentTerminalID(widget
-              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel2ViewModel.setCurrentTerminalID(widget
-              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel3ViewModel.setCurrentTerminalID(widget
-              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-          widget.channel4ViewModel.setCurrentTerminalID(widget
-              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
-        },
-        terminalUtil: widget.terminalUtil,
-        onPlay: ()  {
-          //这里有bug，点击之后不会刷新频道
-          widget.viewModel.setTerminalStatus(1);
-        },
-        onPause: () {
-          widget.viewModel.setTerminalStatus(2);
-        },
-        onStop: () {
-          widget.viewModel.setTerminalStatus(3);
-        },
-      );
-    });
-    return widgets;
-  }
-
-  //利用viewModel进行Http请求
-  Future<List<Widget>> loadMore() async {
-    await widget.viewModel.loadMore((listUtil!.getPageEndIndex!() + 1).toString());
-    List<Widget> widgets = List.generate(
-        widget.viewModel.terminalFromJsonModel!.data.terminals!.length, (q) {
-      return TerminalCard(
-        terminalID: widget
-            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID,
-        terminalIP: widget
-            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalIP,
-        terminalName: widget
-            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalName,
-        terminalDesc: widget
-            .viewModel.terminalFromJsonModel!.data.terminals![q].terminalDesc,
-        terminalStatus:
-            widget.viewModel.terminalFromJsonModel!.data.terminals![q].status,
-        onTap: () {
-          for (var q in widget.terminalUtil.setItemUnSelect!) {
-            q();
-          }
           widget.channel0ViewModel.setCurrentTerminalID(widget
               .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.channel1ViewModel.setCurrentTerminalID(widget
@@ -150,13 +157,19 @@ class _TerminalCardListState extends State<TerminalCardList> {
         },
         terminalUtil: widget.terminalUtil,
         onPlay: () {
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.viewModel.setTerminalStatus(1);
         },
         onPause: () {
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.viewModel.setTerminalStatus(2);
         },
         onStop: () {
-           widget.viewModel.setTerminalStatus(3);
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
+          widget.viewModel.setTerminalStatus(3);
         },
       );
     });
@@ -182,6 +195,8 @@ class _TerminalCardListState extends State<TerminalCardList> {
             q();
           }
           widget.terminalUtil.setItemSelect![q]();
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.channel0ViewModel.setCurrentTerminalID(widget
               .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.channel1ViewModel.setCurrentTerminalID(widget
@@ -197,13 +212,19 @@ class _TerminalCardListState extends State<TerminalCardList> {
           }
         },
         terminalUtil: widget.terminalUtil,
-        onPlay: ()  {
+        onPlay: () {
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.viewModel.setTerminalStatus(1);
         },
         onPause: () {
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.viewModel.setTerminalStatus(2);
         },
         onStop: () {
+          widget.viewModel.setCurrentTerminalID(widget
+              .viewModel.terminalFromJsonModel!.data.terminals![q].terminalID);
           widget.viewModel.setTerminalStatus(3);
         },
       );

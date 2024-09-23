@@ -6,13 +6,19 @@ import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
 import '../../Model/ViewModel/terminal_view_model.dart';
+import '../../Util/terminal_util.dart';
 
 class EditCommitBar extends StatefulWidget {
   final EditUtil? editUtil;
+  final TerminalUtil? terminalUtil;
+
   final TerminalViewModel terminalViewModel;
 
   const EditCommitBar(
-      {super.key, required this.editUtil, required this.terminalViewModel});
+      {super.key,
+      required this.editUtil,
+      required this.terminalViewModel,
+      required this.terminalUtil});
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
@@ -75,8 +81,9 @@ class _EditCommitBarState extends State<EditCommitBar> {
               //加入提交代码
               await widget.terminalViewModel.submitTerminalEdit(
                   widget.editUtil!.textEditingController1!.text,
-                  widget.editUtil!.textEditingController2!.text);
-              
+                  widget.editUtil!.textEditingController2!.text,
+                  widget.editUtil!.textEditingController3!.text);
+              widget.terminalUtil!.refreshList!();
               widget.editUtil!.removeEdit!();
             },
             child: Container(

@@ -20,6 +20,7 @@ import '../../Model/ViewModel/channel2_view_model.dart';
 import '../../Model/ViewModel/channel3_view_model.dart';
 import '../../Model/ViewModel/channel4_view_model.dart';
 import '../../../Cookie/cookie.dart';
+import '../../Util/terminal_util.dart';
 
 class PageNav extends StatefulWidget {
   final EditUtil? editUtil;
@@ -29,6 +30,7 @@ class PageNav extends StatefulWidget {
   final Channel2ViewModel channel2ViewModel;
   final Channel3ViewModel channel3ViewModel;
   final Channel4ViewModel channel4ViewModel;
+  final TerminalUtil terminalUtil;
 
   const PageNav({
     super.key,
@@ -38,7 +40,7 @@ class PageNav extends StatefulWidget {
     required this.channel1ViewModel,
     required this.channel2ViewModel,
     required this.channel3ViewModel,
-    required this.channel4ViewModel,
+    required this.channel4ViewModel, required this.terminalUtil,
   });
 
   @override
@@ -197,7 +199,7 @@ class _PageNavState extends State<PageNav> {
           child: Material(
               child: Edit(
             editUtil: widget.editUtil,
-            terminalViewModel: widget.terminalViewModel,
+            terminalViewModel: widget.terminalViewModel, terminalUtil: widget.terminalUtil,
           )));
     });
   }

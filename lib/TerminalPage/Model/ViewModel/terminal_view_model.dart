@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import '../../../Config/host.dart';
 import '../FromJsonModel/terminal_from_json_model.dart';
 import '../DataModel/terminal_data_model.dart' as tData;
 import '../../../Cookie/cookie.dart';
@@ -19,20 +20,29 @@ class TerminalViewModel {
   }
 
   //提交修改终端名字和简介
-  Future<int> submitTerminalEdit(String terminalNamem, String desc) async {
-    Map<String, dynamic> data = {
+  Future<int> submitTerminalEdit(String terminalNamem, String desc, String terminalIP) async {
+    Map<String, dynamic> qdata = {
       'terminalID': _currentTerminalID,
       "terminalName": terminalNamem,
       "desc": desc,
+      "terminalIP": terminalIP,
     };
     response = null;
-    response = await Dio().get('www.baidu.com');
-    terminalFromJsonModel = null;
-    if (response!.statusCode == HttpStatus.ok) {
+    //
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .post('${Host.host}/api/v1/Termianl/UpdateTerminal', data: qdata);
+
       return response!.statusCode!;
-    } else {
-      return response!.statusCode!;
-    }
   }
 
   //提交用户登录
@@ -45,7 +55,7 @@ class TerminalViewModel {
     //response = await Dio().get('www.baidu.com');
 
     response = await Dio()
-        .post('http://localhost:5036/api/v1/Account/Login', data: data);
+        .post('${Host.host}/api/v1/Account/Login', data: data);
     terminalFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
       //保存token
@@ -62,19 +72,29 @@ class TerminalViewModel {
 
   //修改终端状态
   Future<int> setTerminalStatus(int status) async {
-    Map<String, dynamic> data = {
-      'terminalID': _currentTerminalID,
+    Map<String, dynamic> qdata = {
+      'terminalID': currentTerminalID,
       "status": status,
     };
 
     response = null;
-    response = await Dio().get('www.baidu.com');
-    terminalFromJsonModel = null;
-    if (response!.statusCode == HttpStatus.ok) {
+    //
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .post('${Host.host}/api/v1/Termianl/SetTerminalStatus', data: qdata);
+
       return response!.statusCode!;
-    } else {
-      return response!.statusCode!;
-    }
+
+
   }
 
 
@@ -94,7 +114,7 @@ class TerminalViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/Termianl/GetTerminals?pageIndex=0');
+        .get('${Host.host}/api/v1/Termianl/GetTerminals?pageIndex=0');
 
     terminalFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
@@ -120,7 +140,7 @@ class TerminalViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/Termianl/GetTerminals?pageIndex=$pageIndex');
+        .get('${Host.host}/api/v1/Termianl/GetTerminals?pageIndex=$pageIndex');
 
     terminalFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
@@ -146,7 +166,7 @@ class TerminalViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/Termianl/GetTerminals?pageIndex=$pageIndex');
+        .get('${Host.host}/api/v1/Termianl/GetTerminals?pageIndex=$pageIndex');
 
     terminalFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Config/host.dart';
 import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/channel_from_json_model.dart';
 import '../DataModel/channel_data_model.dart' as tData;
@@ -58,7 +59,7 @@ class Channel3ViewModel {
       },
     ));
     response = await dio
-        .get('http://localhost:5036/api/v1/Order/GetOrderChannel?channelLevels=3&terminalID=' + currentTerminalID.toString());
+        .get('${Host.host}/api/v1/Order/GetOrderChannel?channelLevels=3&terminalID=$currentTerminalID');
     channelFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
       channelFromJsonModel = ChannelFromJsonModel.fromJson(response!.data);

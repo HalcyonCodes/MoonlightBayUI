@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Config/host.dart';
 import '../../../Cookie/cookie.dart';
 import '../DataModel/work_script_picker_data_model.dart' as tData;
 import '../FromJsonModel/work_script_picker_from_json_model.dart';
@@ -34,7 +35,7 @@ class WorkScriptPickerViewModel {
     ));
     //
     response = await dio
-        .post('http://localhost:5036/api/v1/OrderService/DeleteOrderServiceWorkScript',data: data);
+        .post('${Host.host}/api/v1/OrderService/DeleteOrderServiceWorkScript',data: data);
     return response!.statusCode!;
   }
 
@@ -53,7 +54,7 @@ class WorkScriptPickerViewModel {
     ));
     //
     response = await dio
-        .get('http://localhost:5036/api/v1/OrderService/GetOrderServiceWorkScriptsUI');
+        .get('${Host.host}/api/v1/OrderService/GetOrderServiceWorkScriptsUI');
 
     fromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {

@@ -29,5 +29,12 @@ class TerminalUtil {
   void removFuncSetItemSelect(Function() q) {
     _setItemSelect!.remove(q);
   }
+
+  //刷新
+  Function()? _refreshList;
+  Function()? get refreshList => _refreshList;
+  void setFuncRefreshList(Function() q) {
+    _refreshList = q;
+  }
   
 }

@@ -57,5 +57,9 @@ class EditUtil {
   void setTextEditingController2(TextEditingController? textEditingController) {
     _textEditingController2 = textEditingController;
   }
-
+  TextEditingController? _textEditingController3;
+  TextEditingController? get textEditingController3 => _textEditingController3;
+  void setTextEditingController3(TextEditingController? textEditingController) {
+    _textEditingController3 = textEditingController;
+  }
 }

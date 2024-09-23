@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../../Config/host.dart';
 import '../../../Cookie/cookie.dart';
 import '../FromJsonModel/order_resource_from_json_model.dart';
 
@@ -57,7 +58,7 @@ class OrderResourceViewModel {
     ));
     //
     response = await dio.post(
-        'http://localhost:5036/api/v1/OrderService/UpdateOrderServiceResources',
+        '${Host.host}/api/v1/OrderService/UpdateOrderServiceResources',
         data: qdata);
 
     return response!.statusCode!;
@@ -78,7 +79,7 @@ class OrderResourceViewModel {
     ));
     //
     response = await dio.get(
-        'http://localhost:5036/api/v1/OrderService/GetOrderServiceResourcesByServiceID?serviceID=${orderServiceID!}');
+        '${Host.host}/api/v1/OrderService/GetOrderServiceResourcesByServiceID?serviceID=${orderServiceID!}');
     orderResourceFromJsonModel = null;
     if (response!.statusCode == HttpStatus.ok) {
       orderResourceFromJsonModel =

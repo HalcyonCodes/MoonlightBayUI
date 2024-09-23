@@ -76,7 +76,7 @@ class _TerminalPageState extends State<TerminalPage> {
                     channel1ViewModel: channelViewModel1!, 
                     channel2ViewModel: channelViewModel2!, 
                     channel3ViewModel: channelViewModel3!, 
-                    channel4ViewModel: channelViewModel4!,
+                    channel4ViewModel: channelViewModel4!, terminalUtil: terminalUtil!,
                   ),
                   const SizedBox(
                     width: 24,
