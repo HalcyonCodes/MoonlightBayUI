@@ -94,6 +94,7 @@ class _OrderServicePageState extends State<OrderServicePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PageNav(
+                    serviceUtil: serviceUtil!,
                     navUtil: navUtil!, resourceUtil: resourceUtil, 
                     resourcePickerUtil: resourcePickerUtil, 
                     workScriptUtil: workScriptUtil,

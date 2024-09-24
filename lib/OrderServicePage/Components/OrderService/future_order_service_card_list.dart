@@ -32,6 +32,12 @@ class OrderServiceCardListFuture extends StatefulWidget {
 }
 
 class _OrderServiceCardListFutureState extends State<OrderServiceCardListFuture> {
+
+  @override
+  void initState() {
+    super.initState();
+    widget.serviceUtil.setFuncRefreshList(refreshUI);
+  }
   @override
   Widget build(BuildContext context) {
      return FutureBuilder(
@@ -57,6 +63,11 @@ class _OrderServiceCardListFutureState extends State<OrderServiceCardListFuture>
         },
       );
 
+  }
+
+  void refreshUI() {
+    setState(() {
+    });
   }
 }
 

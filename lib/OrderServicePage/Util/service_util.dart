@@ -30,4 +30,12 @@ class ServiceUtil {
   void removFuncSetItemSelect(Function() q) {
     _setItemSelect!.remove(q);
   }
+
+  //刷新列表
+  Function()? _refreshList;
+  Function()? get refreshList => _refreshList;
+  void setFuncRefreshList(Function() q) {
+    _refreshList = q;
+  }
+
 }

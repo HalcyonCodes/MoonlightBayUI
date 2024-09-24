@@ -6,13 +6,18 @@ import '../../../Config/string.dart';
 import '../../../Config/font.dart';
 import '../../Util/edit_util.dart';
 import '../../Models/ViewModel/order_service_view_model.dart';
+import '../../Util/service_util.dart';
 
 class EditCommitBar extends StatefulWidget {
   final EditUtil? editUtil;
   final OrderServiceViewModel viewModel;
+  final ServiceUtil serviceUtil;
 
   const EditCommitBar(
-      {super.key, required this.editUtil, required this.viewModel});
+      {super.key,
+      required this.editUtil,
+      required this.viewModel,
+      required this.serviceUtil});
 
   @override
   State<EditCommitBar> createState() => _EditCommitBarState();
@@ -88,10 +93,11 @@ class _EditCommitBarState extends State<EditCommitBar> {
     );
   }
 
-  void commit() {
-    String name = widget.editUtil!.textCtrl1!.value.toString();
-    String desc = widget.editUtil!.textCtrl2!.value.toString();
-    widget.viewModel.addCommit(name, desc);
+  void commit() async {
+    String name = widget.editUtil!.textCtrl1!.text;
+    String desc = widget.editUtil!.textCtrl2!.text;
+    await widget.viewModel.addCommit(name, desc);
     widget.editUtil!.removeEdit!();
+    widget.serviceUtil.refreshList!();
   }
 }

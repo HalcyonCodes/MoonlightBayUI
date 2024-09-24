@@ -99,17 +99,58 @@ class OrderServiceViewModel {
 
   //提交添加的服务
    Future<int> addCommit(String name, String desc) async {
-    
+    var qData =  {
+      'orderServiceName' : name,
+      'orderServiceDesc' : desc
+    };
+
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .post('${Host.host}/api/v1/OrderService/AddOrderServiceUI', data: qData);
+
+  
+    return response!.statusCode!;
+  
+  
+  }
+
+  //设置当前serviceID
+  String? _currentServiceID;
+  String? get currentServiceID => _currentServiceID;
+  void setCurrentServiceID(String? value) {
+    _currentServiceID = value;
+  }
 
 
+  //提交删除
+  Future<int> removeCommit() async {
+    var qData =  {
+      'orderServiceID': int.parse(currentServiceID!),
+    };
 
-    response = null;
-    //添加参数至dio链接
-    
-    response = await Dio().get('www.baidu.com');
-    fromJsonModel = null;
-   
-      fromJsonModel = OrderServiceFromJsonModel.fromJson(data);
+    Dio dio = Dio();
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        // 从本地存储获取JWT令牌
+        String token = JwtManager.getJwtCookie();
+        options.headers['Authorization'] = 'Bearer $token';
+        return handler.next(options);
+      },
+    ));
+    //
+    response = await dio
+        .post('${Host.host}/api/v1/OrderService/DeleteOrderService', data: qData);
+
+  
     return response!.statusCode!;
   
   

@@ -43,6 +43,7 @@ class KString {
   static String addWorkScript = '添加工作脚本';
   static String removeScript = '删除脚本';
   static String terminalIP = '终端IP';
+  static String removeService = '删除服务';
   
 
 }

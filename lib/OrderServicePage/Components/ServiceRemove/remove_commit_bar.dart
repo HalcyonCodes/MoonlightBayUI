@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:moonlight_bay_ui/Config/color.dart';
-import '../../../Config/decoration.dart';
-import '../../../Config/string.dart';
-import '../../../Config/font.dart';
-import '../Util/edit_util.dart';
+import '../../../../Config/decoration.dart';
+import '../../../../Config/string.dart';
+import '../../../../Config/font.dart';
+import '../../Util/edit_util.dart';
+import '../../Models/ViewModel/order_service_view_model.dart';
+import '../../Util/service_util.dart';
 
-class RemoveCommitBar extends StatefulWidget {
+class ServiceRemoveCommitBar extends StatefulWidget {
   final EditUtil editUtil;
+  final ServiceUtil serviceUtil;
+  final OrderServiceViewModel orderServiceViewModel;
 
-  const RemoveCommitBar({super.key, required this.editUtil});
+  const ServiceRemoveCommitBar(
+      {super.key,
+      required this.editUtil,
+      required this.orderServiceViewModel,
+      required this.serviceUtil});
 
   @override
-  State<RemoveCommitBar> createState() => _RemoveCommitBarState();
+  State<ServiceRemoveCommitBar> createState() => _ServiceRemoveCommitBarState();
 }
 
-class _RemoveCommitBarState extends State<RemoveCommitBar> {
+class _ServiceRemoveCommitBarState extends State<ServiceRemoveCommitBar> {
   @override
   void initState() {
     super.initState();
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +76,11 @@ class _RemoveCommitBarState extends State<RemoveCommitBar> {
             borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16)),
-            onTap: () {widget.editUtil.removeRemove!();},
+            onTap: () async {
+              await widget.orderServiceViewModel.removeCommit();
+              widget.editUtil.removeRemove!();
+              widget.serviceUtil.refreshList!();
+            },
             child: Container(
               decoration: BoxDecoration(
                   color: KColor.primaryColor,

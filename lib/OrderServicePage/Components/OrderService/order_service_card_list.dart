@@ -80,6 +80,7 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             q();
           }
           widget.serviceUtil.setItemSelect![q]();
+          widget.viewModel.setCurrentServiceID(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
           if (widget.navUtil.currentNavIndex == 1) {
             //print(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
             widget.serviceUtil.setItemID(
@@ -120,6 +121,7 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             q();
           }
           widget.serviceUtil.setItemSelect![q]();
+          widget.viewModel.setCurrentServiceID(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
           if (widget.navUtil.currentNavIndex == 1) {
             // print(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
             widget.serviceUtil.setItemID(
@@ -158,6 +160,7 @@ class _OrderServiceCardListState extends State<OrderServiceCardList> {
             q();
           }
           widget.serviceUtil.setItemSelect![q]();
+          widget.viewModel.setCurrentServiceID(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
           if (widget.navUtil.currentNavIndex == 1) {
             //print(widget.viewModel.fromJsonModel!.data.orderServices[q].id);
             widget.serviceUtil.setItemID(

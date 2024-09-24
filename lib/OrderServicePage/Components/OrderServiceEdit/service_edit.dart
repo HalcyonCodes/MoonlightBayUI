@@ -8,11 +8,13 @@ import '../../../Config/decoration.dart';
 import '../../../Config/color.dart';
 import '../../Util/edit_util.dart';
 import '../../Models/ViewModel/order_service_view_model.dart';
+import '../../Util/service_util.dart';
 
 class ServiceEdit extends StatefulWidget {
   final OrderServiceViewModel viewModel;
   final EditUtil? editUtil;
-  const ServiceEdit({super.key, required this.editUtil, required this.viewModel});
+  final ServiceUtil? serviceUtil;
+  const ServiceEdit({super.key, required this.editUtil, required this.viewModel, required this.serviceUtil});
 
   @override
   State<ServiceEdit> createState() => _ServiceEditState();
@@ -48,7 +50,7 @@ class _ServiceEditState extends State<ServiceEdit> {
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16))),
               child: EditCommitBar(
-                editUtil: widget.editUtil, viewModel: widget.viewModel,
+                editUtil: widget.editUtil, viewModel: widget.viewModel, serviceUtil: widget.serviceUtil!, 
               )),
           const SizedBox(
             height: 12,

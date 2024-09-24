@@ -22,6 +22,8 @@ import '../../Util/work_script_picker_util.dart';
 import '../../Models/ViewModel/order_resource_view_model.dart';
 import '../../Models/ViewModel/work_script_view_model.dart';
 import '../../Models/ViewModel/work_script_picker_view_model.dart';
+import '../../Util/service_util.dart';
+import '../../Components/ServiceRemove/remove.dart';
 
 class PageNav extends StatefulWidget {
   final NavUtil? navUtil;
@@ -32,24 +34,29 @@ class PageNav extends StatefulWidget {
   final EditUtil? editUtil1;
   final EditUtil? editUtil2;
   final EditUtil? editUtil3;
+
   final OrderServiceViewModel orderServiceViewModel;
   final OrderResourceViewModel orderResourceViewModel;
   final WorkScriptViewModel workScriptViewModel;
   final WorkScriptPickerViewModel workScriptPickerViewModel;
-  
+  final ServiceUtil? serviceUtil;
 
-
-  const PageNav(
-      {super.key,
-      required this.editUtil1,
-      required this.navUtil,
-      required this.resourceUtil,
-      required this.resourcePickerUtil,
-      required this.workScriptUtil,
-      required this.workScriptPickertUtil,
-      required this.editUtil2,
-      required this.editUtil3,
-      required this.orderServiceViewModel, required this.orderResourceViewModel, required this.workScriptViewModel, required this.workScriptPickerViewModel,});
+  const PageNav({
+    super.key,
+    required this.editUtil1,
+    required this.navUtil,
+    required this.resourceUtil,
+    required this.resourcePickerUtil,
+    required this.workScriptUtil,
+    required this.workScriptPickertUtil,
+    required this.editUtil2,
+    required this.editUtil3,
+    required this.orderServiceViewModel,
+    required this.orderResourceViewModel,
+    required this.workScriptViewModel,
+    required this.workScriptPickerViewModel,
+    required this.serviceUtil,
+  });
 
   @override
   State<PageNav> createState() => _PageNavState();
@@ -61,6 +68,7 @@ class _PageNavState extends State<PageNav> {
   OverlayEntry? fOverlayEntry;
   OverlayEntry? dOverlayEntry;
   OverlayEntry? qOverlayEntry;
+  OverlayEntry? zOverlayEntry;
   int switchIndex = 0;
 
   @override
@@ -70,6 +78,7 @@ class _PageNavState extends State<PageNav> {
     overlayEntry = ddOverlayEntry();
     fOverlayEntry = ffOverlayEntry();
     qOverlayEntry = qqOverlayEntry();
+    zOverlayEntry = zzOverlayEntry();
     //注册
     widget.editUtil1!.setFuncRemoveEdit(removeEdit);
     widget.editUtil1!.setFuncShowEdit(showEdit);
@@ -77,6 +86,8 @@ class _PageNavState extends State<PageNav> {
     widget.editUtil2!.setFuncShowEdit(showEdit2);
     widget.editUtil2!.setFuncShowRemove(showDelete2);
     widget.editUtil2!.setFuncRemoveRemove(removeDelete2);
+    widget.editUtil3!.setFuncShowRemove(showDelete3);
+    widget.editUtil3!.setFuncRemoveRemove(removeDelete3);
   }
 
   @override
@@ -105,11 +116,12 @@ class _PageNavState extends State<PageNav> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                NavIconButton(iconPath: 'svg/terminal.svg', onClick: () {
-                  Application.router!.navigateTo(
-                          context, '/TerminalPage',
+                NavIconButton(
+                    iconPath: 'svg/terminal.svg',
+                    onClick: () {
+                      Application.router!.navigateTo(context, '/TerminalPage',
                           transition: TransitionType.fadeIn);
-                }),
+                    }),
                 const SizedBox(
                   width: 12,
                 ),
@@ -164,7 +176,10 @@ class _PageNavState extends State<PageNav> {
                     onClick: () {
                       //widget.editUtil!.showRemove!();
                       //
-                      if (switchIndex == 0) {}
+                      int a;
+                      if (switchIndex == 0) {
+                        widget.editUtil3!.showRemove!();
+                      }
                       //脚本相关
                       if (switchIndex == 2) {
                         widget.editUtil2!.showRemove!();
@@ -216,11 +231,12 @@ class _PageNavState extends State<PageNav> {
                 //提交按钮
                 NavIconButton(
                     iconPath: 'svg/add.svg',
-                    onClick: () async{
+                    onClick: () async {
                       //resource相关
                       if (switchIndex == 1) {
                         //提交的代码
-                        await widget.orderResourceViewModel.commitAddResources();
+                        await widget.orderResourceViewModel
+                            .commitAddResources();
                         //退出的代码
                         switchIndex = 1;
                         widget.navUtil!.switchNav!(1);
@@ -287,7 +303,9 @@ class _PageNavState extends State<PageNav> {
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
           child: Material(
               child: ScriptEdit(
-            editUtil: widget.editUtil2, workScriptViewModel: widget.workScriptViewModel, workScriptPickerUtil: widget.workScriptPickertUtil,
+            editUtil: widget.editUtil2,
+            workScriptViewModel: widget.workScriptViewModel,
+            workScriptPickerUtil: widget.workScriptPickertUtil,
           )));
     });
   }
@@ -309,6 +327,7 @@ class _PageNavState extends State<PageNav> {
               child: ServiceEdit(
             editUtil: widget.editUtil1,
             viewModel: widget.orderServiceViewModel,
+            serviceUtil: widget.serviceUtil,
           )));
     });
   }
@@ -326,7 +345,12 @@ class _PageNavState extends State<PageNav> {
       return Positioned(
           left: MediaQuery.of(context).size.width / 2 - 658 / 2,
           top: MediaQuery.of(context).size.height / 2 - 208 / 2,
-          child: Material(child: ScriptRemove(editUtil: widget.editUtil2!, workScriptPickerViewModel: widget.workScriptPickerViewModel, workScriptPickerUtil: widget.workScriptPickertUtil,)));
+          child: Material(
+              child: ScriptRemove(
+            editUtil: widget.editUtil2!,
+            workScriptPickerViewModel: widget.workScriptPickerViewModel,
+            workScriptPickerUtil: widget.workScriptPickertUtil,
+          )));
     });
   }
 
@@ -336,5 +360,27 @@ class _PageNavState extends State<PageNav> {
 
   Future<void> removeDelete2() async {
     qOverlayEntry?.remove();
+  }
+
+  OverlayEntry zzOverlayEntry() {
+    return OverlayEntry(builder: (context) {
+      return Positioned(
+          left: MediaQuery.of(context).size.width / 2 - 658 / 2,
+          top: MediaQuery.of(context).size.height / 2 - 208 / 2,
+          child: Material(
+            child: ServiceRemove(
+                editUtil: widget.editUtil3!,
+                orderServiceViewModel: widget.orderServiceViewModel,
+                serviceUtil: widget.serviceUtil!),
+          ));
+    });
+  }
+
+  Future<void> showDelete3() async {
+    Overlay.of(context).insert(zOverlayEntry!);
+  }
+
+  Future<void> removeDelete3() async {
+    zOverlayEntry?.remove();
   }
 }
